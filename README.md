@@ -1,71 +1,95 @@
-# Welcome to your GPT Engineer project
+# 自動投資パフォーマンスダッシュボード
 
-## Project info
+## プロジェクト概要
 
-**URL**: https://run.gptengineer.app/projects/5d035752-f28f-4c34-a2a3-3e16cf2d0b53/improve
+リアルタイムで投資パフォーマンスを監視・分析するためのダッシュボードアプリケーションです。
 
-## How can I edit this code?
+**主な機能:**
+- 重要な投資指標のリアルタイム表示
+- レスポンシブデザイン
+- アニメーション付きの数値更新
+- 直感的なユーザーインターフェース
 
-There are several ways of editing your application.
+## 技術スタック
 
-**Use GPT Engineer**
+- **フロントエンド**
+  - React + TypeScript
+  - Tailwind CSS
+  - shadcn/ui コンポーネント
+  - Tanstack Query
 
-Simply visit the GPT Engineer project at [GPT Engineer](https://gptengineer.app/projects/5d035752-f28f-4c34-a2a3-3e16cf2d0b53/improve) and start prompting.
+## パフォーマンス指標
 
-Changes made via gptengineer.app will be committed automatically to this repo.
+### 1. シャープレシオ (Sharpe Ratio)
+- リスク調整後リターンの指標
+- 1以上で良好なパフォーマンス
 
-**Use your preferred IDE**
+### 2. 最大ドローダウン (Maximum Drawdown)
+- 最大の下落率
+- 小さいほど良好
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in the GPT Engineer UI.
+### 3. 勝率 (Win Rate)
+- 利益が出たトレードの割合
+- 50%以上が目標
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 4. プロフィットファクター (Profit Factor)
+- 総利益÷総損失
+- 1以上で収益性あり
 
-Follow these steps:
+## プロジェクトの構造
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```
+src/
+├── components/
+│   ├── PerformanceCard.tsx    # 指標表示カード
+│   └── PerformanceMetrics.tsx # 指標グリッド
+├── lib/
+│   └── calculateMetrics.ts    # 指標計算ロジック
+└── pages/
+    └── Index.tsx              # メインダッシュボード
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## セットアップ方法
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. リポジトリのクローン:
+```bash
+git clone <repository-url>
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. 依存関係のインストール:
+```bash
+npm install
+```
+
+3. 開発サーバーの起動:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 開発ガイドライン
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### コンポーネント設計
+- 単一責任の原則に従う
+- Props型を明示的に定義
+- 再利用可能なコンポーネントの作成
 
-**Use GitHub Codespaces**
+### スタイリング
+- Tailwind CSSクラスの活用
+- レスポンシブデザインの確保
+- アニメーションの適切な使用
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### パフォーマンス最適化
+- メモ化の活用
+- 適切なステート管理
+- 効率的なレンダリング
 
-## What technologies are used for this project?
+## 貢献方法
 
-This project is built with .
+1. Issueの作成
+2. ブランチの作成
+3. 変更の実装
+4. プルリクエストの作成
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## ライセンス
 
-## How can I deploy this project?
-
-All GPT Engineer projects can be deployed directly via the GPT Engineer app.
-
-Simply visit your project at [GPT Engineer](https://gptengineer.app/projects/5d035752-f28f-4c34-a2a3-3e16cf2d0b53/improve) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.gptengineer.app/tips-tricks/custom-domain/)
+このプロジェクトはMITライセンスの下で公開されています。
