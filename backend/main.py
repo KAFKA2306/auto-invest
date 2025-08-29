@@ -1,16 +1,16 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
-import numpy as np
+from typing import List
 from datetime import datetime
+import numpy as np
+import pandas as pd
 
 app = FastAPI(title="Investment Performance API")
 
-# CORS設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -28,51 +28,48 @@ class PerformanceMetrics(BaseModel):
     win_rate: float
     profit_factor: float
 
-@app.get("/api/v1/market")
+@app.get("/api/v1/market", response_model=List[MarketData])
 async def get_market_data(symbol: str) -> List[MarketData]:
-    # モックデータを生成
-    dates = pd.date_range(end=datetime.now(), periods=100, freq='D')
-    prices = np.random.normal(100, 10, 100).cumsum()
-    volumes = np.random.normal(1000000, 100000, 100)
-    
+    dates = pd.date_range(end=datetime.now(), periods=100, freq="D")
+    prices = np.random.normal(100, 1, len(dates)).cumsum()
+    volumes = np.random.normal(1_000_000, 100_000, len(dates))
+
     return [
         MarketData(
-            timestamp=date,
-            price=price,
-            volume=volume,
-            symbol=symbol
+            timestamp=date.to_pydatetime(),
+            price=float(price),
+            volume=float(volume),
+            symbol=symbol,
         )
         for date, price, volume in zip(dates, prices, volumes)
     ]
 
-@app.post("/api/v1/analysis")
+@app.post("/api/v1/analysis", response_model=PerformanceMetrics)
 async def analyze_market(data: List[MarketData]) -> PerformanceMetrics:
     if not data:
         raise HTTPException(status_code=400, detail="No data provided")
-    
-    # リターンの計算
-    prices = [d.price for d in data]
+
+    prices = np.array([d.price for d in data])
     returns = np.diff(prices) / prices[:-1]
-    
-    # 各指標の計算
-    sharpe_ratio = np.mean(returns) / np.std(returns) * np.sqrt(252)
-    
+
+    sharpe_ratio = float(np.mean(returns) / np.std(returns) * np.sqrt(252))
     cumulative_returns = np.cumprod(1 + returns)
-    max_drawdown = np.min(cumulative_returns / np.maximum.accumulate(cumulative_returns) - 1)
-    
-    win_rate = len([r for r in returns if r > 0]) / len(returns)
-    
-    gains = sum([r for r in returns if r > 0])
-    losses = abs(sum([r for r in returns if r < 0]))
-    profit_factor = gains / losses if losses != 0 else float('inf')
-    
+    max_drawdown = float(
+        np.min(cumulative_returns / np.maximum.accumulate(cumulative_returns) - 1)
+    )
+    win_rate = float(np.sum(returns > 0) / len(returns))
+    gains = returns[returns > 0].sum()
+    losses = -returns[returns < 0].sum()
+    profit_factor = float(gains / losses) if losses != 0 else 0.0
+
     return PerformanceMetrics(
-        sharpe_ratio=float(sharpe_ratio),
-        max_drawdown=float(max_drawdown),
-        win_rate=float(win_rate),
-        profit_factor=float(profit_factor)
+        sharpe_ratio=sharpe_ratio,
+        max_drawdown=max_drawdown,
+        win_rate=win_rate,
+        profit_factor=profit_factor,
     )
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
