@@ -15,11 +15,12 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: node scripts/update-data.js
+      - run: node scripts/fetch-actions-status.js
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data/market.json public/data/metrics.json
+          git add public/data/market.json public/data/metrics.json public/data/actions.json
           git commit -m "chore: update data" || echo "No changes"
           git push
       - run: npm run build
