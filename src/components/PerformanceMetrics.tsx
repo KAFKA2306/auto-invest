@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import { PerformanceCard } from "./PerformanceCard";
-import { getMarketData, analyzeMarket } from "@/lib/api";
 import type { PerformanceMetrics } from "@/types/market";
 
 export const PerformanceMetricsGrid = () => {
   const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
 
   const fetchMetrics = async () => {
-    const market = await getMarketData("TEST");
-    const result = await analyzeMarket(market);
+    const res = await fetch("/data/metrics.json");
+    if (!res.ok) return;
+    const result: PerformanceMetrics = await res.json();
     setMetrics(result);
   };
 
   useEffect(() => {
     fetchMetrics();
-    const id = setInterval(fetchMetrics, 5000);
-    return () => clearInterval(id);
   }, []);
 
   if (!metrics) {

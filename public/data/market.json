@@ -1,0 +1,602 @@
+[
+  {
+    "timestamp": "2015-02-17T00:00:00.000Z",
+    "price": 127.830002,
+    "volume": 63152400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-18T00:00:00.000Z",
+    "price": 128.720001,
+    "volume": 44891700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-19T00:00:00.000Z",
+    "price": 128.449997,
+    "volume": 37362400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-20T00:00:00.000Z",
+    "price": 129.5,
+    "volume": 48948400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-23T00:00:00.000Z",
+    "price": 133,
+    "volume": 70974100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-24T00:00:00.000Z",
+    "price": 132.169998,
+    "volume": 69228100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-25T00:00:00.000Z",
+    "price": 128.789993,
+    "volume": 74711700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-26T00:00:00.000Z",
+    "price": 130.419998,
+    "volume": 91287500,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-02-27T00:00:00.000Z",
+    "price": 128.460007,
+    "volume": 62014800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-02T00:00:00.000Z",
+    "price": 129.089996,
+    "volume": 48096700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-03T00:00:00.000Z",
+    "price": 129.360001,
+    "volume": 37816300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-04T00:00:00.000Z",
+    "price": 128.539993,
+    "volume": 31666300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-05T00:00:00.000Z",
+    "price": 126.410004,
+    "volume": 56517100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-06T00:00:00.000Z",
+    "price": 126.599998,
+    "volume": 72842100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-09T00:00:00.000Z",
+    "price": 127.139999,
+    "volume": 88528500,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-10T00:00:00.000Z",
+    "price": 124.510002,
+    "volume": 68856600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-11T00:00:00.000Z",
+    "price": 122.239998,
+    "volume": 68939000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-12T00:00:00.000Z",
+    "price": 124.449997,
+    "volume": 48362700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-13T00:00:00.000Z",
+    "price": 123.589996,
+    "volume": 51827300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-16T00:00:00.000Z",
+    "price": 124.949997,
+    "volume": 35874300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-17T00:00:00.000Z",
+    "price": 127.040001,
+    "volume": 51023100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-18T00:00:00.000Z",
+    "price": 128.470001,
+    "volume": 65270900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-19T00:00:00.000Z",
+    "price": 127.5,
+    "volume": 45809500,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-20T00:00:00.000Z",
+    "price": 125.900002,
+    "volume": 68695100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-23T00:00:00.000Z",
+    "price": 127.209999,
+    "volume": 37709700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-24T00:00:00.000Z",
+    "price": 126.690002,
+    "volume": 32842300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-25T00:00:00.000Z",
+    "price": 123.379997,
+    "volume": 51655200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-26T00:00:00.000Z",
+    "price": 124.239998,
+    "volume": 47572900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-27T00:00:00.000Z",
+    "price": 123.25,
+    "volume": 39546200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-30T00:00:00.000Z",
+    "price": 126.370003,
+    "volume": 47099700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-03-31T00:00:00.000Z",
+    "price": 124.43,
+    "volume": 42090600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-01T00:00:00.000Z",
+    "price": 124.25,
+    "volume": 40621400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-02T00:00:00.000Z",
+    "price": 125.32,
+    "volume": 32220100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-06T00:00:00.000Z",
+    "price": 127.349998,
+    "volume": 37194000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-07T00:00:00.000Z",
+    "price": 126.010002,
+    "volume": 35012300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-08T00:00:00.000Z",
+    "price": 125.599998,
+    "volume": 37329200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-09T00:00:00.000Z",
+    "price": 126.559998,
+    "volume": 32484000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-10T00:00:00.000Z",
+    "price": 127.099998,
+    "volume": 40188000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-13T00:00:00.000Z",
+    "price": 126.849998,
+    "volume": 36365100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-14T00:00:00.000Z",
+    "price": 126.300003,
+    "volume": 25524600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-15T00:00:00.000Z",
+    "price": 126.779999,
+    "volume": 28970400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-16T00:00:00.000Z",
+    "price": 126.169998,
+    "volume": 28369000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-17T00:00:00.000Z",
+    "price": 124.75,
+    "volume": 51957000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-20T00:00:00.000Z",
+    "price": 127.599998,
+    "volume": 47054300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-21T00:00:00.000Z",
+    "price": 126.910004,
+    "volume": 32435100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-22T00:00:00.000Z",
+    "price": 128.619995,
+    "volume": 37654500,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-23T00:00:00.000Z",
+    "price": 129.669998,
+    "volume": 45770900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-24T00:00:00.000Z",
+    "price": 130.279999,
+    "volume": 44525900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-27T00:00:00.000Z",
+    "price": 132.649994,
+    "volume": 96954200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-28T00:00:00.000Z",
+    "price": 130.559998,
+    "volume": 118924000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-29T00:00:00.000Z",
+    "price": 128.639999,
+    "volume": 63386100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-04-30T00:00:00.000Z",
+    "price": 125.150002,
+    "volume": 83195400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-01T00:00:00.000Z",
+    "price": 128.949997,
+    "volume": 58512600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-04T00:00:00.000Z",
+    "price": 128.699997,
+    "volume": 50988300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-05T00:00:00.000Z",
+    "price": 125.800003,
+    "volume": 49271400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-06T00:00:00.000Z",
+    "price": 125.010002,
+    "volume": 72141000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-07T00:00:00.000Z",
+    "price": 125.260002,
+    "volume": 43940900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-08T00:00:00.000Z",
+    "price": 127.620003,
+    "volume": 55550400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-11T00:00:00.000Z",
+    "price": 126.32,
+    "volume": 42035800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-12T00:00:00.000Z",
+    "price": 125.870003,
+    "volume": 48160000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-13T00:00:00.000Z",
+    "price": 126.010002,
+    "volume": 34694200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-14T00:00:00.000Z",
+    "price": 128.949997,
+    "volume": 45203500,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-15T00:00:00.000Z",
+    "price": 128.770004,
+    "volume": 38208000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-18T00:00:00.000Z",
+    "price": 130.190002,
+    "volume": 50882900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-19T00:00:00.000Z",
+    "price": 130.070007,
+    "volume": 44633200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-20T00:00:00.000Z",
+    "price": 130.059998,
+    "volume": 36454900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-21T00:00:00.000Z",
+    "price": 131.389999,
+    "volume": 39730400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-22T00:00:00.000Z",
+    "price": 132.539993,
+    "volume": 45596000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-26T00:00:00.000Z",
+    "price": 129.619995,
+    "volume": 70697600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-27T00:00:00.000Z",
+    "price": 132.039993,
+    "volume": 45833200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-28T00:00:00.000Z",
+    "price": 131.779999,
+    "volume": 30733300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-05-29T00:00:00.000Z",
+    "price": 130.279999,
+    "volume": 50884500,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-01T00:00:00.000Z",
+    "price": 130.539993,
+    "volume": 32112800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-02T00:00:00.000Z",
+    "price": 129.960007,
+    "volume": 33667600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-03T00:00:00.000Z",
+    "price": 130.119995,
+    "volume": 30889400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-04T00:00:00.000Z",
+    "price": 129.360001,
+    "volume": 38450100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-05T00:00:00.000Z",
+    "price": 128.649994,
+    "volume": 35626800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-08T00:00:00.000Z",
+    "price": 127.800003,
+    "volume": 52674800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-09T00:00:00.000Z",
+    "price": 127.419998,
+    "volume": 56075400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-10T00:00:00.000Z",
+    "price": 128.880005,
+    "volume": 39087300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-11T00:00:00.000Z",
+    "price": 128.589996,
+    "volume": 35390900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-12T00:00:00.000Z",
+    "price": 127.169998,
+    "volume": 36886200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-15T00:00:00.000Z",
+    "price": 126.919998,
+    "volume": 43988900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-16T00:00:00.000Z",
+    "price": 127.599998,
+    "volume": 31494100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-17T00:00:00.000Z",
+    "price": 127.300003,
+    "volume": 32918100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-18T00:00:00.000Z",
+    "price": 127.879997,
+    "volume": 35407200,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-19T00:00:00.000Z",
+    "price": 126.599998,
+    "volume": 54716900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-22T00:00:00.000Z",
+    "price": 127.610001,
+    "volume": 34039300,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-23T00:00:00.000Z",
+    "price": 127.029999,
+    "volume": 30268900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-24T00:00:00.000Z",
+    "price": 128.110001,
+    "volume": 55280900,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-25T00:00:00.000Z",
+    "price": 127.5,
+    "volume": 31938100,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-26T00:00:00.000Z",
+    "price": 126.75,
+    "volume": 44066800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-29T00:00:00.000Z",
+    "price": 124.529999,
+    "volume": 49161400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-06-30T00:00:00.000Z",
+    "price": 125.43,
+    "volume": 44370700,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-07-01T00:00:00.000Z",
+    "price": 126.599998,
+    "volume": 30238800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-07-02T00:00:00.000Z",
+    "price": 126.440002,
+    "volume": 27211000,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-07-06T00:00:00.000Z",
+    "price": 126,
+    "volume": 28060400,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-07-07T00:00:00.000Z",
+    "price": 125.690002,
+    "volume": 46946800,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-07-08T00:00:00.000Z",
+    "price": 122.57,
+    "volume": 60761600,
+    "symbol": "AAPL"
+  },
+  {
+    "timestamp": "2015-07-09T00:00:00.000Z",
+    "price": 120.07,
+    "volume": 77821600,
+    "symbol": "AAPL"
+  }
+]
