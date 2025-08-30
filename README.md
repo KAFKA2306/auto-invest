@@ -3,6 +3,7 @@
 最小構成の投資ダッシュボードです。FastAPI バックエンドと React + TypeScript フロントエンドを使い、基本的な市場データと分析指標を表示します。
 
 GitHub Actions と GitHub Pages による全自動ワークフローも用意されており、定期的に市場データを取得して分析結果を `public/data/metrics.json` に保存し、静的サイトを自動デプロイします。
+さらに最新の GitHub Actions の実行状況も `public/data/actions.json` に書き出され、ダッシュボード上で確認できます。
 
 ## クイックスタート
 

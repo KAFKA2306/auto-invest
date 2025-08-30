@@ -1,4 +1,5 @@
 import { PerformanceMetricsGrid } from "@/components/PerformanceMetrics";
+import { ActionsDashboard } from "@/components/ActionsDashboard";
 
 const Index = () => {
   return (
@@ -11,6 +12,7 @@ const Index = () => {
         
         <main>
           <PerformanceMetricsGrid />
+          <ActionsDashboard />
         </main>
       </div>
     </div>
