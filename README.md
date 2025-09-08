@@ -31,6 +31,16 @@ python examples/generate_market_plot.py
 
 画像は `examples/sample_market.png` に保存されます。（このリポジトリには含まれていません）
 
+## 不動産デベロッパー監視YAML
+
+不動産デベロッパーの監視データを `public/data/real_estate_watch.yaml` に追加しました。スプレッドシートで扱いやすい CSV に変換するには次を実行します。
+
+```bash
+python examples/real_estate_yaml_to_csv.py
+```
+
+`public/data/real_estate_watch.csv` が生成され、YAML の内容がテーブル形式で出力されます。
+
 ## テストとLint
 
 ```bash
