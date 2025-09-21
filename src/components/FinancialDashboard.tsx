@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { AlertCircle, RefreshCw, TrendingUp, TrendingDown, Activity, AlertTriangle, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Activity, AlertTriangle, Target } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { LastUpdatedBadge } from "@/components/LastUpdatedBadge";
 
 interface Article {
   id: string;
@@ -26,6 +30,7 @@ interface FinancialData {
 }
 
 interface AnalysisReport {
+  timestamp?: string;
   market_indicators: {
     overall_sentiment: number;
     volatility_index: number;
@@ -45,20 +50,42 @@ interface AnalysisReport {
 }
 
 const fetchFinancialData = async (): Promise<FinancialData> => {
-  const response = await fetch('/data/financial/daily-articles.json');
+  const response = await fetch('/data/financial/daily-articles.json', { cache: 'no-store' });
   if (!response.ok) {
     throw new Error('Failed to fetch financial data');
   }
-  return response.json();
+
+  const payload = (await response.json()) as FinancialData;
+  if (payload.timestamp) {
+    return payload;
+  }
+
+  const lastModified = response.headers.get('last-modified');
+  return {
+    ...payload,
+    timestamp: lastModified ? new Date(lastModified).toISOString() : new Date().toISOString(),
+  };
 };
 
 const fetchAnalysisReport = async (): Promise<AnalysisReport> => {
-  const response = await fetch('/data/financial/analysis-report.json');
+  const response = await fetch('/data/financial/analysis-report.json', { cache: 'no-store' });
   if (!response.ok) {
     throw new Error('Failed to fetch analysis report');
   }
-  return response.json();
+
+  const payload = (await response.json()) as AnalysisReport;
+  if (payload.timestamp) {
+    return payload;
+  }
+
+  const lastModified = response.headers.get('last-modified');
+  return {
+    ...payload,
+    timestamp: lastModified ? new Date(lastModified).toISOString() : undefined,
+  };
 };
+
+const staleThresholdMs = 1000 * 60 * 60 * 6; // 6 hours
 
 const SentimentIndicator = ({ sentiment }: { sentiment: number }) => {
   const getSentimentColor = (value: number) => {

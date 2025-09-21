@@ -10,4 +10,5 @@ export interface PerformanceMetrics {
   max_drawdown: number;
   win_rate: number;
   profit_factor: number;
+  last_updated?: string;
 }
