@@ -123,53 +123,143 @@ const PriorityBadge = ({ priority }: { priority: string }) => {
 };
 
 export const FinancialDashboard = () => {
-  const { data: financialData, isLoading: loadingData } = useQuery({
+  const {
+    data: financialData,
+    isLoading: loadingData,
+    isError: isDataError,
+    error: dataError,
+    refetch: refetchFinancialData,
+    isFetching: fetchingFinancialData,
+  } = useQuery({
     queryKey: ['financial-data'],
     queryFn: fetchFinancialData,
-    refetchInterval: 300000, // Refetch every 5 minutes
+    refetchInterval: 300000,
+    staleTime: 60000,
   });
 
-  const { data: analysisReport, isLoading: loadingAnalysis } = useQuery({
+  const {
+    data: analysisReport,
+    isLoading: loadingAnalysis,
+    isError: isAnalysisError,
+    error: analysisError,
+    refetch: refetchAnalysis,
+    isFetching: fetchingAnalysis,
+  } = useQuery({
     queryKey: ['analysis-report'],
     queryFn: fetchAnalysisReport,
     refetchInterval: 300000,
+    staleTime: 60000,
   });
 
-  if (loadingData || loadingAnalysis) {
+  const isLoading = loadingData || loadingAnalysis;
+  const hasError = isDataError || isAnalysisError;
+  const isRefreshing = fetchingFinancialData || fetchingAnalysis;
+
+  const lastUpdated = financialData?.timestamp ?? analysisReport?.timestamp ?? null;
+  const isStale = lastUpdated
+    ? Date.now() - new Date(lastUpdated).getTime() > staleThresholdMs
+    : false;
+
+  const totalArticles = financialData?.summary?.total_articles ?? financialData?.articles?.length ?? 0;
+
+  const handleManualRefresh = () => {
+    void refetchFinancialData();
+    void refetchAnalysis();
+  };
+
+  if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <div className="text-center">
-          <Activity className="h-8 w-8 animate-spin mx-auto mb-2" />
-          <p className="text-sm text-muted-foreground">Loading financial data...</p>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-7 w-48" />
+          <Skeleton className="h-9 w-24" />
         </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, idx) => (
+            <Skeleton key={idx} className="h-32 rounded-lg" />
+          ))}
+        </div>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {Array.from({ length: 2 }).map((_, idx) => (
+            <Skeleton key={idx} className="h-64 rounded-lg" />
+          ))}
+        </div>
+        <Skeleton className="h-80 rounded-lg" />
       </div>
     );
   }
 
-  if (!financialData || !analysisReport) {
+  if (hasError || !financialData || !analysisReport) {
+    const message = [dataError, analysisError]
+      .map((err) => (err instanceof Error ? err.message : null))
+      .filter(Boolean)
+      .join(' / ');
+
     return (
-      <Card className="p-8">
-        <div className="text-center">
-          <AlertTriangle className="h-8 w-8 mx-auto mb-2 text-orange-500" />
-          <p className="text-sm text-muted-foreground">Failed to load financial data</p>
+      <Alert variant="destructive" className="flex items-start justify-between">
+        <div className="flex items-start gap-3">
+          <AlertCircle className="h-5 w-5" />
+          <div>
+            <AlertTitle>Unable to load financial intelligence</AlertTitle>
+            <AlertDescription>
+              {message || 'The news pipeline did not return data. Please try again or check the scraper logs.'}
+            </AlertDescription>
+          </div>
         </div>
-      </Card>
+        <Button variant="outline" onClick={handleManualRefresh}>
+          <RefreshCw className="mr-2 h-4 w-4" /> Retry
+        </Button>
+      </Alert>
     );
   }
 
   const marketIndicators = analysisReport.market_indicators;
-  const hotTopics = analysisReport.hot_topics.hot_topics;
+  const hotTopics = analysisReport.hot_topics.hot_topics ?? [];
+  const keyThemes = marketIndicators.key_themes ?? [];
+  const hasArticles = (financialData.articles?.length ?? 0) > 0;
 
   return (
     <div className="space-y-6">
-      {/* Market Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <LastUpdatedBadge
+            lastUpdated={lastUpdated}
+            staleAfterMs={staleThresholdMs}
+            isRefreshing={isRefreshing}
+          />
+          <Badge variant="secondary" className="uppercase tracking-wide">
+            {totalArticles} articles tracked today
+          </Badge>
+        </div>
+        <Button variant="outline" size="sm" onClick={handleManualRefresh} disabled={isRefreshing}>
+          <RefreshCw className="mr-2 h-4 w-4" /> Refresh now
+        </Button>
+      </div>
+
+      {isStale && (
+        <Alert variant="destructive" className="flex items-start gap-3">
+          <AlertTriangle className="h-5 w-5" />
+          <div>
+            <AlertTitle>News data looks stale</AlertTitle>
+            <AlertDescription>
+              We have not received fresh articles in over 6 hours. Confirm the GitHub Actions job is
+              running or trigger{' '}
+              <code className="rounded bg-muted px-1 py-0.5 text-xs">npm run financial:pipeline</code>.
+            </AlertDescription>
+          </div>
+        </Alert>
+      )}
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Overall Sentiment</CardTitle>
           </CardHeader>
           <CardContent>
             <SentimentIndicator sentiment={marketIndicators.overall_sentiment} />
+            <p className="mt-1 text-xs text-muted-foreground">
+              Average sentiment across the latest article batch
+            </p>
           </CardContent>
         </Card>
 
@@ -179,7 +269,7 @@ export const FinancialDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{marketIndicators.news_volume}</div>
-            <p className="text-xs text-muted-foreground">articles</p>
+            <p className="text-xs text-muted-foreground">Articles ingested in this refresh cycle</p>
           </CardContent>
         </Card>
 
@@ -189,85 +279,87 @@ export const FinancialDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{marketIndicators.volatility_index.toFixed(3)}</div>
-            <p className="text-xs text-muted-foreground">sentiment variance</p>
+            <p className="text-xs text-muted-foreground">Variance of sentiment across sources</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Last Update</CardTitle>
+            <CardTitle className="text-sm font-medium">Avg Sentiment</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-sm">
-              {new Date(financialData.timestamp).toLocaleString()}
+            <div className="text-2xl font-bold">
+              {financialData.summary.sentiment_average.toFixed(3)}
             </div>
+            <p className="text-xs text-muted-foreground">From {totalArticles} tracked articles</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Hot Topics */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Target className="h-5 w-5" />
               Hot Topics
             </CardTitle>
-            <CardDescription>
-              Trending keywords and emerging themes
-            </CardDescription>
+            <CardDescription>Trending keywords and emerging themes</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {hotTopics.slice(0, 5).map((topic, index) => (
-                <div key={topic.keyword} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">#{index + 1}</span>
-                    <span>{topic.keyword}</span>
+            {hotTopics.length > 0 ? (
+              <div className="space-y-3">
+                {hotTopics.slice(0, 5).map((topic, index) => (
+                  <div key={topic.keyword} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">#{index + 1}</span>
+                      <span>{topic.keyword}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline">{topic.mentions} mentions</Badge>
+                      <SentimentIndicator sentiment={topic.avg_sentiment} />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline">{topic.mentions} mentions</Badge>
-                    <SentimentIndicator sentiment={topic.avg_sentiment} />
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                No recurring themes detected in the latest crawl. Expand your source list or rerun the
+                scraper to gather more coverage.
+              </p>
+            )}
           </CardContent>
         </Card>
 
-        {/* Key Themes */}
         <Card>
           <CardHeader>
             <CardTitle>Key Market Themes</CardTitle>
-            <CardDescription>
-              Most mentioned topics in recent articles
-            </CardDescription>
+            <CardDescription>Most mentioned topics in recent articles</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {marketIndicators.key_themes.map((theme, index) => (
-                <div key={theme.keyword} className="flex items-center justify-between">
-                  <span className="font-medium">{theme.keyword}</span>
-                  <Badge variant="secondary">{theme.mentions}</Badge>
-                </div>
-              ))}
-            </div>
+            {keyThemes.length > 0 ? (
+              <div className="space-y-3">
+                {keyThemes.map((theme) => (
+                  <div key={theme.keyword} className="flex items-center justify-between">
+                    <span className="font-medium">{theme.keyword}</span>
+                    <Badge variant="secondary">{theme.mentions}</Badge>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">No key themes surfaced in this batch.</p>
+            )}
           </CardContent>
         </Card>
       </div>
 
-      {/* Signals */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Risk Signals */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-red-600">
               <AlertTriangle className="h-5 w-5" />
               Risk Signals
             </CardTitle>
-            <CardDescription>
-              Potential market concerns and warnings
-            </CardDescription>
+            <CardDescription>Potential market concerns and warnings</CardDescription>
           </CardHeader>
           <CardContent>
             {marketIndicators.risk_signals.length > 0 ? (
@@ -285,21 +377,18 @@ export const FinancialDashboard = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">No significant risk signals detected</p>
+              <p className="text-sm text-muted-foreground">No significant risk signals detected.</p>
             )}
           </CardContent>
         </Card>
 
-        {/* Opportunity Signals */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-600">
               <TrendingUp className="h-5 w-5" />
               Opportunity Signals
             </CardTitle>
-            <CardDescription>
-              Positive market indicators and opportunities
-            </CardDescription>
+            <CardDescription>Positive market indicators and opportunities</CardDescription>
           </CardHeader>
           <CardContent>
             {marketIndicators.opportunity_signals.length > 0 ? (
@@ -317,13 +406,12 @@ export const FinancialDashboard = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">No significant opportunity signals detected</p>
+              <p className="text-sm text-muted-foreground">No significant opportunity signals detected.</p>
             )}
           </CardContent>
         </Card>
       </div>
 
-      {/* Recent Articles */}
       <Card>
         <CardHeader>
           <CardTitle>Recent Articles</CardTitle>
@@ -332,35 +420,45 @@ export const FinancialDashboard = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {financialData.articles.slice(0, 10).map((article) => (
-              <div key={article.id} className="border-l-4 border-l-blue-500 pl-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h4 className="font-medium text-sm mb-1">{article.title}</h4>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span>{article.source}</span>
-                      <span>•</span>
-                      <span>{new Date(article.date).toLocaleDateString()}</span>
-                    </div>
-                    {article.keywords.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {article.keywords.slice(0, 3).map((keyword) => (
-                          <Badge key={keyword} variant="outline" className="text-xs">
-                            {keyword}
-                          </Badge>
-                        ))}
+          {hasArticles ? (
+            <div className="space-y-4">
+              {financialData.articles.slice(0, 10).map((article) => (
+                <div key={article.id} className="border-l-4 border-l-blue-500 pl-4">
+                  <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                    <div className="flex-1">
+                      <h4 className="text-sm font-medium md:text-base">{article.title}</h4>
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                        <span>{article.source}</span>
+                        <span>•</span>
+                        <span>{new Date(article.date).toLocaleDateString()}</span>
                       </div>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 ml-4">
-                    <PriorityBadge priority={article.priority} />
-                    <SentimentIndicator sentiment={article.sentiment} />
+                      {article.keywords.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {article.keywords.slice(0, 3).map((keyword) => (
+                            <Badge key={keyword} variant="outline" className="text-xs">
+                              {keyword}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 md:ml-4">
+                      <PriorityBadge priority={article.priority} />
+                      <SentimentIndicator sentiment={article.sentiment} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <Alert className="border-l-4 border-l-blue-500">
+              <AlertTitle>No articles received</AlertTitle>
+              <AlertDescription>
+                The scraper completed without capturing articles. Review the source availability or run
+                the pipeline manually to collect the latest coverage.
+              </AlertDescription>
+            </Alert>
+          )}
         </CardContent>
       </Card>
     </div>
