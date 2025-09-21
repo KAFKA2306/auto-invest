@@ -1,4 +1,5 @@
 import { FinancialScraper } from './financial-scraper.js';
+import { FinancialScraperHeadless } from './financial-scraper-headless.js';
 import { FinancialAnalyzer } from './financial-analyzer.js';
 
 /**
@@ -10,7 +11,12 @@ async function runFinancialAnalysis() {
   try {
     // Step 1: Scrape new financial data
     console.log('[pipeline] Step 1: Scraping financial data...');
-    const scraper = new FinancialScraper();
+
+    // Use headless scraper in CI environment, Playwright locally
+    const isCI = process.env.CI === 'true' || process.env.NODE_ENV === 'production';
+    const scraper = isCI ? new FinancialScraperHeadless() : new FinancialScraper();
+
+    console.log(`[pipeline] Using ${isCI ? 'headless' : 'playwright'} scraper`);
     const scrapedData = await scraper.scrape();
     console.log(`[pipeline] Scraped ${scrapedData.articles.length} articles`);
 
