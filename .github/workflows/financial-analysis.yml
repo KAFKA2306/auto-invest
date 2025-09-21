@@ -49,10 +49,21 @@ jobs:
           echo "Files in scripts:"
           ls -la
           echo "Node version: $(node --version)"
+          echo "Environment variables:"
+          echo "NODE_ENV=$NODE_ENV"
+          echo "CI=$CI"
           echo "Starting financial analysis..."
-          node run-financial-analysis.js
+          node run-financial-analysis.js 2>&1 || {
+            echo "Pipeline failed with exit code $?"
+            echo "Attempting to debug..."
+            node -e "console.log('Node.js basic test working')"
+            echo "Current working directory contents:"
+            find . -type f -name "*.js" | head -10
+            exit 1
+          }
         env:
           NODE_ENV: production
+          CI: true
           DISPLAY: :99
 
       - name: Commit and push financial data
