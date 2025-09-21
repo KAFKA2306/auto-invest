@@ -1,0 +1,22 @@
+{
+  "FOMC": {
+    "total_mentions": 2,
+    "daily_data": [
+      {
+        "date": "2025-09-21",
+        "count": 2
+      }
+    ],
+    "avg_daily": 2
+  },
+  "中国経済": {
+    "total_mentions": 2,
+    "daily_data": [
+      {
+        "date": "2025-09-21",
+        "count": 2
+      }
+    ],
+    "avg_daily": 2
+  }
+}
