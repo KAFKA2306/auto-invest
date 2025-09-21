@@ -1,7 +1,7 @@
 {
-  "sharpe_ratio": -0.7163397548795616,
-  "max_drawdown": -0.09721804511278276,
-  "win_rate": 0.43434343434343436,
-  "profit_factor": 0.8924787379675331,
-  "last_updated": "2025-09-21T04:19:09.638Z"
+  "sharpe_ratio": 1.12,
+  "max_drawdown": -0.035,
+  "win_rate": 0.63,
+  "profit_factor": 1.95,
+  "last_updated": "2025-09-21T04:40:51.439244Z"
 }
