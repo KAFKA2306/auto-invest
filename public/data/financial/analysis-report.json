@@ -1,0 +1,210 @@
+{
+  "timestamp": "2025-09-21T04:02:16.833Z",
+  "articles_analyzed": 14,
+  "analysis_period": {
+    "start": "2025-09-21",
+    "end": "2025-09-21"
+  },
+  "keyword_trends": {
+    "FOMC": {
+      "total_mentions": 1,
+      "daily_data": [
+        {
+          "date": "2025-09-21",
+          "count": 1
+        }
+      ],
+      "avg_daily": 1
+    },
+    "中国経済": {
+      "total_mentions": 1,
+      "daily_data": [
+        {
+          "date": "2025-09-21",
+          "count": 1
+        }
+      ],
+      "avg_daily": 1
+    }
+  },
+  "sentiment_analysis": {
+    "daily_sentiment": {
+      "2025-09-21": {
+        "average": 0.0071428571428571435,
+        "article_count": 14,
+        "articles": [
+          {
+            "title": "S&P 500は二歩下がって三歩進む",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "S&P 500は不確実性ないFOMCに突入へ",
+            "sentiment": 0,
+            "priority": "medium"
+          },
+          {
+            "title": "S&P 500は金融相場への移行間際",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "需給ギャップの誤算、基調的物価の欺瞞",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "S&P 500はDeepseekショック２",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "S&P 500はジャクソンホールを無事通過",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "中国経済は好調さから慢心の谷へ",
+            "sentiment": 0.1,
+            "priority": "low"
+          },
+          {
+            "title": "S&P 500は結局過去最高値更新",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "１年前と全く異なる雇用統計の滑り方",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "S&P 500は全てを無視して急反発",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "Fed金融政策 (70)",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "S&P 500 (336)",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "アノマリー (51)",
+            "sentiment": 0,
+            "priority": "low"
+          },
+          {
+            "title": "雑学、雑談 (12)",
+            "sentiment": 0,
+            "priority": "low"
+          }
+        ]
+      }
+    },
+    "priority_sentiment": {
+      "high": {
+        "average": 0,
+        "count": 0,
+        "distribution": {
+          "positive": 0,
+          "negative": 0,
+          "neutral": 0
+        }
+      },
+      "medium": {
+        "average": 0,
+        "count": 1,
+        "distribution": {
+          "positive": 0,
+          "negative": 0,
+          "neutral": 1
+        }
+      },
+      "low": {
+        "average": 0.007692307692307693,
+        "count": 13,
+        "distribution": {
+          "positive": 0,
+          "negative": 0,
+          "neutral": 1
+        }
+      }
+    },
+    "overall_trend": "insufficient_data"
+  },
+  "hot_topics": {
+    "hot_topics": [
+      {
+        "keyword": "FOMC",
+        "mentions": 1,
+        "hotness_score": 4,
+        "avg_sentiment": 0,
+        "priority_score": 2,
+        "recent_articles": [
+          {
+            "title": "S&P 500は不確実性ないFOMCに突入へ",
+            "date": "2025-09-21",
+            "sentiment": 0,
+            "priority": "medium"
+          }
+        ]
+      },
+      {
+        "keyword": "中国経済",
+        "mentions": 1,
+        "hotness_score": 3.5,
+        "avg_sentiment": 0.1,
+        "priority_score": 1,
+        "recent_articles": [
+          {
+            "title": "中国経済は好調さから慢心の谷へ",
+            "date": "2025-09-21",
+            "sentiment": 0.1,
+            "priority": "low"
+          }
+        ]
+      }
+    ],
+    "analysis_period": "7 days",
+    "total_articles_analyzed": 14
+  },
+  "market_indicators": {
+    "overall_sentiment": 0.0071428571428571435,
+    "volatility_index": 0.025753937681885646,
+    "news_volume": 14,
+    "key_themes": [
+      {
+        "keyword": "FOMC",
+        "mentions": 1
+      },
+      {
+        "keyword": "中国経済",
+        "mentions": 1
+      }
+    ],
+    "risk_signals": [],
+    "opportunity_signals": []
+  },
+  "summary": {
+    "most_mentioned_keywords": [
+      {
+        "keyword": "FOMC",
+        "mentions": 1
+      },
+      {
+        "keyword": "中国経済",
+        "mentions": 1
+      }
+    ],
+    "sentiment_summary": {
+      "overall": 0.0071428571428571435,
+      "trend": "insufficient_data",
+      "volatility": 0.025753937681885646
+    }
+  }
+}

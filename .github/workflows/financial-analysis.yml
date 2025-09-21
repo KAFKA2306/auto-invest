@@ -1,0 +1,82 @@
+name: Financial Analysis Pipeline
+
+on:
+  schedule:
+    # Run every 4 hours during market hours (JST)
+    - cron: '0 0,4,8,12 * * 1-5'
+  workflow_dispatch:
+    # Manual trigger
+  push:
+    paths:
+      - 'scripts/financial-*.js'
+      - 'scripts/scraper-*.js'
+      - 'scripts/run-financial-analysis.js'
+
+jobs:
+  financial-analysis:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx playwright install chromium
+
+      - name: Run financial analysis pipeline
+        run: npm run financial:pipeline
+        env:
+          NODE_ENV: production
+
+      - name: Commit and push financial data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Add the generated files
+          git add public/data/financial/
+
+          # Only commit if there are changes
+          if ! git diff --staged --quiet; then
+            git commit -m "Update financial analysis data $(date '+%Y-%m-%d %H:%M:%S')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Upload analysis artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: financial-analysis-data
+          path: |
+            public/data/financial/
+            scripts/public/data/financial/
+          retention-days: 30
+
+      - name: Create analysis summary
+        run: |
+          echo "## Financial Analysis Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Generated at: $(date)" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "public/data/financial/daily-articles.json" ]; then
+            ARTICLE_COUNT=$(jq '.summary.total_articles' public/data/financial/daily-articles.json)
+            SENTIMENT=$(jq '.summary.sentiment_average' public/data/financial/daily-articles.json)
+            echo "- Total Articles: $ARTICLE_COUNT" >> $GITHUB_STEP_SUMMARY
+            echo "- Average Sentiment: $SENTIMENT" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -f "public/data/financial/analysis-report.json" ]; then
+            HOT_TOPICS=$(jq -r '.hot_topics.hot_topics[0:3][].keyword' public/data/financial/analysis-report.json | tr '\n' ', ' | sed 's/, $//')
+            echo "- Hot Topics: $HOT_TOPICS" >> $GITHUB_STEP_SUMMARY
+          fi

@@ -8,7 +8,10 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "scrape:financial": "cd scripts && node financial-scraper.js",
+    "analyze:financial": "cd scripts && node financial-analyzer.js",
+    "financial:pipeline": "cd scripts && node run-financial-analysis.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -75,7 +78,10 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "jsdom": "^27.0.0",
+    "playwright": "^1.55.0",
     "postcss": "^8.4.47",
+    "sentiment": "^5.0.2",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
