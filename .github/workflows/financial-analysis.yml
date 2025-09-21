@@ -32,10 +32,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npx playwright install chromium
+          npx playwright install chromium --with-deps
 
       - name: Run financial analysis pipeline
-        run: npm run financial:pipeline
+        run: |
+          cd scripts
+          ls -la
+          node run-financial-analysis.js
         env:
           NODE_ENV: production
 
@@ -45,7 +48,7 @@ jobs:
           git config --local user.name "GitHub Action"
 
           # Add the generated files
-          git add public/data/financial/
+          git add public/data/financial/ scripts/public/data/financial/
 
           # Only commit if there are changes
           if ! git diff --staged --quiet; then

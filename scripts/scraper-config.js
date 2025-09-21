@@ -33,7 +33,7 @@ export const CONFIG = {
 
   // File paths
   paths: {
-    output: 'public/data/financial',
+    output: '../public/data/financial',
     articles: 'daily-articles.json',
     keywords: 'keywords-trend.json',
     sentiment: 'sentiment-analysis.json'
