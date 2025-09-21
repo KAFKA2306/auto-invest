@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
+import { History, RefreshCw } from "lucide-react";
 
 interface LastUpdatedBadgeProps {
   lastUpdated?: string | null;
@@ -29,12 +30,20 @@ export const LastUpdatedBadge = ({
 
   return (
     <Badge
-      variant={isStale ? "destructive" : "secondary"}
-      className={cn("flex items-center gap-2", className)}
+      variant={isStale ? "destructive" : "outline"}
+      className={cn(
+        "flex items-center gap-2 rounded-full border border-border/50 bg-background/80 px-3 py-1 text-xs font-medium shadow-sm",
+        className
+      )}
     >
-      <span className="font-medium">Last updated</span>
-      <span>{relativeTime}</span>
-      {isRefreshing && <span className="text-xs opacity-80">(refreshing...)</span>}
+      <History className="h-3.5 w-3.5 opacity-70" />
+      <span className="uppercase tracking-wide text-muted-foreground">Last updated</span>
+      <span className="text-foreground">{relativeTime}</span>
+      {isRefreshing && (
+        <span className="flex items-center gap-1 text-muted-foreground">
+          <RefreshCw className="h-3 w-3 animate-spin" />
+        </span>
+      )}
     </Badge>
   );
 };

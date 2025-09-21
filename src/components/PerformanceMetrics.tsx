@@ -87,12 +87,20 @@ export const PerformanceMetricsGrid = () => {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <LastUpdatedBadge lastUpdated={metrics.last_updated} isRefreshing={isFetching} />
-        <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isFetching}>
-          <RefreshCw className="mr-2 h-4 w-4" /> Refresh now
-        </Button>
+    <section className="space-y-6">
+      <div className="flex flex-col gap-4 rounded-xl border border-border/60 bg-card/70 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="space-y-1">
+          <h2 className="text-lg font-semibold text-foreground">Performance snapshot</h2>
+          <p className="text-sm text-muted-foreground">
+            Core trading metrics aggregated from the latest completed pipeline run.
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <LastUpdatedBadge lastUpdated={metrics.last_updated} isRefreshing={isFetching} />
+          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isFetching}>
+            <RefreshCw className="mr-2 h-4 w-4" /> Refresh now
+          </Button>
+        </div>
       </div>
 
       {isStale && (
@@ -112,7 +120,7 @@ export const PerformanceMetricsGrid = () => {
         </Alert>
       )}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
         <PerformanceCard
           title="Sharpe Ratio"
           value={metrics.sharpe_ratio}
@@ -140,6 +148,6 @@ export const PerformanceMetricsGrid = () => {
           trend={metrics.profit_factor > 1 ? "up" : "down"}
         />
       </div>
-    </div>
+    </section>
   );
 };
