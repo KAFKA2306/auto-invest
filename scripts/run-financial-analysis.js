@@ -63,4 +63,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export { runFinancialAnalysis };
+export { runFinancialAnalysis };// Debug CI trigger Sun Sep 21 13:23:30 JST 2025
