@@ -33,38 +33,34 @@ jobs:
         run: |
           npm ci
 
-      - name: Install Playwright
-        run: |
-          npx playwright install --with-deps chromium
-
       - name: Create output directories
         run: |
           mkdir -p public/data/financial
           mkdir -p scripts/public/data/financial
 
-      - name: Run financial analysis pipeline
+      - name: Run simple financial scraper
         run: |
           cd scripts
-          echo "Current directory: $(pwd)"
-          echo "Files in scripts:"
-          ls -la
+          echo "=== Environment Info ==="
           echo "Node version: $(node --version)"
-          echo "Environment variables:"
-          echo "NODE_ENV=$NODE_ENV"
-          echo "CI=$CI"
-          echo "Starting financial analysis..."
-          node run-financial-analysis.js 2>&1 || {
-            echo "Pipeline failed with exit code $?"
-            echo "Attempting to debug..."
-            node -e "console.log('Node.js basic test working')"
-            echo "Current working directory contents:"
-            find . -type f -name "*.js" | head -10
-            exit 1
-          }
+          echo "Working directory: $(pwd)"
+          echo "Files available:"
+          ls -la *.js | head -10
+
+          echo "=== Running Simple Scraper ==="
+          node simple-scraper.js
         env:
           NODE_ENV: production
           CI: true
-          DISPLAY: :99
+
+      - name: Run financial analysis pipeline
+        run: |
+          cd scripts
+          echo "=== Running Full Financial Pipeline ==="
+          node run-financial-analysis.js
+        env:
+          NODE_ENV: production
+          CI: true
 
       - name: Commit and push financial data
         working-directory: ${{ github.workspace }}

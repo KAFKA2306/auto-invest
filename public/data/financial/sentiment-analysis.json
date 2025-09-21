@@ -2,8 +2,78 @@
   "daily_sentiment": {
     "2025-09-21": {
       "average": 0.0071428571428571435,
-      "article_count": 14,
+      "article_count": 28,
       "articles": [
+        {
+          "title": "S&P 500は二歩下がって三歩進む",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "S&P 500は不確実性ないFOMCに突入へ",
+          "sentiment": 0,
+          "priority": "medium"
+        },
+        {
+          "title": "S&P 500は金融相場への移行間際",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "需給ギャップの誤算、基調的物価の欺瞞",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "S&P 500はDeepseekショック２",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "S&P 500はジャクソンホールを無事通過",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "中国経済は好調さから慢心の谷へ",
+          "sentiment": 0.1,
+          "priority": "medium"
+        },
+        {
+          "title": "S&P 500は結局過去最高値更新",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "１年前と全く異なる雇用統計の滑り方",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "S&P 500は全てを無視して急反発",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "Fed金融政策 (70)",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "S&P 500 (336)",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "アノマリー (51)",
+          "sentiment": 0,
+          "priority": "low"
+        },
+        {
+          "title": "雑学、雑談 (12)",
+          "sentiment": 0,
+          "priority": "low"
+        },
         {
           "title": "S&P 500は二歩下がって三歩進む",
           "sentiment": 0,
@@ -88,8 +158,8 @@
       }
     },
     "medium": {
-      "average": 0,
-      "count": 1,
+      "average": 0.03333333333333333,
+      "count": 3,
       "distribution": {
         "positive": 0,
         "negative": 0,
@@ -97,8 +167,8 @@
       }
     },
     "low": {
-      "average": 0.007692307692307693,
-      "count": 13,
+      "average": 0.004,
+      "count": 25,
       "distribution": {
         "positive": 0,
         "negative": 0,
