@@ -9,12 +9,34 @@ async function runFinancialAnalysis() {
   console.log('[pipeline] Starting financial analysis pipeline...');
 
   try {
+    // Debug environment
+    console.log('[pipeline] Environment check:');
+    console.log('- NODE_ENV:', process.env.NODE_ENV);
+    console.log('- CI:', process.env.CI);
+    console.log('- Working directory:', process.cwd());
+
     // Step 1: Scrape new financial data
     console.log('[pipeline] Step 1: Scraping financial data...');
 
     // Use headless scraper in CI environment, Playwright locally
     const isCI = process.env.CI === 'true' || process.env.NODE_ENV === 'production';
-    const scraper = isCI ? new FinancialScraperHeadless() : new FinancialScraper();
+    console.log(`[pipeline] isCI determined as: ${isCI}`);
+
+    // Test module loading first
+    console.log('[pipeline] Testing module loading...');
+
+    let scraper;
+    if (isCI) {
+      console.log('[pipeline] Loading FinancialScraperHeadless...');
+      const { FinancialScraperHeadless } = await import('./financial-scraper-headless.js');
+      scraper = new FinancialScraperHeadless();
+      console.log('[pipeline] ✅ FinancialScraperHeadless loaded');
+    } else {
+      console.log('[pipeline] Loading FinancialScraper...');
+      const { FinancialScraper } = await import('./financial-scraper.js');
+      scraper = new FinancialScraper();
+      console.log('[pipeline] ✅ FinancialScraper loaded');
+    }
 
     console.log(`[pipeline] Using ${isCI ? 'headless' : 'playwright'} scraper`);
     const scrapedData = await scraper.scrape();
