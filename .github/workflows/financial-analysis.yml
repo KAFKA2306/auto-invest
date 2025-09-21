@@ -56,15 +56,16 @@ jobs:
           DISPLAY: :99
 
       - name: Commit and push financial data
+        working-directory: ${{ github.workspace }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          # Add the generated files
-          git add public/data/financial/ scripts/public/data/financial/
+          # Stage all changes produced by the pipeline (handles files outside the current dir)
+          git add -A
 
           # Only commit if there are changes
-          if ! git diff --staged --quiet; then
+          if ! git diff --cached --quiet; then
             git commit -m "Update financial analysis data $(date '+%Y-%m-%d %H:%M:%S')"
             git push
           else
