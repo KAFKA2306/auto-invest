@@ -51,6 +51,30 @@ interface LeverageMetrics {
   }>;
 }
 
+interface ValuationPoint {
+  date: string;
+  forward_pe: number;
+  forward_eps: number;
+  earnings_yield?: number;
+  earnings_yield_spread?: number;
+  implied_forward_pe_from_price?: number;
+  price_close?: number;
+}
+
+interface ValuationPayload {
+  as_of: string;
+  latest?: {
+    forward_pe?: number;
+    forward_eps?: number;
+    earnings_yield?: number;
+    earnings_yield_spread?: number;
+    yoy_eps_growth?: number;
+    implied_forward_pe_from_price?: number;
+  };
+  series: ValuationPoint[];
+  source?: string;
+}
+
 type Domain = [number, number] | ["auto", "auto"];
 type SeriesPoint = LeverageMetrics["series"][number];
 
@@ -72,12 +96,28 @@ const fetchLeverageMetrics = async (): Promise<LeverageMetrics> => {
   return payload.leverage;
 };
 
+const fetchValuation = async (): Promise<ValuationPayload> => {
+  const base = import.meta.env.BASE_URL ?? "/";
+  const response = await fetch(`${base}data/valuation.json`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Failed to fetch valuation: ${response.status}`);
+  const payload = (await response.json()) as ValuationPayload;
+  if (!payload.series) throw new Error("Valuation payload missing series");
+  return payload;
+};
+
 export const LeveragePanel = () => {
   const { data, isError, refetch, isFetching } = useQuery({
     queryKey: ["leverage"],
     queryFn: fetchLeverageMetrics,
     refetchInterval: 5 * 60 * 1000,
     staleTime: 60 * 1000,
+    retry: 1,
+  });
+
+  const { data: valuationData } = useQuery({
+    queryKey: ["valuation"],
+    queryFn: fetchValuation,
+    staleTime: 5 * 60 * 1000,
     retry: 1,
   });
 
@@ -104,6 +144,33 @@ export const LeveragePanel = () => {
     return sorted[base + 1] !== undefined
       ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
       : sorted[base];
+  };
+
+  const isAutoDomain = (domain: Domain): domain is ["auto", "auto"] =>
+    typeof domain[0] === "string" || typeof domain[1] === "string";
+
+  const quantileDomain = (
+    values: number[],
+    lowerQ = 0.02,
+    upperQ = 0.98,
+    minSpan = 0.1,
+    clampMin?: number,
+    clampMax?: number
+  ): Domain => {
+    const valid = values.filter((v) => Number.isFinite(v));
+    if (!valid.length) return ["auto", "auto"];
+    const lowQ = quantile(valid, lowerQ);
+    const highQ = quantile(valid, upperQ);
+    let low = lowQ - Math.abs(lowQ) * 0.05;
+    let high = highQ + Math.abs(highQ) * 0.05;
+    if (high - low < minSpan) {
+      const mid = (low + high) / 2;
+      low = mid - minSpan / 2;
+      high = mid + minSpan / 2;
+    }
+    if (clampMin !== undefined) low = Math.max(clampMin, low);
+    if (clampMax !== undefined) high = Math.min(clampMax, high);
+    return [low, high];
   };
 
   const plottedSeries = useMemo(
@@ -258,6 +325,62 @@ export const LeveragePanel = () => {
 
   const leverageTicks = useMemo(() => makeTicks(leverageDomain[0] as number, leverageDomain[1] as number), [leverageDomain]);
   const drawdownTicks = useMemo(() => makeTicks(drawdownDomain[0] as number, drawdownDomain[1] as number), [drawdownDomain]);
+
+  const valuationSeries = useMemo(() => {
+    if (!valuationData) return [] as ValuationPoint[];
+    const endDate = valuationData.as_of
+      ? new Date(valuationData.as_of)
+      : new Date(valuationData.series[valuationData.series.length - 1]?.date ?? Date.now());
+    const selected = RANGE_OPTIONS.find((r) => r.key === range);
+    if (!selected || !selected.days) return valuationData.series;
+    const start = new Date(endDate);
+    start.setDate(start.getDate() - selected.days);
+    return valuationData.series.filter((d) => {
+      const dt = new Date(d.date);
+      return dt >= start && dt <= endDate;
+    });
+  }, [valuationData, range]);
+
+  const peDomain = useMemo(
+    () => quantileDomain(valuationSeries.map((d) => d.forward_pe), 0.02, 0.98, 1, 0),
+    [valuationSeries]
+  );
+  const epsDomain = useMemo(
+    () => quantileDomain(valuationSeries.map((d) => d.forward_eps), 0.02, 0.98, 0.5),
+    [valuationSeries]
+  );
+  const yieldDomain = useMemo(
+    () =>
+      quantileDomain(
+        valuationSeries.map((d) =>
+          d.earnings_yield_spread !== undefined ? d.earnings_yield_spread : Number.NaN
+        ),
+        0.02,
+        0.98,
+        0.01
+      ),
+    [valuationSeries]
+  );
+
+  const peTicks = useMemo(
+    () =>
+      isAutoDomain(peDomain) ? undefined : makeTicks(peDomain[0] as number, peDomain[1] as number),
+    [peDomain]
+  );
+  const epsTicks = useMemo(
+    () =>
+      isAutoDomain(epsDomain) ? undefined : makeTicks(epsDomain[0] as number, epsDomain[1] as number),
+    [epsDomain]
+  );
+  const yieldTicks = useMemo(
+    () =>
+      isAutoDomain(yieldDomain)
+        ? undefined
+        : makeTicks(yieldDomain[0] as number, yieldDomain[1] as number),
+    [yieldDomain]
+  );
+
+  const valuationLatest = valuationData?.latest;
 
   if (isError) {
     return (
@@ -428,6 +551,91 @@ export const LeveragePanel = () => {
             </ResponsiveContainer>
           </div>
         </div>
+
+        {valuationSeries.length > 0 && (
+          <div className="space-y-4 pt-4 border-t border-border/60">
+            <div className="space-y-1">
+              <h3 className="text-lg font-medium">Valuation</h3>
+              <p className="text-sm text-muted-foreground">NASDAQ-100 Forward P/E と Forward 12M EPS に基づくバリュエーション指標</p>
+              {valuationLatest && (
+                <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
+                  <span>Forward P/E: {valuationLatest.forward_pe !== undefined ? valuationLatest.forward_pe.toFixed(2) : "–"}</span>
+                  <span>Forward EPS: {valuationLatest.forward_eps !== undefined ? valuationLatest.forward_eps.toFixed(2) : "–"}</span>
+                  <span>イールドスプレッド: {valuationLatest.earnings_yield_spread !== undefined ? `${(valuationLatest.earnings_yield_spread * 100).toFixed(1)}%` : "–"}</span>
+                  <span>EPS成長率(YoY): {valuationLatest.yoy_eps_growth !== undefined ? `${(valuationLatest.yoy_eps_growth * 100).toFixed(1)}%` : "–"}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="grid gap-6">
+              <div className="h-[320px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={valuationSeries}>
+                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Forward P/E</text>
+                    <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                    <YAxis
+                      domain={peDomain}
+                      ticks={peTicks}
+                      label={{ value: "Forward P/E", angle: -90, position: "insideLeft" }}
+                      tickFormatter={(v: number) => v.toFixed(1)}
+                      allowDataOverflow
+                    />
+                    <Tooltip formatter={(value: number) => value.toFixed(2)} />
+                    <Line type="monotone" dataKey="forward_pe" name="Forward P/E" stroke="#7c3aed" dot={false} strokeWidth={2} />
+                    <Line
+                      type="monotone"
+                      dataKey="implied_forward_pe_from_price"
+                      name="Implied P/E (価格換算)"
+                      stroke="#14b8a6"
+                      dot={false}
+                      strokeWidth={1}
+                      strokeDasharray="5 5"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="h-[320px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={valuationSeries}>
+                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Forward EPS</text>
+                    <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                    <YAxis
+                      domain={epsDomain}
+                      ticks={epsTicks}
+                      label={{ value: "Forward EPS", angle: -90, position: "insideLeft" }}
+                      tickFormatter={(v: number) => v.toFixed(2)}
+                    />
+                    <Tooltip formatter={(value: number) => value.toFixed(2)} />
+                    <Line type="monotone" dataKey="forward_eps" name="Forward EPS" stroke="#ea580c" dot={false} strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="h-[320px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={valuationSeries}>
+                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">イールドスプレッド</text>
+                    <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                    <YAxis
+                      domain={yieldDomain}
+                      ticks={yieldTicks}
+                      label={{ value: "Earn. Yield - Rf", angle: -90, position: "insideLeft" }}
+                      tickFormatter={(v: number) => `${(v * 100).toFixed(1)}%`}
+                    />
+                    <Tooltip formatter={(value: number) => `${(value * 100).toFixed(2)}%`} />
+                    <ReferenceLine y={0} stroke="#666" strokeDasharray="3 3" />
+                    <Line type="monotone" dataKey="earnings_yield_spread" name="Earnings Yield - Rf" stroke="#0ea5e9" dot={false} strokeWidth={2} />
+                    <Line type="monotone" dataKey="earnings_yield" name="Earnings Yield" stroke="#10b981" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+        )}
       </Card>
     </div>
   );

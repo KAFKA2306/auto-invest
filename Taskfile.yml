@@ -26,6 +26,11 @@ tasks:
     cmds:
       - PYTHONPATH=. uv run python scripts/update_leverage.py
 
+  update:valuation:
+    desc: Fetch MacroMicro valuation series (requires MACROMICRO_SESSION cookie)
+    cmds:
+      - PYTHONPATH=. uv run python scripts/fetch_valuation.py
+
   build:
     desc: Build frontend
     cmds:

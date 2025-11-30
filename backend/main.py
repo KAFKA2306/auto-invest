@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+import json
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import pandas as pd
@@ -65,6 +66,15 @@ async def get_leverage(
         fraction=fraction,
         spx_prices=spx_prices,
     )
+
+
+@app.get("/api/v1/valuation")
+async def get_valuation():
+    path = Path("public/data/valuation.json")
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="valuation.json not found. Run scripts/fetch_valuation.py")
+    with path.open() as f:
+        return json.load(f)
 
 
 if __name__ == "__main__":
