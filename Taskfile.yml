@@ -37,6 +37,15 @@ tasks:
       - uv run ruff check .
       - npm run lint
 
+  typecheck:
+    desc: Type-check frontend (no emit)
+    cmds:
+      - npm run typecheck
+
+  check:
+    desc: Run all quality gates (lint + typecheck)
+    deps: [lint, typecheck]
+
   format:
     desc: Format code
     cmds:

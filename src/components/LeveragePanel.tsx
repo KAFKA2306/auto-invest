@@ -52,6 +52,7 @@ interface LeverageMetrics {
 }
 
 type Domain = [number, number] | ["auto", "auto"];
+type SeriesPoint = LeverageMetrics["series"][number];
 
 const RANGE_OPTIONS = [
   { key: "90d", label: "90日", days: 90 },
@@ -80,6 +81,76 @@ export const LeveragePanel = () => {
     retry: 1,
   });
 
+  const [range, setRange] = useState<string>("180d");
+
+  const series = useMemo(() => {
+    if (!data) return [] as LeverageMetrics["series"];
+    const end = new Date(data.as_of);
+    const selected = RANGE_OPTIONS.find((r) => r.key === range);
+    if (!selected || !selected.days) return data.series;
+    const start = new Date(end);
+    start.setDate(start.getDate() - selected.days);
+    return data.series.filter((d) => new Date(d.date) >= start && new Date(d.date) <= end);
+  }, [data, range]);
+
+  const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
+
+  const plottedSeries = useMemo(
+    () =>
+      series.map((d) => ({
+        ...d,
+        L_blend_plot: clamp(d.L_blend, 0, 10),
+        kelly_plot: clamp(d.kelly_leverage, 0, 10),
+        fractional_plot: clamp(d.fractional_kelly, 0, 10),
+        max_drawdown_plot: clamp(d.max_drawdown, -0.8, 0),
+      })),
+    [series]
+  );
+
+  const domainFor = (key: keyof SeriesPoint): Domain => {
+    const vals = series.map((d) => d[key]).filter((v) => Number.isFinite(v)) as number[];
+    if (!vals.length) return ["auto", "auto"];
+
+    const mean = vals.reduce((sum, v) => sum + v, 0) / vals.length;
+    const variance =
+      vals.reduce((sum, v) => sum + (v - mean) * (v - mean), 0) / (vals.length || 1);
+    const std = Math.sqrt(variance);
+
+    let low = mean - 3 * std;
+    let high = mean + 3 * std;
+
+    if (std === 0) {
+      const padding = Math.abs(mean) * 0.05 || 1;
+      low = mean - padding;
+      high = mean + padding;
+    }
+
+    if (low === high) {
+      low -= 1;
+      high += 1;
+    }
+
+    return [low, high];
+  };
+
+  const priceDomain = domainFor("price_close");
+  const volDomain = domainFor("volatility_score");
+  const leverageDomain: Domain = (() => {
+    const maxVal = Math.max(
+      0,
+      ...plottedSeries.map((d) => d.L_blend_plot),
+      ...plottedSeries.map((d) => d.kelly_plot),
+      ...plottedSeries.map((d) => d.fractional_plot)
+    );
+    const upper = Math.min(10, Math.max(2, maxVal * 1.1));
+    return [0, upper];
+  })();
+  const drawdownDomain: Domain = (() => {
+    if (!plottedSeries.length) return [-0.8, 0];
+    const minVal = Math.min(...plottedSeries.map((d) => d.max_drawdown_plot), 0);
+    return [Math.min(minVal * 1.05, -0.05), 0];
+  })();
+
   if (isError) {
     return (
       <div className="rounded-xl border border-border/60 bg-card/70 p-6 shadow-sm">
@@ -95,45 +166,6 @@ export const LeveragePanel = () => {
       </div>
     );
   }
-
-  const [range, setRange] = useState<string>("180d");
-
-  const series = useMemo(() => {
-    if (!data) return [] as LeverageMetrics["series"];
-    const end = new Date(data.as_of);
-    const selected = RANGE_OPTIONS.find((r) => r.key === range);
-    if (!selected || !selected.days) return data.series;
-    const start = new Date(end);
-    start.setDate(start.getDate() - selected.days);
-    return data.series.filter((d) => new Date(d.date) >= start && new Date(d.date) <= end);
-  }, [data, range]);
-
-  const quantile = (values: number[], q: number) => {
-    if (!values.length) return 0;
-    const sorted = [...values].sort((a, b) => a - b);
-    const pos = (sorted.length - 1) * q;
-    const base = Math.floor(pos);
-    const rest = pos - base;
-    return sorted[base + 1] !== undefined
-      ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
-      : sorted[base];
-  };
-
-  const domainFor = (key: keyof LeverageMetrics["series"]): Domain => {
-    const vals = series.map((d) => d[key]).filter((v) => Number.isFinite(v)) as number[];
-    if (!vals.length) return ["auto", "auto"];
-    const low = quantile(vals, 0.02);
-    const high = quantile(vals, 0.98);
-    if (low === high) {
-      const padding = Math.abs(high) * 0.05 || 1;
-      return [high - padding, high + padding];
-    }
-    return [Math.min(low, 0), high];
-  };
-
-  const priceDomain = domainFor("price_close");
-  const volDomain = domainFor("volatility_score");
-  const leverageDomain = domainFor("L_blend");
 
   if (!data || series.length === 0) return null;
 
@@ -203,10 +235,15 @@ export const LeveragePanel = () => {
         <div className="grid gap-6">
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={series}>
+              <LineChart data={plottedSeries}>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">価格推移</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} />
-                <YAxis domain={priceDomain} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <YAxis
+                  domain={priceDomain}
+                  label={{ value: "価格(USD)", angle: -90, position: "insideLeft" }}
+                  tickFormatter={(v: number) => v.toFixed(0)}
+                />
                 <Tooltip formatter={(value: number) => value.toFixed(2)} />
                 <Line type="monotone" dataKey="price_close" stroke="#2563eb" dot={false} strokeWidth={2} />
               </LineChart>
@@ -215,11 +252,16 @@ export const LeveragePanel = () => {
 
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={series}>
+              <LineChart data={plottedSeries}>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">ボラティリティ</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} />
-                <YAxis domain={volDomain} />
-                <Tooltip formatter={(value: number) => value.toFixed(4)} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <YAxis
+                  domain={volDomain}
+                  label={{ value: "年率ボラ(σ)", angle: -90, position: "insideLeft" }}
+                  tickFormatter={(v: number) => v.toFixed(2)}
+                />
+                <Tooltip formatter={(value: number) => value.toFixed(3)} />
                 <Line type="monotone" dataKey="volatility_score" name="Vol Score" stroke="#dc2626" dot={false} strokeWidth={2} />
                 <Line type="monotone" dataKey="realized_vol_annual" name="Realized" stroke="#ea580c" dot={false} strokeWidth={1} strokeDasharray="5 5" />
                 <Line type="monotone" dataKey="ewma_vol_annual" name="EWMA" stroke="#9333ea" dot={false} strokeWidth={1} strokeDasharray="5 5" />
@@ -229,15 +271,38 @@ export const LeveragePanel = () => {
 
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={series}>
+              <LineChart data={plottedSeries}>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">最大ドローダウン</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} />
-                <YAxis domain={leverageDomain} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <YAxis
+                  domain={drawdownDomain}
+                  label={{ value: "最大DD(%)", angle: -90, position: "insideLeft" }}
+                  tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`}
+                />
+                <Tooltip formatter={(value: number) => `${(value * 100).toFixed(1)}%`} />
+                <ReferenceLine y={0} stroke="#666" strokeDasharray="3 3" />
+                <Line type="monotone" dataKey="max_drawdown" name="Max DD" stroke="#ef4444" dot={false} strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="h-[320px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={plottedSeries}>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">レバレッジ推奨</text>
+                <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <YAxis
+                  domain={leverageDomain}
+                  label={{ value: "レバレッジ(x)", angle: -90, position: "insideLeft" }}
+                  tickFormatter={(v: number) => v.toFixed(1)}
+                />
                 <Tooltip formatter={(value: number) => value.toFixed(2)} />
                 <ReferenceLine y={1} stroke="#666" strokeDasharray="3 3" />
-                <Line type="monotone" dataKey="L_blend" name="Blend" stroke="#16a34a" dot={false} strokeWidth={2} />
-                <Line type="monotone" dataKey="kelly_leverage" name="Kelly" stroke="#2563eb" dot={false} strokeWidth={1} strokeDasharray="5 5" />
-                <Line type="monotone" dataKey="fractional_kelly" name="Fractional" stroke="#0891b2" dot={false} strokeWidth={1} strokeDasharray="3 3" />
+                <Line type="monotone" dataKey="L_blend_plot" name="推奨レバ (Blend)" stroke="#16a34a" dot={false} strokeWidth={2} />
+                <Line type="monotone" dataKey="kelly_plot" name="Kelly理論レバ" stroke="#2563eb" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="fractional_plot" name="分割Kellyレバ" stroke="#0891b2" dot={false} strokeWidth={1} strokeDasharray="3 3" />
               </LineChart>
             </ResponsiveContainer>
           </div>

@@ -1,8 +1,5 @@
 import { PerformanceMetricsGrid } from "@/components/PerformanceMetrics";
-import { ActionsDashboard } from "@/components/ActionsDashboard";
-import { FinancialDashboard } from "@/components/FinancialDashboard";
 import { LeveragePanel } from "@/components/LeveragePanel";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   return (
@@ -17,50 +14,10 @@ const Index = () => {
         </header>
 
         <main>
-          <Tabs defaultValue="performance" className="space-y-8">
-            <TabsList className="grid w-full max-w-xl grid-cols-3 rounded-full bg-muted/70 p-1.5">
-              <TabsTrigger
-                value="performance"
-                className="rounded-full px-4 py-2 text-sm font-medium transition data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm"
-              >
-                Performance
-              </TabsTrigger>
-              <TabsTrigger
-                value="financial"
-                className="rounded-full px-4 py-2 text-sm font-medium transition data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm"
-              >
-                Financial News
-              </TabsTrigger>
-              <TabsTrigger
-                value="leverage"
-                className="rounded-full px-4 py-2 text-sm font-medium transition data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm"
-              >
-                Leverage
-              </TabsTrigger>
-              <TabsTrigger
-                value="actions"
-                className="rounded-full px-4 py-2 text-sm font-medium transition data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm"
-              >
-                Actions
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="performance">
-              <PerformanceMetricsGrid />
-            </TabsContent>
-
-            <TabsContent value="financial">
-              <FinancialDashboard />
-            </TabsContent>
-
-            <TabsContent value="leverage">
-              <LeveragePanel />
-            </TabsContent>
-
-            <TabsContent value="actions">
-              <ActionsDashboard />
-            </TabsContent>
-          </Tabs>
+          <div className="space-y-10">
+            <PerformanceMetricsGrid />
+            <LeveragePanel />
+          </div>
         </main>
       </div>
     </div>

@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "preview": "vite preview",
     "scrape:financial": "cd scripts && node financial-scraper.js",
     "analyze:financial": "cd scripts && node financial-analyzer.js",
