@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   LineChart,
   Line,
@@ -59,6 +60,7 @@ interface ValuationPoint {
   earnings_yield_spread?: number;
   implied_forward_pe_from_price?: number;
   price_close?: number;
+  price_index?: number;
 }
 
 interface ValuationPayload {
@@ -97,16 +99,28 @@ const fetchLeverageMetrics = async (): Promise<LeverageMetrics> => {
 };
 
 const fetchValuation = async (): Promise<ValuationPayload> => {
-  const base = import.meta.env.BASE_URL ?? "/";
-  const response = await fetch(`${base}data/valuation.json`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Failed to fetch valuation: ${response.status}`);
-  const payload = (await response.json()) as ValuationPayload;
-  if (!payload.series) throw new Error("Valuation payload missing series");
-  return payload;
+  const apiBase = import.meta.env.VITE_API_BASE ?? "http://localhost:8000";
+  const staticBase = import.meta.env.BASE_URL ?? "/";
+
+  const tryFetch = async (url: string) => {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Fetch failed ${res.status}`);
+    return (await res.json()) as ValuationPayload;
+  };
+
+  try {
+    const payload = await tryFetch(`${apiBase}/api/v1/valuation`);
+    if (!payload.series) throw new Error("Valuation payload missing series");
+    return payload;
+  } catch {
+    const payload = await tryFetch(`${staticBase}data/valuation.json`);
+    if (!payload.series) throw new Error("Valuation payload missing series");
+    return payload;
+  }
 };
 
 export const LeveragePanel = () => {
-  const { data, isError, refetch, isFetching } = useQuery({
+  const { data, isError, refetch, isFetching, isLoading } = useQuery({
     queryKey: ["leverage"],
     queryFn: fetchLeverageMetrics,
     refetchInterval: 5 * 60 * 1000,
@@ -185,51 +199,6 @@ export const LeveragePanel = () => {
     [series]
   );
 
-  const priceStats = useMemo(() => {
-    const prices = plottedSeries.map((d) => d.price_close).filter((v) => v > 0);
-    if (!prices.length) return { min: 1, max: 10 };
-    const min = Math.min(...prices);
-    const max = Math.max(...prices);
-    return { min, max };
-  }, [plottedSeries]);
-
-  const priceTicks = useMemo(() => {
-    const ticks: number[] = [];
-    const { min, max } = priceStats;
-    const minPow = Math.floor(Math.log10(min));
-    const maxPow = Math.ceil(Math.log10(max));
-    for (let p = minPow; p <= maxPow; p += 1) {
-      const base = 10 ** p;
-      [1, 2, 5].forEach((m) => {
-        const v = m * base;
-        if (v >= min * 0.9 && v <= max * 1.1) ticks.push(v);
-      });
-    }
-    let candidates = Array.from(new Set(ticks)).sort((a, b) => a - b);
-
-    if (candidates.length < 4) {
-      const logMin = Math.log10(min);
-      const logMax = Math.log10(max);
-      const evenTicks = Array.from({ length: 4 }, (_, i) =>
-        10 ** (logMin + ((logMax - logMin) / 3) * i)
-      );
-      candidates = Array.from(new Set([...candidates, ...evenTicks, min, max])).sort(
-        (a, b) => a - b
-      );
-    }
-
-    if (candidates.length > 8) {
-      const step = Math.ceil(candidates.length / 8);
-      candidates = candidates.filter((_, idx) => idx % step === 0);
-    }
-
-    while (candidates.length < 4 && candidates.length < 8) {
-      candidates.push(max * (1 + candidates.length * 0.01));
-    }
-
-    return candidates;
-  }, [priceStats]);
-
   const domainFor = (key: keyof SeriesPoint): Domain => {
     const vals = series.map((d) => d[key]).filter((v) => Number.isFinite(v)) as number[];
     if (!vals.length) return ["auto", "auto"];
@@ -255,6 +224,37 @@ export const LeveragePanel = () => {
 
     return [low, high];
   };
+
+  const valuationSeries = useMemo(() => {
+    if (!valuationData) return [] as ValuationPoint[];
+    const endDate = valuationData.as_of
+      ? new Date(valuationData.as_of)
+      : new Date(valuationData.series[valuationData.series.length - 1]?.date ?? Date.now());
+    const selected = RANGE_OPTIONS.find((r) => r.key === range);
+    if (!selected || !selected.days) return valuationData.series;
+    const start = new Date(endDate);
+    start.setDate(start.getDate() - selected.days);
+    return valuationData.series.filter((d) => {
+      const dt = new Date(d.date);
+      return dt >= start && dt <= endDate;
+    });
+  }, [valuationData, range]);
+
+  const priceChartData = useMemo(() => {
+    if (!valuationSeries.length) return [];
+    return valuationSeries
+      .map((d) => ({ date: d.date, price: d.price_index }))
+      .filter((d) => Number.isFinite(d.price as number));
+  }, [valuationSeries]);
+
+  // 価格統計はドメイン計算より先に評価する必要がある
+  const priceStats = useMemo(() => {
+    const prices = priceChartData.map((d) => d.price as number).filter((v) => v > 0);
+    if (!prices.length) return { min: 1, max: 10 };
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    return { min, max };
+  }, [priceChartData]);
 
   const priceDomain: Domain = (() => {
     const low = Math.max(0.5, priceStats.min * 0.9);
@@ -326,20 +326,42 @@ export const LeveragePanel = () => {
   const leverageTicks = useMemo(() => makeTicks(leverageDomain[0] as number, leverageDomain[1] as number), [leverageDomain]);
   const drawdownTicks = useMemo(() => makeTicks(drawdownDomain[0] as number, drawdownDomain[1] as number), [drawdownDomain]);
 
-  const valuationSeries = useMemo(() => {
-    if (!valuationData) return [] as ValuationPoint[];
-    const endDate = valuationData.as_of
-      ? new Date(valuationData.as_of)
-      : new Date(valuationData.series[valuationData.series.length - 1]?.date ?? Date.now());
-    const selected = RANGE_OPTIONS.find((r) => r.key === range);
-    if (!selected || !selected.days) return valuationData.series;
-    const start = new Date(endDate);
-    start.setDate(start.getDate() - selected.days);
-    return valuationData.series.filter((d) => {
-      const dt = new Date(d.date);
-      return dt >= start && dt <= endDate;
-    });
-  }, [valuationData, range]);
+  const priceTicks = useMemo(() => {
+    const ticks: number[] = [];
+    const { min, max } = priceStats;
+    const minPow = Math.floor(Math.log10(min));
+    const maxPow = Math.ceil(Math.log10(max));
+    for (let p = minPow; p <= maxPow; p += 1) {
+      const base = 10 ** p;
+      [1, 2, 5].forEach((m) => {
+        const v = m * base;
+        if (v >= min * 0.9 && v <= max * 1.1) ticks.push(v);
+      });
+    }
+    let candidates = Array.from(new Set(ticks)).sort((a, b) => a - b);
+
+    if (candidates.length < 4) {
+      const logMin = Math.log10(min);
+      const logMax = Math.log10(max);
+      const evenTicks = Array.from({ length: 4 }, (_, i) =>
+        10 ** (logMin + ((logMax - logMin) / 3) * i)
+      );
+      candidates = Array.from(new Set([...candidates, ...evenTicks, min, max])).sort(
+        (a, b) => a - b
+      );
+    }
+
+    if (candidates.length > 8) {
+      const step = Math.ceil(candidates.length / 8);
+      candidates = candidates.filter((_, idx) => idx % step === 0);
+    }
+
+    while (candidates.length < 4 && candidates.length < 8) {
+      candidates.push(max * (1 + candidates.length * 0.01));
+    }
+
+    return candidates;
+  }, [priceStats]);
 
   const peDomain = useMemo(
     () => quantileDomain(valuationSeries.map((d) => d.forward_pe), 0.02, 0.98, 1, 0),
@@ -398,7 +420,30 @@ export const LeveragePanel = () => {
     );
   }
 
-  if (!data || series.length === 0) return null;
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+          <Skeleton className="h-[120px] w-full" />
+          <Skeleton className="h-[120px] w-full" />
+          <Skeleton className="h-[120px] w-full" />
+          <Skeleton className="h-[120px] w-full" />
+        </div>
+        <Skeleton className="h-[400px] w-full" />
+        <Skeleton className="h-[400px] w-full" />
+        <Skeleton className="h-[400px] w-full" />
+        <Skeleton className="h-[400px] w-full" />
+      </div>
+    );
+  }
+
+  if (!data || series.length === 0) {
+    return (
+      <div className="rounded-xl border border-border/60 bg-card/70 p-6 shadow-sm">
+        <div className="text-sm text-muted-foreground">No data available.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -473,20 +518,20 @@ export const LeveragePanel = () => {
         <div className="grid gap-6">
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={plottedSeries}>
-                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">価格推移</text>
+              <LineChart data={priceChartData}>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">指数価格推移</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
                 <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   scale="log"
                   domain={priceDomain}
                   ticks={priceTicks}
-                  label={{ value: "価格(USD, 対数)", angle: -90, position: "insideLeft" }}
+                  label={{ value: "指数価格(USD, 対数)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(0)}
                   allowDataOverflow
                 />
                 <Tooltip formatter={(value: number) => value.toFixed(2)} />
-                <Line type="monotone" dataKey="price_close" stroke="#2563eb" dot={false} strokeWidth={2} />
+                <Line type="monotone" dataKey="price" stroke="#2563eb" dot={false} strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -571,45 +616,29 @@ export const LeveragePanel = () => {
               <div className="h-[320px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={valuationSeries}>
-                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Forward P/E</text>
+                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Forward P/E & EPS</text>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
                     <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                     <YAxis
+                      yAxisId="pe"
                       domain={peDomain}
                       ticks={peTicks}
                       label={{ value: "Forward P/E", angle: -90, position: "insideLeft" }}
                       tickFormatter={(v: number) => v.toFixed(1)}
                       allowDataOverflow
                     />
-                    <Tooltip formatter={(value: number) => value.toFixed(2)} />
-                    <Line type="monotone" dataKey="forward_pe" name="Forward P/E" stroke="#7c3aed" dot={false} strokeWidth={2} />
-                    <Line
-                      type="monotone"
-                      dataKey="implied_forward_pe_from_price"
-                      name="Implied P/E (価格換算)"
-                      stroke="#14b8a6"
-                      dot={false}
-                      strokeWidth={1}
-                      strokeDasharray="5 5"
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="h-[320px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={valuationSeries}>
-                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Forward EPS</text>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                     <YAxis
+                      yAxisId="eps"
+                      orientation="right"
                       domain={epsDomain}
                       ticks={epsTicks}
-                      label={{ value: "Forward EPS", angle: -90, position: "insideLeft" }}
-                      tickFormatter={(v: number) => v.toFixed(2)}
+                      label={{ value: "Forward EPS", angle: 90, position: "insideRight" }}
+                      tickFormatter={(v: number) => v.toFixed(1)}
                     />
                     <Tooltip formatter={(value: number) => value.toFixed(2)} />
-                    <Line type="monotone" dataKey="forward_eps" name="Forward EPS" stroke="#ea580c" dot={false} strokeWidth={2} />
+                    <Line yAxisId="pe" type="monotone" dataKey="forward_pe" name="Forward P/E" stroke="#7c3aed" dot={false} strokeWidth={2} />
+                    <Line yAxisId="pe" type="monotone" dataKey="implied_forward_pe_from_price" name="Implied P/E" stroke="#14b8a6" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                    <Line yAxisId="eps" type="monotone" dataKey="forward_eps" name="Forward EPS" stroke="#ea580c" dot={false} strokeWidth={2} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

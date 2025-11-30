@@ -21,20 +21,19 @@ tasks:
     cmds:
       - npm run dev
 
-  update:
-    desc: Update leverage metrics
+  update:leverage:
+    desc: Update leverage metrics (QQQ)
     cmds:
       - PYTHONPATH=. uv run python scripts/update_leverage.py
 
   update:valuation:
-    desc: Fetch MacroMicro valuation series (requires MACROMICRO_SESSION cookie)
+    desc: Update valuation (NDX price + EPS model)
     cmds:
-      - PYTHONPATH=. uv run python scripts/fetch_valuation.py
+      - PYTHONPATH=. uv run python scripts/fetch_valuation_pdr.py
 
-  update:valuation:free:
-    desc: Fetch valuation via free Yahoo Finance forward P/E/EPS (QQQ proxy)
-    cmds:
-      - PYTHONPATH=. uv run python scripts/fetch_valuation_free.py
+  update:all:
+    desc: Update leverage and valuation data
+    deps: [update:leverage, update:valuation]
 
   build:
     desc: Build frontend
@@ -60,3 +59,9 @@ tasks:
     desc: Format code
     cmds:
       - uv run ruff format .
+
+  del:cache:
+    desc: Delete build/test caches (keeps node_modules and data)
+    cmds:
+      - rm -rf .ruff_cache .pytest_cache .mypy_cache .ipynb_checkpoints .parcel-cache .cache .turbo .vite coverage dist-ssr dist
+      - find . -name '__pycache__' -type d -prune -exec rm -rf {} +

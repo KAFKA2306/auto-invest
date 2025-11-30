@@ -1,6 +1,7 @@
 import json
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
 from pathlib import Path
 import pandas as pd
 from backend.services.leverage import compute_leverage
@@ -33,6 +34,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
+@app.get("/")
+async def root():
+    return {
+        "status": "ok",
+        "endpoints": [
+            "/api/v1/leverage",
+            "/api/v1/valuation",
+            "/data/metrics.json",
+            "/data/valuation.json",
+        ],
+    }
 
 
 @app.get("/api/v1/leverage")
@@ -72,9 +91,25 @@ async def get_leverage(
 async def get_valuation():
     path = Path("public/data/valuation.json")
     if not path.exists():
-        raise HTTPException(status_code=404, detail="valuation.json not found. Run scripts/fetch_valuation.py")
+        raise HTTPException(status_code=404, detail="valuation.json not found. Run scripts/fetch_valuation_pdr.py")
     with path.open() as f:
         return json.load(f)
+
+
+@app.get("/data/valuation.json")
+async def get_valuation_file():
+    path = Path("public/data/valuation.json")
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="valuation.json not found. Run scripts/fetch_valuation_pdr.py")
+    return FileResponse(path)
+
+
+@app.get("/data/metrics.json")
+async def get_metrics_file():
+    path = Path("public/data/metrics.json")
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="metrics.json not found. Run scripts/update_leverage.py")
+    return FileResponse(path)
 
 
 if __name__ == "__main__":
