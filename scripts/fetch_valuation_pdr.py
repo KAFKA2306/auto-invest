@@ -22,6 +22,7 @@ REF_PE = 32.5
 CALIB_WINDOW = 20
 EPS_PATH = DATA_DIR / "ndx_eps_quarterly.csv"
 NDX_PRICE_PATH = DATA_DIR / "price_NDX.csv"
+PRICE_START = "2005-01-01"
 
 
 def load_eps_actual() -> pd.DataFrame:
@@ -53,12 +54,12 @@ def fetch_growth() -> pd.DataFrame:
 
 
 def fetch_index_price() -> pd.DataFrame:
-    ndx = pdr.DataReader("^NDX", "stooq")
+    ndx = pdr.DataReader("^NDX", "stooq", start=PRICE_START)
     ndx = ndx.rename(columns={"Close": "price_index"})[["price_index"]]
     ndx.index.name = "date"
     ndx = ndx.sort_index()
 
-    qqq = pdr.DataReader("QQQ", "stooq")
+    qqq = pdr.DataReader("QQQ", "stooq", start=PRICE_START)
     qqq = qqq.rename(columns={"Close": "price_close"})[["price_close"]]
     qqq.index.name = "date"
     qqq = qqq.sort_index()
@@ -101,7 +102,8 @@ def build_series() -> pd.DataFrame:
     growth_term = df["g_long"].clip(lower=-0.02, upper=0.05)
     model_yield = (expected_return - growth_term).clip(EY_CLIP[0], EY_CLIP[1])
 
-    median_window = model_yield.rolling(CALIB_WINDOW, min_periods=30).median()
+    # Use the same minimum periods as the rolling window to avoid pandas validation errors
+    median_window = model_yield.rolling(CALIB_WINDOW, min_periods=CALIB_WINDOW).median()
     bias = (1.0 / REF_PE) / median_window.iloc[-1] if not pd.isna(median_window.iloc[-1]) else 1.0
     model_yield = (model_yield * bias).clip(EY_CLIP[0], EY_CLIP[1])
     rolling_anchor = model_yield.rolling(ANCHOR_WINDOW, min_periods=30).median()
