@@ -2,6 +2,10 @@
 
 最小構成の投資ダッシュボードです。FastAPI バックエンドと React + TypeScript フロントエンドを使用し、最適レバレッジ判断のための指標（Kelly基準、ボラティリティ、各種リスク指標）を提供します。
 
+## 公開サイト
+
+- GitHub Pages: https://kafka2306.github.io/auto-invest/
+
 ## 機能
 
 - **最適レバレッジ提案**: Kelly基準とボラティリティターゲットを組み合わせた `L_blend` を提示
