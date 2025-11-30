@@ -11,7 +11,7 @@ from pandas_datareader import data as pdr
 
 DATA_DIR = Path("public/data")
 PROCESSED_DIR = Path("data/processed")
-ROLLING_WINDOW = 252
+ROLLING_WINDOW = 20
 PE_CLIP = (2.0, 60.0)
 EY_CLIP = (0.005, 0.12)
 ERP_BASE = 0.01
@@ -25,8 +25,6 @@ NDX_PRICE_PATH = DATA_DIR / "price_NDX.csv"
 
 
 def load_eps_actual() -> pd.DataFrame:
-    if not EPS_PATH.exists():
-        raise FileNotFoundError(f"{EPS_PATH} not found")
     df = pd.read_csv(EPS_PATH)
     df.columns = [c.lower() for c in df.columns]
     if "date" not in df or "value" not in df:
