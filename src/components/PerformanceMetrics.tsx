@@ -83,7 +83,7 @@ export const PerformanceMetricsGrid = () => {
           title="Win Rate"
           value={metrics.win_rate}
           format={(v) => `${(v * 100).toFixed(1)}%`}
-          description="Share of trades finishing in profit"
+          description="Share of daily QQQ returns that are positive (last ~6M)"
           trend={metrics.win_rate > 0.5 ? "up" : "down"}
         />
         <PerformanceCard
