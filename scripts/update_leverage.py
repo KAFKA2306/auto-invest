@@ -66,6 +66,7 @@ def summarize(prices: pd.Series, rf_daily: pd.Series) -> dict:
 def main() -> None:
     symbol = "QQQ"
     window_trading_days = 756
+    summary_window_trading_days = 126  # ~6 months
     borrow_spread_annual = 0.01
     fund_fee_annual = 0.0
     cap = 2.0
@@ -91,6 +92,10 @@ def main() -> None:
     rf_daily = rf_daily.reindex(common_index)
     spx_prices = spx_raw.reindex(common_index)
 
+    # Use a shorter lookback for dashboard summary statistics
+    prices_recent = prices.tail(summary_window_trading_days)
+    rf_recent = rf_daily.reindex(prices_recent.index)
+
     leverage = compute_leverage(
         prices=prices,
         ffrate_daily=rf_daily,
@@ -103,7 +108,7 @@ def main() -> None:
         spx_prices=spx_prices,
     )
 
-    summary = summarize(prices, rf_daily)
+    summary = summarize(prices_recent, rf_recent)
     summary["last_updated"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     summary["leverage"] = leverage
 

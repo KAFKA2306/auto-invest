@@ -1,9 +1,9 @@
 {
-  "sharpe_ratio": 0.6839939664361406,
-  "max_drawdown": -0.5340204840498395,
-  "win_rate": 0.554491476728596,
-  "profit_factor": 1.1509637356069826,
-  "last_updated": "2025-11-30T06:46:41Z",
+  "sharpe_ratio": 2.0935367506708658,
+  "max_drawdown": -0.07880208251411702,
+  "win_rate": 0.608,
+  "profit_factor": 1.4818426284790944,
+  "last_updated": "2025-11-30T06:49:30Z",
   "leverage": {
     "as_of": "2025-11-26",
     "symbol": "QQQ",
