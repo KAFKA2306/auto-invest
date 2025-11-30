@@ -19,7 +19,7 @@ tasks:
   dev:frontend:
     desc: Run Vite frontend
     cmds:
-      - npm run dev
+      - PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}
 
   check:
     desc: Run all quality checks (lint + typecheck + build)
@@ -62,6 +62,11 @@ tasks:
   update:all:
     desc: Update all market data
     deps: [update:leverage, update:valuation]
+
+  fetch:bottomup:
+    desc: Update bottom-up EPS dataset (Nasdaq-100, with fallbacks)
+    cmds:
+      - npm run fetch:bottomup
 
   clean:
     desc: Remove all caches and build artifacts
