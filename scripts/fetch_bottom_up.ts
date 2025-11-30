@@ -3,6 +3,7 @@
  * Fetch bottom-up EPS data for NASDAQ-100 leaders using Yahoo Finance,
  * with a hook for future LLM/PDF fallback.
  */
+import "dotenv/config";
 import fs from "node:fs/promises";
 import path from "node:path";
 import YahooFinance from "yahoo-finance2";
@@ -335,7 +336,9 @@ const main = async () => {
   }
 
   // Recompute weights from market cap if available
-  const totalMcap = Object.values(marketCaps).filter((v) => v && v > 0).reduce((a, b) => a + (b as number), 0);
+  const totalMcap = Object.values(marketCaps)
+    .filter((v) => v && v > 0)
+    .reduce((a, b) => a + (b as number), 0);
   const weightedRows =
     totalMcap > 0
       ? rows.map((r) => ({
@@ -347,7 +350,11 @@ const main = async () => {
         }))
       : rows;
 
-  await saveDataset(weightedRows, existing);
+  // Final normalization to make weights sum to 1
+  const weightSum = weightedRows.reduce((s, r) => s + (r.weight ?? 0), 0) || 1;
+  const normalizedRows = weightedRows.map((r) => ({ ...r, weight: (r.weight ?? 0) / weightSum }));
+
+  await saveDataset(normalizedRows, existing);
 };
 
 main().catch((err) => {
