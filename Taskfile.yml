@@ -4,19 +4,9 @@ tasks:
   install:
     desc: Install all dependencies
     cmds:
-      - uv sync
       - npm install
 
   dev:
-    desc: Run backend and frontend concurrently
-    deps: [dev:backend, dev:frontend]
-
-  dev:backend:
-    desc: Run FastAPI backend
-    cmds:
-      - uv run uvicorn backend.main:app --reload --port 8000
-
-  dev:frontend:
     desc: Run Vite frontend
     cmds:
       - PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}
@@ -29,15 +19,9 @@ tasks:
       - task: build
 
   lint:
-    desc: Lint Python and TypeScript
+    desc: Lint TypeScript
     cmds:
-      - uv run ruff check .
       - npm run lint
-
-  format:
-    desc: Format all code
-    cmds:
-      - uv run ruff format .
 
   typecheck:
     desc: TypeScript type check
@@ -52,24 +36,23 @@ tasks:
   update:leverage:
     desc: Update QQQ leverage metrics
     cmds:
-      - PYTHONPATH=. uv run python scripts/update_leverage.py
+      - npm run update:leverage
 
   update:valuation:
     desc: Update NDX valuation data
     cmds:
-      - PYTHONPATH=. uv run python scripts/fetch_valuation_pdr.py
+      - npm run update:valuation
+
+  update:eps:
+    desc: Update bottom-up EPS dataset
+    cmds:
+      - npm run update:eps
 
   update:all:
     desc: Update all market data
-    deps: [update:leverage, update:valuation]
-
-  fetch:bottomup:
-    desc: Update bottom-up EPS dataset (Nasdaq-100, with fallbacks)
-    cmds:
-      - npm run fetch:bottomup
+    deps: [update:leverage, update:valuation, update:eps]
 
   clean:
     desc: Remove all caches and build artifacts
     cmds:
-      - rm -rf dist dist-ssr .vite .turbo .cache .ruff_cache .pytest_cache
-      - find . -type d -name '__pycache__' -exec rm -rf {} +
+      - rm -rf dist dist-ssr .vite .turbo .cache

@@ -20,18 +20,12 @@ jobs:
           node-version: 20
           cache: npm
 
-      - uses: astral-sh/setup-uv@v3
-        with:
-          version: latest
-
       - name: Install dependencies
         run: |
-          uv sync
           npm ci
 
       - name: Lint
         run: |
-          uv run ruff check .
           npm run lint
 
       - name: Type check
