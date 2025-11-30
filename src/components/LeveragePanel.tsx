@@ -250,7 +250,6 @@ export const LeveragePanel = () => {
       .filter((d) => Number.isFinite(d.price as number));
   }, [valuationSeries]);
 
-  // 価格統計はドメイン計算より先に評価する必要がある
   const priceStats = useMemo(() => {
     const prices = priceChartData.map((d) => d.price as number).filter((v) => v > 0);
     if (!prices.length) return { min: 1, max: 10 };
