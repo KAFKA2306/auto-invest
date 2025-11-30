@@ -69,27 +69,27 @@ export const PerformanceMetricsGrid = () => {
         <PerformanceCard
           title="Sharpe Ratio"
           value={metrics.sharpe_ratio}
-          description="Risk-adjusted return across the most recent period"
+          description="Risk-adjusted return (annualized) of daily QQQ returns over the latest 126 trading days, relative to risk-free rate."
           trend={metrics.sharpe_ratio > 1 ? "up" : "down"}
         />
         <PerformanceCard
           title="Maximum Drawdown"
           value={metrics.max_drawdown}
           format={(v) => `${(v * 100).toFixed(2)}%`}
-          description="Largest peak-to-trough decline in the monitored window"
+          description="Largest peak-to-trough decline in cumulative QQQ returns over the latest 126 trading days."
           trend={metrics.max_drawdown > -0.1 ? "up" : "down"}
         />
         <PerformanceCard
           title="Win Rate"
           value={metrics.win_rate}
           format={(v) => `${(v * 100).toFixed(1)}%`}
-          description="Share of trades finishing in profit"
+          description="Proportion of trading days with positive QQQ daily returns over the latest 126 trading days."
           trend={metrics.win_rate > 0.5 ? "up" : "down"}
         />
         <PerformanceCard
           title="Profit Factor"
           value={metrics.profit_factor}
-          description="Gross profit divided by gross loss"
+          description="Ratio of total positive QQQ daily returns to absolute total negative daily returns over the latest 126 trading days."
           trend={metrics.profit_factor > 1 ? "up" : "down"}
         />
       </div>

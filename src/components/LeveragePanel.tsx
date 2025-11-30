@@ -458,7 +458,7 @@ export const LeveragePanel = () => {
             <CardContent>
               <div className="text-2xl font-bold">{data.suggested.L_blend.toFixed(2)}x</div>
               <p className="text-xs text-muted-foreground">
-                Kelly {data.suggested.L_kelly.toFixed(2)} / Vol-Targeted {data.suggested.L_vol.toFixed(2)}
+                Blended from Kelly ({data.suggested.L_kelly.toFixed(2)}) & Vol-Targeted ({data.suggested.L_vol.toFixed(2)}) leverage (full history log returns), capped at {data.suggested.cap}x.
               </p>
             </CardContent>
           </Card>
@@ -468,7 +468,7 @@ export const LeveragePanel = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{data.risk.sortino_ratio_annual.toFixed(2)}</div>
-              <p className="text-xs text-muted-foreground">Sharpe {data.sharpe_ratio_annual.toFixed(2)}</p>
+              <p className="text-xs text-muted-foreground">Sortino (annualized, full history log returns) measures excess return per downside risk. Sharpe: {data.sharpe_ratio_annual.toFixed(2)}</p>
             </CardContent>
           </Card>
           <Card>
@@ -477,7 +477,7 @@ export const LeveragePanel = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{(data.risk.max_drawdown * 100).toFixed(1)}%</div>
-              <p className="text-xs text-muted-foreground">Calmar {data.risk.calmar_ratio.toFixed(2)}</p>
+              <p className="text-xs text-muted-foreground">Max Drawdown (full history cumulative log returns) is largest peak-to-trough decline. Calmar Ratio: {data.risk.calmar_ratio.toFixed(2)}</p>
             </CardContent>
           </Card>
           <Card>
@@ -486,7 +486,7 @@ export const LeveragePanel = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{(data.risk.es_95 * 100).toFixed(2)}%</div>
-              <p className="text-xs text-muted-foreground">Vol of Vol {data.risk.vol_of_vol.toFixed(2)}</p>
+              <p className="text-xs text-muted-foreground">ES (95%, full history log returns) is avg loss below 5th percentile. Vol of Vol: {data.risk.vol_of_vol.toFixed(2)}</p>
             </CardContent>
           </Card>
         </div>
@@ -511,10 +511,10 @@ export const LeveragePanel = () => {
         </div>
 
         <div className="rounded-lg bg-muted/40 p-4 text-xs text-muted-foreground space-y-1">
-          <div className="font-semibold text-foreground">Calculation Methodology</div>
-          <div>Recommended Leverage (Blended) = min(cap, α·Kelly + (1-α)·Vol-Targeted), where α={data.suggested.alpha.toFixed(2)}, cap={data.suggested.cap}×</div>
-          <div>Kelly Criterion Leverage = (excess return) ÷ variance; Fractional Kelly = min(cap, fraction·Kelly)</div>
-          <div>Volatility-Targeted Leverage = (target volatility 20%) ÷ (realized volatility); Maximum Drawdown = largest cumulative peak-to-trough decline</div>
+          <div className="font-semibold text-foreground">Calculation Methodology (Full History QQQ Log Returns)</div>
+          <div>Recommended Leverage is min(cap, α·Kelly + (1-α)·Vol-Targeted). Kelly = (excess return) ÷ variance. Vol-Targeted = (target vol 20%) ÷ (realized vol).</div>
+          <div>Sortino Ratio uses downside deviation. Max Drawdown (MDD) is largest cumulative peak-to-trough decline. Calmar = Annualized Return / |MDD|.</div>
+          <div>Expected Shortfall (95%) is average loss below 5th percentile. Vol of Vol is std dev of 21-day rolling annualized vol.</div>
         </div>
 
         <div className="grid gap-6">
