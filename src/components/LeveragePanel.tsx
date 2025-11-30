@@ -81,10 +81,10 @@ type Domain = [number, number] | ["auto", "auto"];
 type SeriesPoint = LeverageMetrics["series"][number];
 
 const RANGE_OPTIONS = [
-  { key: "90d", label: "90日", days: 90 },
-  { key: "180d", label: "180日", days: 180 },
-  { key: "1y", label: "1年", days: 252 },
-  { key: "max", label: "全期間" },
+  { key: "90d", label: "90D", days: 90 },
+  { key: "180d", label: "180D", days: 180 },
+  { key: "1y", label: "1Y", days: 252 },
+  { key: "max", label: "All" },
 ];
 
 
@@ -454,12 +454,12 @@ export const LeveragePanel = () => {
         <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Blend提案</CardTitle>
+              <CardTitle className="text-sm font-medium">Recommended Leverage</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{data.suggested.L_blend.toFixed(2)}x</div>
               <p className="text-xs text-muted-foreground">
-                Kelly {data.suggested.L_kelly.toFixed(2)} / Vol {data.suggested.L_vol.toFixed(2)}
+                Kelly {data.suggested.L_kelly.toFixed(2)} / Vol-Targeted {data.suggested.L_vol.toFixed(2)}
               </p>
             </CardContent>
           </Card>
@@ -474,7 +474,7 @@ export const LeveragePanel = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Max DD</CardTitle>
+              <CardTitle className="text-sm font-medium">Maximum Drawdown</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{(data.risk.max_drawdown * 100).toFixed(1)}%</div>
@@ -483,11 +483,11 @@ export const LeveragePanel = () => {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">ES 95%</CardTitle>
+              <CardTitle className="text-sm font-medium">Expected Shortfall (95%)</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{(data.risk.es_95 * 100).toFixed(2)}%</div>
-              <p className="text-xs text-muted-foreground">VoV {data.risk.vol_of_vol.toFixed(2)}</p>
+              <p className="text-xs text-muted-foreground">Vol of Vol {data.risk.vol_of_vol.toFixed(2)}</p>
             </CardContent>
           </Card>
         </div>
@@ -508,28 +508,28 @@ export const LeveragePanel = () => {
       <Card className="p-6 space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-medium">Historical Analysis</h3>
-          <p className="text-sm text-muted-foreground">レンジ: {range === "max" ? "全期間" : range} / データ点 {series.length}</p>
+          <p className="text-sm text-muted-foreground">Period: {range === "max" ? "All" : range} / {series.length} data points</p>
         </div>
 
         <div className="rounded-lg bg-muted/40 p-4 text-xs text-muted-foreground space-y-1">
-          <div className="font-semibold text-foreground">計算定義</div>
-          <div>推奨レバ (Blend) = min(cap, α·Kelly理論レバ + (1-α)·Volターゲット)。α={data.suggested.alpha.toFixed(2)}, cap={data.suggested.cap}x。</div>
-          <div>Kelly理論レバ = (超過収益率) ÷ 分散、分割Kelly = min(cap, fraction·Kelly)。</div>
-          <div>Volターゲット = 目標ボラ20% ÷ 実現ボラ、Max DD = 期間内累積のピーク比下落。</div>
+          <div className="font-semibold text-foreground">Calculation Methodology</div>
+          <div>Recommended Leverage (Blended) = min(cap, α·Kelly + (1-α)·Vol-Targeted), where α={data.suggested.alpha.toFixed(2)}, cap={data.suggested.cap}×</div>
+          <div>Kelly Criterion Leverage = (excess return) ÷ variance; Fractional Kelly = min(cap, fraction·Kelly)</div>
+          <div>Volatility-Targeted Leverage = (target volatility 20%) ÷ (realized volatility); Maximum Drawdown = largest cumulative peak-to-trough decline</div>
         </div>
 
         <div className="grid gap-6">
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={priceChartData}>
-                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">指数価格推移</text>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Index Price</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "Date", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   scale="log"
                   domain={priceDomain}
                   ticks={priceTicks}
-                  label={{ value: "指数価格(USD, 対数)", angle: -90, position: "insideLeft" }}
+                  label={{ value: "Index Price (USD, log scale)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(0)}
                   allowDataOverflow
                 />
@@ -542,19 +542,19 @@ export const LeveragePanel = () => {
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={plottedSeries}>
-                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">ボラティリティ</text>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Volatility</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "Date", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   domain={volDomain}
                   tickCount={6}
-                  label={{ value: "年率ボラ(σ)", angle: -90, position: "insideLeft" }}
+                  label={{ value: "Annualized Volatility (σ)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(2)}
                 />
                 <Tooltip formatter={(value: number) => value.toFixed(3)} />
-                <Line type="monotone" dataKey="volatility_score" name="Vol Score" stroke="#dc2626" dot={false} strokeWidth={2} />
-                <Line type="monotone" dataKey="realized_vol_annual" name="Realized" stroke="#ea580c" dot={false} strokeWidth={1} strokeDasharray="5 5" />
-                <Line type="monotone" dataKey="ewma_vol_annual" name="EWMA" stroke="#9333ea" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="volatility_score" name="Volatility Score" stroke="#dc2626" dot={false} strokeWidth={2} />
+                <Line type="monotone" dataKey="realized_vol_annual" name="Realized Volatility" stroke="#ea580c" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="ewma_vol_annual" name="EWMA Volatility" stroke="#9333ea" dot={false} strokeWidth={1} strokeDasharray="5 5" />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -562,18 +562,18 @@ export const LeveragePanel = () => {
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={plottedSeries}>
-                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">最大ドローダウン</text>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Maximum Drawdown</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "Date", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   domain={drawdownDomain}
                   ticks={drawdownTicks}
-                  label={{ value: "最大DD(%)", angle: -90, position: "insideLeft" }}
+                  label={{ value: "Maximum Drawdown (%)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`}
                 />
                 <Tooltip formatter={(value: number) => `${(value * 100).toFixed(1)}%`} />
                 <ReferenceLine y={0} stroke="#666" strokeDasharray="3 3" />
-                <Line type="monotone" dataKey="max_drawdown" name="Max DD" stroke="#ef4444" dot={false} strokeWidth={2} />
+                <Line type="monotone" dataKey="max_drawdown" name="Maximum Drawdown" stroke="#ef4444" dot={false} strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -581,20 +581,20 @@ export const LeveragePanel = () => {
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={plottedSeries}>
-                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">レバレッジ推奨</text>
+                <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Recommended Leverage Ratios</text>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "Date", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   domain={leverageDomain}
                   ticks={leverageTicks}
-                  label={{ value: "レバレッジ(x)", angle: -90, position: "insideLeft" }}
+                  label={{ value: "Leverage Multiplier", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(1)}
                 />
                 <Tooltip formatter={(value: number) => value.toFixed(2)} />
                 <ReferenceLine y={1} stroke="#666" strokeDasharray="3 3" />
-                <Line type="monotone" dataKey="L_blend_plot" name="推奨レバ (Blend)" stroke="#16a34a" dot={false} strokeWidth={2} />
-                <Line type="monotone" dataKey="kelly_plot" name="Kelly理論レバ" stroke="#2563eb" dot={false} strokeWidth={1} strokeDasharray="5 5" />
-                <Line type="monotone" dataKey="fractional_plot" name="分割Kellyレバ" stroke="#0891b2" dot={false} strokeWidth={1} strokeDasharray="3 3" />
+                <Line type="monotone" dataKey="L_blend_plot" name="Recommended Leverage (Blended)" stroke="#16a34a" dot={false} strokeWidth={2} />
+                <Line type="monotone" dataKey="kelly_plot" name="Kelly Criterion Leverage" stroke="#2563eb" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="fractional_plot" name="Fractional Kelly Leverage" stroke="#0891b2" dot={false} strokeWidth={1} strokeDasharray="3 3" />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -604,13 +604,13 @@ export const LeveragePanel = () => {
           <div className="space-y-4 pt-4 border-t border-border/60">
             <div className="space-y-1">
               <h3 className="text-lg font-medium">Valuation</h3>
-              <p className="text-sm text-muted-foreground">NASDAQ-100 Forward P/E と Forward 12M EPS に基づくバリュエーション指標</p>
+              <p className="text-sm text-muted-foreground">NASDAQ-100 valuation metrics based on forward P/E and 12-month forward EPS</p>
               {valuationLatest && (
                 <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
                   <span>Forward P/E: {valuationLatest.forward_pe !== undefined ? valuationLatest.forward_pe.toFixed(2) : "–"}</span>
                   <span>Forward EPS: {valuationLatest.forward_eps !== undefined ? valuationLatest.forward_eps.toFixed(2) : "–"}</span>
-                  <span>イールドスプレッド: {valuationLatest.earnings_yield_spread !== undefined ? `${(valuationLatest.earnings_yield_spread * 100).toFixed(1)}%` : "–"}</span>
-                  <span>EPS成長率(YoY): {valuationLatest.yoy_eps_growth !== undefined ? `${(valuationLatest.yoy_eps_growth * 100).toFixed(1)}%` : "–"}</span>
+                  <span>Earnings Yield Spread: {valuationLatest.earnings_yield_spread !== undefined ? `${(valuationLatest.earnings_yield_spread * 100).toFixed(1)}%` : "–"}</span>
+                  <span>EPS Growth (YoY): {valuationLatest.yoy_eps_growth !== undefined ? `${(valuationLatest.yoy_eps_growth * 100).toFixed(1)}%` : "–"}</span>
                 </div>
               )}
             </div>
@@ -621,7 +621,7 @@ export const LeveragePanel = () => {
                   <LineChart data={valuationSeries}>
                     <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Forward P/E & EPS</text>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "Date", position: "insideBottom", offset: -6 }} />
                     <YAxis
                       yAxisId="pe"
                       domain={peDomain}
@@ -640,7 +640,7 @@ export const LeveragePanel = () => {
                     />
                     <Tooltip formatter={(value: number) => value.toFixed(2)} />
                     <Line yAxisId="pe" type="monotone" dataKey="forward_pe" name="Forward P/E" stroke="#7c3aed" dot={false} strokeWidth={2} />
-                    <Line yAxisId="pe" type="monotone" dataKey="implied_forward_pe_from_price" name="Implied P/E" stroke="#14b8a6" dot={false} strokeWidth={1} strokeDasharray="5 5" />
+                    <Line yAxisId="pe" type="monotone" dataKey="implied_forward_pe_from_price" name="Implied Forward P/E" stroke="#14b8a6" dot={false} strokeWidth={1} strokeDasharray="5 5" />
                     <Line yAxisId="eps" type="monotone" dataKey="forward_eps" name="Forward EPS" stroke="#ea580c" dot={false} strokeWidth={2} />
                   </LineChart>
                 </ResponsiveContainer>
@@ -649,18 +649,18 @@ export const LeveragePanel = () => {
               <div className="h-[320px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={valuationSeries}>
-                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">イールドスプレッド</text>
+                    <text x="50%" y={18} textAnchor="middle" className="fill-foreground text-sm">Earnings Yield Spread</text>
                     <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
+                    <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "Date", position: "insideBottom", offset: -6 }} />
                     <YAxis
                       domain={yieldDomain}
                       ticks={yieldTicks}
-                      label={{ value: "Earn. Yield - Rf", angle: -90, position: "insideLeft" }}
+                      label={{ value: "Earnings Yield Spread (vs. Rf)", angle: -90, position: "insideLeft" }}
                       tickFormatter={(v: number) => `${(v * 100).toFixed(1)}%`}
                     />
                     <Tooltip formatter={(value: number) => `${(value * 100).toFixed(2)}%`} />
                     <ReferenceLine y={0} stroke="#666" strokeDasharray="3 3" />
-                    <Line type="monotone" dataKey="earnings_yield_spread" name="Earnings Yield - Rf" stroke="#0ea5e9" dot={false} strokeWidth={2} />
+                    <Line type="monotone" dataKey="earnings_yield_spread" name="Earnings Yield Spread" stroke="#0ea5e9" dot={false} strokeWidth={2} />
                     <Line type="monotone" dataKey="earnings_yield" name="Earnings Yield" stroke="#10b981" dot={false} strokeWidth={1} strokeDasharray="5 5" />
                   </LineChart>
                 </ResponsiveContainer>

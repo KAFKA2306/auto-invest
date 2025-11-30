@@ -1,28 +1,13 @@
 import json
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from pathlib import Path
-import pandas as pd
 from backend.services.leverage import compute_leverage
-
-
-def load_price_data(symbol: str) -> pd.Series:
-    csv_path = Path(f"public/data/price_{symbol}.csv")
-    df = pd.read_csv(csv_path, parse_dates=["date"])
-    return df.set_index("date")["close"]
-
-
-def load_ffrate_data() -> pd.Series:
-    csv_path = Path("public/data/ffrate.csv")
-    df = pd.read_csv(csv_path, parse_dates=["date"])
-    return df.set_index("date")["ffrate_annual"] / 252
-
-
-def load_spx_data() -> pd.Series:
-    csv_path = Path("public/data/price_SPY.csv")
-    df = pd.read_csv(csv_path, parse_dates=["date"])
-    return df.set_index("date")["close"]
+from backend.config import (
+    VALUATION_DATA_PATH,
+    METRICS_DATA_PATH,
+)
+from backend.data import load_price_data, load_ffrate_data, load_spx_data
 
 
 app = FastAPI(title="Investment Performance API")
@@ -67,7 +52,9 @@ async def get_leverage(
     ffrate = load_ffrate_data()
     spx_prices = load_spx_data()
 
-    common_index = prices.index.intersection(ffrate.index).intersection(spx_prices.index)
+    common_index = prices.index.intersection(ffrate.index).intersection(
+        spx_prices.index
+    )
     prices = prices.reindex(common_index)
     ffrate = ffrate.reindex(common_index)
     spx_prices = spx_prices.reindex(common_index)
@@ -89,26 +76,20 @@ async def get_leverage(
 
 @app.get("/api/v1/valuation")
 async def get_valuation():
-    path = Path("public/data/valuation.json")
-    if not path.exists():
-        raise HTTPException(status_code=404, detail="valuation.json not found. Run scripts/fetch_valuation_pdr.py")
+    path = VALUATION_DATA_PATH
     with path.open() as f:
         return json.load(f)
 
 
 @app.get("/data/valuation.json")
 async def get_valuation_file():
-    path = Path("public/data/valuation.json")
-    if not path.exists():
-        raise HTTPException(status_code=404, detail="valuation.json not found. Run scripts/fetch_valuation_pdr.py")
+    path = VALUATION_DATA_PATH
     return FileResponse(path)
 
 
 @app.get("/data/metrics.json")
 async def get_metrics_file():
-    path = Path("public/data/metrics.json")
-    if not path.exists():
-        raise HTTPException(status_code=404, detail="metrics.json not found. Run scripts/update_leverage.py")
+    path = METRICS_DATA_PATH
     return FileResponse(path)
 
 
