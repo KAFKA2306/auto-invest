@@ -1,0 +1,43 @@
+version: "3"
+
+tasks:
+  install:
+    desc: Install dependencies
+    cmds:
+      - uv sync
+      - npm install
+
+  dev:
+    desc: Run development servers
+    deps: [dev:backend, dev:frontend]
+
+  dev:backend:
+    desc: Run backend server
+    cmds:
+      - uv run uvicorn backend.main:app --reload --port 8000
+
+  dev:frontend:
+    desc: Run frontend server
+    cmds:
+      - npm run dev
+
+  update:
+    desc: Update leverage metrics
+    cmds:
+      - PYTHONPATH=. uv run python scripts/update_leverage.py
+
+  build:
+    desc: Build frontend
+    cmds:
+      - npm run build
+
+  lint:
+    desc: Lint code
+    cmds:
+      - uv run ruff check .
+      - npm run lint
+
+  format:
+    desc: Format code
+    cmds:
+      - uv run ruff format .

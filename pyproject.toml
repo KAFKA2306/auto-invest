@@ -1,0 +1,19 @@
+[project]
+name = "auto-invest"
+version = "0.1.0"
+description = "Auto Invest Dashboard"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.109.2",
+    "uvicorn>=0.27.1",
+    "pydantic>=2.6.1",
+    "numpy>=1.26.3",
+    "pandas>=2.2.0",
+    "matplotlib>=3.8.2",
+    "httpx>=0.27.2",
+    "PyYAML>=6.0.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0", "ruff>=0.3.0"]

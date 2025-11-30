@@ -1,53 +1,47 @@
-# 自動投資パフォーマンスダッシュボード
+# Auto Invest Dashboard
 
-最小構成の投資ダッシュボードです。FastAPI バックエンドと React + TypeScript フロントエンドを使い、基本的な市場データと分析指標を表示します。
+最小構成の投資ダッシュボードです。FastAPI バックエンドと React + TypeScript フロントエンドを使用し、最適レバレッジ判断のための指標（Kelly基準、ボラティリティ、各種リスク指標）を提供します。
 
-GitHub Actions と GitHub Pages による全自動ワークフローも用意されており、定期的に市場データを取得して分析結果を `public/data/metrics.json` に保存し、静的サイトを自動デプロイします。
-さらに最新の GitHub Actions の実行状況も `public/data/actions.json` に書き出され、ダッシュボード上で確認できます。
+## 機能
+
+- **最適レバレッジ提案**: Kelly基準とボラティリティターゲットを組み合わせた `L_blend` を提示
+- **リスク分析**: 下方偏差、ソルティノ比、最大ドローダウン、ES 95%、VoV、SPX相関などを表示
+- **時系列チャート**: 価格、ボラティリティ構成要素、レバレッジ推移を可視化
 
 ## クイックスタート
 
-### バックエンド
-```bash
-pip install -r requirements.txt
-uvicorn backend.main:app --reload --port 8000
-```
+### 必須ツール
 
-### フロントエンド
+- `uv` (Python package manager)
+- `npm` (Node.js package manager)
+- `task` (Task runner)
+
+### セットアップ & 起動
+
 ```bash
-npm install
-npm run dev
+# 依存関係のインストール
+task install
+
+# 開発サーバー起動 (Backend + Frontend)
+task dev
 ```
 
 ブラウザで http://localhost:5173 を開きます。
 
-## 実用例
-
-バックエンドを起動した状態で以下を実行すると、マーケットデータの価格推移を PNG 画像として保存します。
+### データ更新
 
 ```bash
-python examples/generate_market_plot.py
+# レバレッジ指標の計算と更新
+task update
 ```
 
-画像は `examples/sample_market.png` に保存されます。（このリポジトリには含まれていません）
+## アーキテクチャ
 
-## 不動産デベロッパー監視YAML
-
-不動産デベロッパーの監視データを `public/data/real_estate_watch.yaml` に追加しました。スプレッドシートで扱いやすい CSV に変換するには次を実行します。
-
-```bash
-python examples/real_estate_yaml_to_csv.py
-```
-
-`public/data/real_estate_watch.csv` が生成され、YAML の内容がテーブル形式で出力されます。
-
-## テストとLint
-
-```bash
-npm run lint
-pytest backend/tests/test_api.py
-```
+- **Backend**: FastAPI (`backend/`) - 純粋関数による指標計算サービス
+- **Frontend**: React + Vite (`src/`) - 最小限のUIコンポーネント
+- **Scripts**: Python (`scripts/`) - データ取得と指標更新
+- **Config**: `pyproject.toml`, `Taskfile.yml` - 依存管理とタスク定義
 
 ## ライセンス
 
-本プロジェクトは MIT ライセンスの下で公開されています。
+MIT

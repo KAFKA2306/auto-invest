@@ -1,4 +1,4 @@
-# Logs
+# Logs & diagnostics
 logs
 *.log
 npm-debug.log*
@@ -6,22 +6,107 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+*.tsbuildinfo
 
-node_modules
-dist
-dist-ssr
+# Node / Vite build output
+node_modules/
+node_modules/.cache/
+dist/
+dist-ssr/
+.vite/
+.turbo/
+.parcel-cache/
+.cache/
+.npm/
+npm-packages-offline-cache/
+.pnpm-store/
+.eslintcache
+.stylelintcache
 *.local
+coverage/
+coverage-*.json
+coverage-final.json
+coverage.lcov
+playwright-report/
+test-results/
+storybook-static/
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
 
-# Editor directories and files
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+.venv/
+venv/
+env/
+__pypackages__/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.tox/
+.nox/
+.hypothesis/
+.benchmarks/
+.coverage*
+htmlcov/
+pip-wheel-metadata/
+pip-log.txt
+pip-delete-this-directory.txt
+build/
+*.egg-info/
+*.eggs/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+.python-version
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+
+# Editor & OS metadata
 .vscode/*
 !.vscode/extensions.json
 .idea
+.fleet/
 .DS_Store
+._*
+Thumbs.db
+*.code-workspace
+*.iml
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*~
+*.orig
+*.rej
+*.tmp
+tmp/
+temp/
 
-# Generated images
+# Generated assets
 examples/sample_market.png
+
+# Databases & data dumps
+*.sqlite
+*.sqlite3
+*.db
+*.pkl
+*.parquet
+*.feather
+*.h5
+*.npz
+*.npy
+
+# Notebooks
+.ipynb_checkpoints/
