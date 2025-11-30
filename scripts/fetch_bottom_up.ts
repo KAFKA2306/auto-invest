@@ -130,7 +130,7 @@ const fetchFromYahoo = async (symbol: string) => {
   };
 };
 
-// LLM fallback using Gemini Flash (best-effort, no web access). Expects .env GEMINI_API_KEY.
+// LLM fallback using Gemini Flash (best-effort). Expects .env GEMINI_API_KEY.
 const fetchWithLLMFallback = async (symbol: string) => {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return null;
@@ -176,6 +176,46 @@ const fetchWithLLMFallback = async (symbol: string) => {
     console.warn(`Gemini fallback failed for ${symbol}: ${(err as Error).message}`);
     return null;
   }
+};
+
+// Web search + simple scrape fallback (Serper). Requires SERPER_API_KEY. Very best-effort.
+const fetchWithSerper = async (symbol: string) => {
+  const serperKey = process.env.SERPER_API_KEY;
+  if (!serperKey) return null;
+  try {
+    const searchRes = await fetch("https://google.serper.dev/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": serperKey,
+      },
+      body: JSON.stringify({ q: `${symbol} earnings diluted EPS` }),
+    });
+    if (!searchRes.ok) throw new Error(`Serper search ${searchRes.status}`);
+    const searchJson = (await searchRes.json()) as any;
+    const results: any[] = searchJson.organic ?? [];
+    for (const r of results.slice(0, 3)) {
+      const url = r.link as string;
+      if (!url) continue;
+      try {
+        const html = await (await fetch(url)).text();
+        // crude EPS regex: $1.23 or 1.23 per share
+        const m = html.match(/EPS[^\\d\\$]{0,15}(\\$?\\d+\\.\\d+)/i);
+        if (!m) continue;
+        const eps = Number.parseFloat(m[1].replace("$", ""));
+        if (!Number.isFinite(eps)) continue;
+        // crude quarter extraction
+        const qm = html.match(/(FY)?\\s?(20\\d{2})[\\-\\/\\s]?(Q[1-4])/i);
+        const quarter = qm ? `${qm[2]} ${qm[3].toUpperCase()}` : "latest";
+        return { quarter, eps, eps_yoy: null, source: "serper-scrape" };
+      } catch {
+        continue;
+      }
+    }
+  } catch (err) {
+    console.warn(`Serper fallback failed for ${symbol}: ${(err as Error).message}`);
+  }
+  return null;
 };
 
 const loadExisting = async (): Promise<ExistingDataset> => {
@@ -252,6 +292,19 @@ const main = async () => {
           source: prev.source ?? "prev-file",
         });
         marketCaps[item.symbol] = prev.marketCap;
+        continue;
+      }
+      const fallbackSearch = await fetchWithSerper(item.symbol);
+      if (fallbackSearch) {
+        rows.push({
+          symbol: item.symbol,
+          name: item.name,
+          quarter: fallbackSearch.quarter,
+          eps: fallbackSearch.eps,
+          eps_yoy: fallbackSearch.eps_yoy,
+          weight: item.weight,
+          source: fallbackSearch.source,
+        });
         continue;
       }
       const fallback = await fetchWithLLMFallback(item.symbol);
