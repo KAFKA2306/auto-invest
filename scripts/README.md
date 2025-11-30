@@ -36,35 +36,30 @@
     *   `CALIB_WINDOW` (20日) の中央値と `REF_PE` (32.5) を使用して `model_yield` を調整（バイアス導入）し、モデルの益利回りが参照P/E比率と整合するようにします。
 9.  **アンカー系列の作成**:
     *   `model_yield` の安定化のため、`ANCHOR_WINDOW` (30日) の移動中央値と拡張中央値、そして`model_yield`自体を `ANCHOR_WEIGHT = 0.15` で加重平均することで、滑らかなアンカー系列を生成します。
-10. **予想P/E（Forward P/E）と予想EPS（Forward EPS）の導出**:
-    *   `forward_pe` は `1.0 / earnings_yield_proxy` として計算され、`PE_CLIP = (2.0, 60.0)` の範囲に調整されます。
-    *   `forward_eps` は `price_index / forward_pe` として計算されます。
+10. **予想EPS（Forward EPS）と予想P/E（Forward P/E）の導出（ロジック変更）**:
+    *   **予想EPS**: `eps_actual`（四半期データ）を日次のインデックス（`df.index`）に合わせてリインデックスし、**線形補間** (`.interpolate(method='linear')`) および端のNaN処理 (`.bfill().ffill()`) を適用することで、日次の `forward_eps` 系列を直接生成します。
+    *   **予想P/E**: `df` の株価指数（`price_index`）を、上記で生成された日次の `forward_eps` で割ることによって、`forward_pe` を導出します。結果は `PE_CLIP` の範囲に調整されます。
+    *   **変更点**: 以前の `model_yield` や `scale_series` を用いた `pe_model` ベースの `forward_pe` 計算ロジックは廃止され、より直接的に「株価 ÷ 予想EPS」で `forward_pe` を決定するようになりました。これにより、`forward_pe` と `forward_eps` のスパイクや不連続性が抑制されます。
+
 11. **益利回りスプレッド**:
     *   `earnings_yield_spread = earnings_yield_proxy - rf_annual` を計算します。これは、株式の益利回りと無リスク金利の差を示します。
 12. **EPS成長率 (YoY)**:
-    *   `public/data/ndx_eps_quarterly.csv` から読み込まれた四半期EPSデータに基づき、対前年比EPS成長率を計算します。
-13. **スケーリング因子の適用**:
-    *   過去の実績P/E比率（`price_index / eps_actual`）と `pe_model` を使用してスケーリング因子（`scale`）を導き出し、`pe_model` を調整します。これにより、`forward_pe` が過去の観測値とより一致するようにします。この `scale` は平滑化されて適用されます。
-14. **最終データフレームとJSONペイロードの構築**:
+    *   `public/data/ndx_eps_quarterly.csv` から読み込まれた四半期EPSデータに基づき、対前年比EPS成長率を計算します。このデータも日次のインデックスに合わせて線形補間され、`df` に統合されます。
+13. **最終データフレームとJSONペイロードの構築**:
     *   計算されたすべての系列を最終的なデータフレームにまとめます。
     *   最新の計算値と過去の系列、およびメタデータを含むJSONペイロード（`public/data/valuation.json`）を構築します。
 
 ### 最近のバグ修正と改善点 (`scripts/fetch_valuation_pdr.py`)
 
-ユーザーからのフィードバックに基づき、以下の重要なバグ修正と改善が `scripts/fetch_valuation_pdr.py` に適用されました。これにより、データの整合性が向上し、計算の堅牢性が強化されています。特に、`ffill()` (前方補間) ではなく、より統計的に適切な線形補間を基本的な補間方法として採用しています。
+ユーザーからのフィードバックに基づき、`scripts/fetch_valuation_pdr.py` の株価評価指標の計算ロジックが根本的に見直されました。特に、以前の `forward_pe` のスパイクや `forward_eps` の不連続性の原因となっていた `model_pe` や `scale_series` ベースの計算ロジックを廃止し、以下に示すように変更しています。`ffill()` (前方補間) ではなく、より統計的に適切な線形補間を基本的な補間方法として採用しています。
 
-1.  **EPSと株価データの結合ロジックの改善 (Issue 3)**:
-    *   **修正前**: 四半期EPSと日次株価を `merge_asof(direction="nearest", tolerance="7D")` で結合していたため、多くのデータポイントが失われ、EPSデータが散発的になっていました。
-    *   **修正後**: `merge_asof(direction="backward")` を使用して、各日次株価に「直近の過去のEPSデータ」を結合するように変更しました。その後、`ffill()` ではなく**線形補間** (`.interpolate(method='linear')`) と `bfill().ffill()` を適用することで、四半期EPSデータが株価系列全体に滑らかに反映されるようにしました。これにより、EPSデータの欠損が大幅に削減され、`forward_pe` の安定性が向上しました。
-2.  **`bias` 計算におけるNaN処理の堅牢化 (Issue 4)**:
-    *   **修正前**: `median_window.iloc[-1]` がNaNまたはゼロである場合に `bias` がNaNになったり、ゼロ除算が発生したりする可能性がありました。これにより、`forward_pe` などが完全に欠損する問題が発生していました。
-    *   **修正後**: `median_window.iloc[-1]` の値を明示的にチェックし、NaNまたはゼロである場合には `bias` を `1.0` に設定するようにロジックを改善しました。これにより、計算の連鎖的なNaN化やデータ破損のリスクを排除しました。
-3.  **`scale_series` 平滑化の改善と「内挿を基本」の適用 (Issue 5)**:
-    *   **修正前**: `scale_series` の `rolling(...).median()` 処理後の `bfill().ffill()` が、スパースなデータに適用されると不自然な急変を引き起こす可能性がありました。
-    *   **修正後**: `scale_df` から `scale_series` を作成する際に、まず `df.index` に合わせてリインデックスし、ギャップを**線形補間** (`.interpolate(method='linear')`) で埋めるように変更しました。その後、`min_periods` をより堅牢な値（10）に設定したローリング中央値でさらに平滑化し、最後に端のNaNのみを `bfill().ffill()` で処理するようにしました。これにより、スパースデータに起因する不自然なジャンプが抑制され、より滑らかな系列が得られるようになりました。
-4.  **GDP YoYデータ処理の線形補間化 (Issue 6)**:
-    *   **修正前**: 四半期GDP YoYデータを日次にリサンプリングする際に `ffill()` を使用していたため、不自然なステップ関数（段差）が生成され、`model_yield` の計算に不連続性をもたらしていました。
-    *   **修正後**: `fetch_growth()` 関数内で、四半期GDP YoYデータを日次の範囲にリインデックスし、**線形補間** (`.interpolate(method='linear')`) でギャップを埋めるように変更しました。これにより、GDP成長率がより滑らかな時系列データとして扱われ、`model_yield` の変動が自然になりました。
+1.  **予想EPS/P/E導出ロジックの抜本的変更**:
+    *   **変更前**: `model_yield` から `pe_model` を計算し、スケーリング因子 `scale_series` で調整して `forward_pe` を導出し、その `forward_pe` と株価から `forward_eps` を逆算していました。このアプローチが `forward_pe` の不連続性や `forward_eps` のスパイクの原因となっていました。
+    *   **変更後**: 実際のEPSデータを日次で線形補間することで、直接 `forward_eps` 系列を作成するようになりました。そして、この安定した `forward_eps` と株価指数 (`price_index`) から `forward_pe = price_index / forward_eps` を導出します。これにより、両系列の安定性が大幅に向上し、より直感的な財務指標となりました。
+2.  **`bias` 計算におけるNaN処理の堅牢化 (旧Issue 4)**:
+    *   `median_window.iloc[-1]` の値を明示的にチェックし、NaNまたはゼロである場合には `bias` を `1.0` に設定するようにロジックを改善しました。これにより、計算の連鎖的なNaN化やデータ破損のリスクを排除しました。
+3.  **GDP YoYデータ処理の線形補間化 (旧Issue 6)**:
+    *   四半期GDP YoYデータを日次にリサンプリングする際に、`ffill()` ではなく**線形補間** (`.interpolate(method='linear')`) でギャップを埋めるように変更しました。これにより、GDP成長率がより滑らかな時系列データとして扱われ、`model_yield` の変動が自然になりました。
 
 ---
 
