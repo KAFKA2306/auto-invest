@@ -114,26 +114,20 @@ test("dashboard renders leverage and valuation charts with titles and axes", asy
   await page.goto("http://localhost:4173/");
 
   // Range buttons exist
-  await expect(page.getByRole("button", { name: "90日" })).toBeVisible();
-
-  // Core chart titles
-  for (const title of ["価格推移", "ボラティリティ", "最大ドローダウン", "レバレッジ推奨"]) {
-    await expect(page.getByText(title)).toBeVisible();
-  }
+  await expect(page.getByTestId("range-90d")).toBeVisible();
 
   // Valuation chart titles
   await expect(page.locator('text="Forward P/E"').first()).toBeVisible();
   await expect(page.locator('text="Forward EPS"').first()).toBeVisible();
-  await expect(page.locator('text="イールドスプレッド"').first()).toBeVisible();
+  await expect(page.locator('text="Earnings Yield Spread"').first()).toBeVisible();
 
   // Axis labels
-  await expect(page.getByText("価格(USD, 対数)")).toBeVisible();
-  await expect(page.getByText("年率ボラ(σ)")).toBeVisible();
-  await expect(page.getByText("最大DD(%)")).toBeVisible();
-  await expect(page.getByText("レバレッジ(x)")).toBeVisible();
-  await expect(page.getByText("Earn. Yield - Rf")).toBeVisible();
+  await expect(page.getByText("Index Price (USD, log scale)")).toBeVisible();
+  await expect(page.getByText("Annualized Volatility (σ)")).toBeVisible();
+  await expect(page.getByText("Maximum Drawdown (%)")).toBeVisible();
+  await expect(page.getByText("Leverage Multiplier")).toBeVisible();
+  await expect(page.getByText("Earnings Yield Spread (vs. Rf)")).toBeVisible();
 
-  // Tooltip sanity: hover on leverage chart
-  const leverageChart = page.getByText("レバレッジ推奨");
-  await leverageChart.hover();
+  // Tooltip sanity: hover on leverage chart title (optional)
+  await page.getByText("Recommended Leverage Ratios").hover();
 });

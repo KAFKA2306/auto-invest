@@ -13,6 +13,8 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import type { ValuationPayload, ValuationPoint } from "@/types/valuation";
+import { fetchValuation } from "@/services/valuation";
 
 interface LeverageMetrics {
   as_of: string;
@@ -52,30 +54,6 @@ interface LeverageMetrics {
   }>;
 }
 
-interface ValuationPoint {
-  date: string;
-  forward_pe: number;
-  forward_eps: number;
-  earnings_yield?: number;
-  earnings_yield_spread?: number;
-  implied_forward_pe_from_price?: number;
-  price_close?: number;
-  price_index?: number;
-}
-
-interface ValuationPayload {
-  as_of: string;
-  latest?: {
-    forward_pe?: number;
-    forward_eps?: number;
-    earnings_yield?: number;
-    earnings_yield_spread?: number;
-    yoy_eps_growth?: number;
-    implied_forward_pe_from_price?: number;
-  };
-  series: ValuationPoint[];
-  source?: string;
-}
 
 type Domain = [number, number] | ["auto", "auto"];
 type SeriesPoint = LeverageMetrics["series"][number];
@@ -110,27 +88,6 @@ const fetchLeverageMetrics = async (): Promise<LeverageMetrics> => {
   if (!payload.leverage) throw new Error("Leverage payload missing");
 
   return payload.leverage;
-};
-
-const fetchValuation = async (): Promise<ValuationPayload> => {
-  const apiBase = import.meta.env.VITE_API_BASE ?? "http://localhost:8000";
-  const staticBase = import.meta.env.BASE_URL ?? "/";
-
-  const tryFetch = async (url: string) => {
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Fetch failed ${res.status}`);
-    return (await res.json()) as ValuationPayload;
-  };
-
-  try {
-    const payload = await tryFetch(`${apiBase}/api/v1/valuation`);
-    if (!payload.series) throw new Error("Valuation payload missing series");
-    return payload;
-  } catch {
-    const payload = await tryFetch(`${staticBase}data/valuation.json`);
-    if (!payload.series) throw new Error("Valuation payload missing series");
-    return payload;
-  }
 };
 
 export const LeveragePanel = () => {
@@ -495,6 +452,8 @@ export const LeveragePanel = () => {
           {RANGE_OPTIONS.map((r) => (
             <button
               key={r.key}
+              data-testid={`range-${r.key}`}
+              aria-label={`Range ${r.label}`}
               onClick={() => setRange(r.key)}
               className={`rounded-full px-3 py-1 text-sm ${range === r.key ? "bg-primary text-primary-foreground shadow" : "bg-muted text-foreground"}`}
             >

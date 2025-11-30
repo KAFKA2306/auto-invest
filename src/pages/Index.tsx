@@ -1,5 +1,7 @@
 import { PerformanceMetricsGrid } from "@/components/PerformanceMetrics";
 import { LeveragePanel } from "@/components/LeveragePanel";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
@@ -11,6 +13,14 @@ const Index = () => {
             Real-time performance metrics, financial intelligence, and workflow visibility stitched together for
             the current trading session.
           </p>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="secondary" size="sm" asChild>
+              <Link to="/bottom-up">Bottom-up EPS view</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/">Top-down dashboard</Link>
+            </Button>
+          </div>
         </header>
 
         <main>
