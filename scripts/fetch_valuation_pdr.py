@@ -120,62 +120,26 @@ def build_series() -> pd.DataFrame:
         ANCHOR_WEIGHT * anchor_series + (1 - ANCHOR_WEIGHT) * model_yield
     ).clip(EY_CLIP[0], EY_CLIP[1])
 
-    pe_model = (1.0 / df["earnings_yield_proxy"]).clip(PE_CLIP[0], PE_CLIP[1])
+    # Create daily forward_eps by interpolating actual EPS
+    eps_actual_daily = eps_actual.set_index('date')['value'].reindex(df.index).interpolate(method='linear').bfill().ffill()
+    df["forward_eps"] = eps_actual_daily
 
-    price_reset = df.reset_index()[["date", "price_index"]]
-    eps_ref = eps_actual.copy()
-    eps_ref["date"] = pd.to_datetime(eps_ref["date"])
+    # Calculate forward_pe from price and the newly interpolated forward_eps
+    df["forward_pe"] = (df["price_index"] / df["forward_eps"]).clip(PE_CLIP[0], PE_CLIP[1])
+    
+    # earnings_yield_proxy is still used for earnings_yield_spread
+    # The following code block is no longer needed for forward_pe/forward_eps calculation,
+    # but model_yield and earnings_yield_proxy are still needed for earnings_yield_spread.
+    # Therefore, we keep model_yield and earnings_yield_proxy and remove the rest.
 
-    df_with_eps = pd.merge_asof(
-        df.reset_index()[["date", "price_index"]],
-        eps_ref.sort_values("date").rename(columns={"value": "eps_value"}),
-        on="date",
-        direction="backward"
-    )
-    # Apply linear interpolation for eps_value, then bfill/ffill for edges
-    df_with_eps["eps_value"] = df_with_eps["eps_value"].interpolate(method='linear').bfill().ffill()
-    df_with_eps = df_with_eps.dropna(subset=["eps_value"]) # Drop rows where eps could not be interpolated (e.g. before first EPS data point)
-
-    scales = []
-    for _, row in df_with_eps.iterrows():
-        d = row["date"]
-        price_idx = row["price_index"]
-        eps_d = row["eps_value"]
-        pe_model_d = float(pe_model.loc[d]) if d in pe_model.index else np.nan
-        if np.isfinite(pe_model_d) and pe_model_d > 0 and eps_d != 0: # Add eps_d != 0 check
-            pe_actual = price_idx / eps_d
-            scales.append({"date": d, "scale": pe_actual / pe_model_d})
-
-    scale_df = pd.DataFrame(scales).dropna()
-    if scale_df.empty:
-        scale_series = pd.Series(1.0, index=df.index)
-    else:
-        # Create a daily series from scale_df dates and values
-        scale_base_series = scale_df.set_index('date')['scale']
-        
-        # Reindex to match df's index, fill initial NaNs with linear interpolation
-        # and then bfill/ffill for any remaining NaNs at the edges.
-        scale_series_interpolated = scale_base_series.reindex(df.index).interpolate(method='linear').bfill().ffill()
-        
-        # Apply rolling median for further smoothing.
-        # Use a more robust min_periods (e.g., 10) to avoid excessive NaNs from sparse data.
-        # Then bfill/ffill again for any NaNs introduced by the rolling operation at the edges.
-        scale_series = scale_series_interpolated.rolling(30, min_periods=10).median().bfill().ffill()
-
-    df["forward_pe"] = (pe_model * scale_series).clip(PE_CLIP[0], PE_CLIP[1])
-    df["forward_eps"] = df["price_index"] / df["forward_pe"]
     df["earnings_yield_spread"] = df["earnings_yield_proxy"] - df["rf_annual"]
     df["implied_forward_pe_from_price"] = df["forward_pe"]
 
     eps_growth = eps_actual.copy()
     eps_growth["yoy_eps_growth"] = eps_growth["value"].pct_change(4)
-    eps_growth_series = pd.merge_asof(
-        df.reset_index()[["date"]],
-        eps_growth[["date", "yoy_eps_growth"]].sort_values("date"),
-        on="date",
-        direction="backward",
-    )["yoy_eps_growth"]
-    df["yoy_eps_growth"] = eps_growth_series.values
+    # Reindex eps_growth to daily frequency and linearly interpolate
+    eps_growth_daily_raw = eps_growth.set_index('date')['yoy_eps_growth'].reindex(df.index)
+    df["yoy_eps_growth"] = eps_growth_daily_raw.interpolate(method='linear').bfill().ffill()
 
     df = df.dropna(subset=["forward_pe", "forward_eps"])
     df = df.reset_index()
