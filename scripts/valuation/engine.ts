@@ -60,7 +60,7 @@ export const computeValuation = (
     const erpMomentum = clip(muExcess, 0, 0.10) * ERP_MOMENTUM_WEIGHT;
     const expectedReturn = rf + ERP_BASE + erpMomentum;
     const growthTerm = clip(gdpGrowth[i], -0.02, 0.05);
-    let my = clip(expectedReturn - growthTerm, EY_CLIP[0], EY_CLIP[1]);
+    const my = clip(expectedReturn - growthTerm, EY_CLIP[0], EY_CLIP[1]);
     modelYields.push(my);
   }
 

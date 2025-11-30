@@ -1,19 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { BottomUpAggregate, BottomUpDataset } from "../types";
+import { fmtPct, fmtNumber } from "@/lib/utils";
 
 interface BottomUpSummaryProps {
   aggregate: BottomUpAggregate;
   dataset?: BottomUpDataset;
   topDownForwardEps?: number;
 }
-
-const fmtPct = (value: number | null | undefined, digits = 1) =>
-  value === null || value === undefined ? "—" : `${(value * 100).toFixed(digits)}%`;
-
-const fmtNumber = (value: number | null | undefined, digits = 1) =>
-  value === null || value === undefined
-    ? "—"
-    : value.toLocaleString(undefined, { minimumFractionDigits: digits, maximumFractionDigits: digits });
 
 export const BottomUpSummary = ({ aggregate, dataset, topDownForwardEps }: BottomUpSummaryProps) => {
   const priorLabel = dataset?.prior_period.label ?? "Prior EPS";
