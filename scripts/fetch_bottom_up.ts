@@ -133,6 +133,7 @@ const fetchFromYahoo = async (symbol: string) => {
 // LLM fallback using Gemini Flash (best-effort). Expects .env GEMINI_API_KEY.
 const fetchWithLLMFallback = async (symbol: string) => {
   const apiKey = process.env.GEMINI_API_KEY;
+  const model = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
   if (!apiKey) {
     console.info(`Gemini skip: no GEMINI_API_KEY for ${symbol}`);
     return null;
@@ -146,9 +147,9 @@ const fetchWithLLMFallback = async (symbol: string) => {
   ].join("\n");
 
   try {
-    console.info(`Gemini fallback call for ${symbol}`);
+    console.info(`Gemini fallback call for ${symbol} using model ${model}`);
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
