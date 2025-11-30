@@ -134,5 +134,6 @@ public/data/
 **/*.hdf5
 !public/data/
 !public/data/ndx_eps_quarterly.csv
+!public/data/metrics.json
 public/data/price_NDX.csv
-public/data/valuation.json
+
