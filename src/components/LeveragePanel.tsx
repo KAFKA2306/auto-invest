@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import type { ValuationPayload, ValuationPoint } from "@/types/valuation";
+import type { ValuationPoint } from "@/types/valuation";
 import { fetchValuation } from "@/services/valuation";
 
 interface LeverageMetrics {

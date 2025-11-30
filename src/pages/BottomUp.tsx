@@ -99,7 +99,7 @@ const BottomUp = () => {
           </div>
           <p className="max-w-3xl text-sm text-muted-foreground">
             マグニフィセント7＋主要銘柄の最新決算 EPS と YoY をウェイトで合成し、インデックス EPS のボトムアップ成長率を即時計算。
-            トップダウン（forward EPS / P E）との突き合わせもワンクリック。
+            トップダウン（forward EPS / P E）との突き合わせもワンクリック。
           </p>
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" size="sm" asChild>

@@ -167,7 +167,7 @@ const fetchWithLLMFallback = async (symbol: string) => {
       }
     );
     if (!res.ok) throw new Error(`Gemini response ${res.status}`);
-    const body = (await res.json()) as any;
+    const body = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
     const text = body.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!text) throw new Error("No LLM content");
     const parsed = JSON.parse(text);
@@ -201,8 +201,8 @@ const fetchWithSerper = async (symbol: string) => {
       body: JSON.stringify({ q: `${symbol} earnings diluted EPS` }),
     });
     if (!searchRes.ok) throw new Error(`Serper search ${searchRes.status}`);
-    const searchJson = (await searchRes.json()) as any;
-    const results: any[] = searchJson.organic ?? [];
+    const searchJson = (await searchRes.json()) as { organic?: { link?: string }[] };
+    const results = searchJson.organic ?? [];
     for (const r of results.slice(0, 3)) {
       const url = r.link as string;
       if (!url) continue;
@@ -214,7 +214,7 @@ const fetchWithSerper = async (symbol: string) => {
         const eps = Number.parseFloat(m[1].replace("$", ""));
         if (!Number.isFinite(eps)) continue;
         // crude quarter extraction
-        const qm = html.match(/(FY)?\s?(20\d{2})[\-\/\s]?(Q[1-4])/i);
+        const qm = html.match(/(FY)?\s?(20\d{2})[-/\s]?(Q[1-4])/i);
         const quarter = qm ? `${qm[2]} ${qm[3].toUpperCase()}` : "latest";
         return { quarter, eps, eps_yoy: null, source: "serper-scrape" };
       } catch {
@@ -263,7 +263,7 @@ const saveDataset = async (rows: EpsRow[], existing: ExistingDataset) => {
 const main = async () => {
   const existing = await loadExisting();
   const existingComponents =
-    (existing as any)?.components?.map((c: any) => ({
+    (existing as { components?: { symbol: string; name: string; weight?: number }[] })?.components?.map((c) => ({
       symbol: c.symbol,
       name: c.name,
       weight: c.weight ?? 0,
@@ -289,7 +289,7 @@ const main = async () => {
     } catch (err) {
       console.warn(`yfinance failed for ${item.symbol}: ${(err as Error).message}`);
       // fallback to previous file entry if available
-      const prev = (existing as any)?.components?.find((c: any) => c.symbol === item.symbol);
+      const prev = (existing as { components?: EpsRow[] })?.components?.find((c) => c.symbol === item.symbol);
       if (prev) {
         rows.push({
           symbol: item.symbol,
@@ -338,7 +338,7 @@ const main = async () => {
   // Recompute weights from market cap if available
   const totalMcap = Object.values(marketCaps)
     .filter((v) => v && v > 0)
-    .reduce((a, b) => a + (b as number), 0);
+    .reduce((a, b) => (a ?? 0) + (b as number), 0) ?? 0;
   const weightedRows =
     totalMcap > 0
       ? rows.map((r) => ({

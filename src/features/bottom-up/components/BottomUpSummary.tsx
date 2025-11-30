@@ -19,7 +19,6 @@ export const BottomUpSummary = ({ aggregate, dataset, topDownForwardEps }: Botto
   const priorLabel = dataset?.prior_period.label ?? "Prior EPS";
   const priorEps = dataset?.prior_period.eps;
   const baseLabel = dataset?.base_period.label ?? "Latest EPS";
-  const baseEps = dataset?.base_period.eps;
 
   const deltaVsTopDown =
     aggregate.projectedEps !== null && topDownForwardEps !== undefined
