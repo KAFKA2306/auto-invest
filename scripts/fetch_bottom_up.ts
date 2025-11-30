@@ -200,12 +200,12 @@ const fetchWithSerper = async (symbol: string) => {
       try {
         const html = await (await fetch(url)).text();
         // crude EPS regex: $1.23 or 1.23 per share
-        const m = html.match(/EPS[^\\d\\$]{0,15}(\\$?\\d+\\.\\d+)/i);
+        const m = html.match(/EPS[^\d$]{0,15}(\$?\d+\.\d+)/i);
         if (!m) continue;
         const eps = Number.parseFloat(m[1].replace("$", ""));
         if (!Number.isFinite(eps)) continue;
         // crude quarter extraction
-        const qm = html.match(/(FY)?\\s?(20\\d{2})[\\-\\/\\s]?(Q[1-4])/i);
+        const qm = html.match(/(FY)?\s?(20\d{2})[\-\/\s]?(Q[1-4])/i);
         const quarter = qm ? `${qm[2]} ${qm[3].toUpperCase()}` : "latest";
         return { quarter, eps, eps_yoy: null, source: "serper-scrape" };
       } catch {
