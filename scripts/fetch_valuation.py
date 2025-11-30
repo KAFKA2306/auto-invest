@@ -39,10 +39,13 @@ USER_AGENT = (
 
 def parse_cookie(raw: str) -> Dict[str, str]:
     """
-    Accept either plain token (mm_session value) or full cookie string.
+    Accept a single cookie value (legacy mm_session) OR a semicolon-separated list
+    (e.g. cf_clearance=...; PHPSESSID=...; mmu=...).
+    The script no longer requires mm_session explicitly; any cookie set is forwarded.
     """
     raw = raw.strip()
     if ";" not in raw and "=" not in raw:
+        # Treat as a single token named mm_session for backward compatibility
         return {"mm_session": raw}
     cookies: Dict[str, str] = {}
     for part in raw.split(";"):
@@ -50,8 +53,8 @@ def parse_cookie(raw: str) -> Dict[str, str]:
             continue
         k, v = part.split("=", 1)
         cookies[k.strip()] = v.strip()
-    if "mm_session" not in cookies:
-        raise RuntimeError("mm_session not found in provided cookie string.")
+    if not cookies:
+        raise RuntimeError("No valid cookies parsed from MACROMICRO_COOKIE / MACROMICRO_SESSION.")
     return cookies
 
 
