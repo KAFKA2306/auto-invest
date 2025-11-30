@@ -1,7 +1,7 @@
 import json
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse
 from pathlib import Path
 import pandas as pd
 from backend.services.leverage import compute_leverage

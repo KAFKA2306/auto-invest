@@ -13,34 +13,29 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Setup uv (Python)
-        uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v3
         with:
-          version: "latest"
+          version: latest
 
-      - name: Install Python dependencies
-        run: uv sync
+      - name: Install dependencies
+        run: |
+          uv sync
+          npm ci
 
-      - name: Install npm dependencies
-        run: npm ci
+      - name: Lint
+        run: |
+          uv run ruff check .
+          npm run lint
 
-      - name: Ruff lint
-        run: uv run ruff check .
-
-      - name: ESLint
-        run: npm run lint
-
-      - name: TypeScript typecheck
+      - name: Type check
         run: npm run typecheck
 
-      - name: Build frontend
+      - name: Build
         run: npm run build

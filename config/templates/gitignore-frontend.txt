@@ -1,9 +1,0 @@
-# Build artifacts
-dist/
-node_modules/
-
-# Ignore all large generated data
-public/data/generated-*/
-
-# Allow required static data
-!public/data/*.json

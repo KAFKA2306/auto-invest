@@ -99,6 +99,7 @@ const quantile = (values: number[], q: number) => {
     : sorted[base];
 };
 
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 const fetchLeverageMetrics = async (): Promise<LeverageMetrics> => {
   const base = import.meta.env.BASE_URL ?? "/";

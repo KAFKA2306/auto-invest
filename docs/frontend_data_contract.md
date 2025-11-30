@@ -1,29 +1,19 @@
 # Static Fallback Contract
 
-KAFKA の全フロントエンドは以下の3層でデータを扱います。
+## Data Layers
 
-### ① API
+1. API: `/api/...`
+2. Static fallback: `public/data/*.json`
+3. UI: React
 
-`/api/...`
+## Files
 
-### ② static fallback
+### public/data/metrics.json
 
-`public/data/xxx.json`
+- Fallback for `/api/v1/leverage`
+- Schema must match backend response
 
-### ③ UI
+### public/data/valuation.json
 
-React で描画
-
-この3層が形成する「契約 (contract)」を文書化し、フロントエンド、バックエンド、およびデータ生成スクリプト間の責務を明確にします。
-
-## public/data/metrics.json
-
-*   API が落ちたときの fallback として機能します。
-*   スキーマはバックエンドの `/leverage` エンドポイントのレスポンスと同一である必要があります。
-*   CI (Continuous Integration) が push 時にスキーマバリデーションを実行し、整合性を検証します。
-
-## public/data/valuation.json
-
-*   API が落ちたときの fallback として機能します。
-*   スキーマはバックエンドの `/valuation` エンドポイントのレスポンスと同一である必要があります。
-*   CI (Continuous Integration) が push 時にスキーマバリデーションを実行し、整合性を検証します。
+- Fallback for `/api/v1/valuation`
+- Schema must match backend response

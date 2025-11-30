@@ -2,66 +2,69 @@ version: "3"
 
 tasks:
   install:
-    desc: Install dependencies
+    desc: Install all dependencies
     cmds:
       - uv sync
       - npm install
 
   dev:
-    desc: Run development servers
+    desc: Run backend and frontend concurrently
     deps: [dev:backend, dev:frontend]
 
   dev:backend:
-    desc: Run backend server
+    desc: Run FastAPI backend
     cmds:
       - uv run uvicorn backend.main:app --reload --port 8000
 
   dev:frontend:
-    desc: Run frontend server
+    desc: Run Vite frontend
     cmds:
       - npm run dev
 
-  update:leverage:
-    desc: Update leverage metrics (QQQ)
+  check:
+    desc: Run all quality checks (lint + typecheck + build)
     cmds:
-      - PYTHONPATH=. uv run python scripts/update_leverage.py
-
-  update:valuation:
-    desc: Update valuation (NDX price + EPS model)
-    cmds:
-      - PYTHONPATH=. uv run python scripts/fetch_valuation_pdr.py
-
-  update:all:
-    desc: Update leverage and valuation data
-    deps: [update:leverage, update:valuation]
-
-  build:
-    desc: Build frontend
-    cmds:
-      - npm run build
+      - task: lint
+      - task: typecheck
+      - task: build
 
   lint:
-    desc: Lint code
+    desc: Lint Python and TypeScript
     cmds:
       - uv run ruff check .
       - npm run lint
 
-  typecheck:
-    desc: Type-check frontend (no emit)
-    cmds:
-      - npm run typecheck
-
-  check:
-    desc: Run all quality gates (lint + typecheck)
-    deps: [lint, typecheck]
-
   format:
-    desc: Format code
+    desc: Format all code
     cmds:
       - uv run ruff format .
 
-  del:cache:
-    desc: Delete build/test caches (keeps node_modules and data)
+  typecheck:
+    desc: TypeScript type check
     cmds:
-      - rm -rf .ruff_cache .pytest_cache .mypy_cache .ipynb_checkpoints .parcel-cache .cache .turbo .vite coverage dist-ssr dist
-      - find . -name '__pycache__' -type d -prune -exec rm -rf {} +
+      - npm run typecheck
+
+  build:
+    desc: Build production frontend
+    cmds:
+      - npm run build
+
+  update:leverage:
+    desc: Update QQQ leverage metrics
+    cmds:
+      - PYTHONPATH=. uv run python scripts/update_leverage.py
+
+  update:valuation:
+    desc: Update NDX valuation data
+    cmds:
+      - PYTHONPATH=. uv run python scripts/fetch_valuation_pdr.py
+
+  update:all:
+    desc: Update all market data
+    deps: [update:leverage, update:valuation]
+
+  clean:
+    desc: Remove all caches and build artifacts
+    cmds:
+      - rm -rf dist dist-ssr .vite .turbo .cache .ruff_cache .pytest_cache
+      - find . -type d -name '__pycache__' -exec rm -rf {} +

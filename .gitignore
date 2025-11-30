@@ -1,139 +1,53 @@
-# Logs & diagnostics
-logs
-artifacts/
-reports/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-*.tsbuildinfo
-
-# Node / Vite build output
-node_modules/
-node_modules/.cache/
+# Build artifacts
 dist/
 dist-ssr/
+node_modules/
 .vite/
 .turbo/
-.parcel-cache/
 .cache/
-.next/
-.nuxt/
-.npm/
-npm-packages-offline-cache/
-.pnpm-store/
+.parcel-cache/
+*.tsbuildinfo
 .eslintcache
-.stylelintcache
-*.local
-coverage/
-coverage-*.json
-coverage-final.json
-coverage.lcov
-playwright-report/
-test-results/
-storybook-static/
-cypress/videos/
-cypress/screenshots/
-cypress/downloads/
 
-# Python artifacts
+# Python
 __pycache__/
 *.py[cod]
-*.pyd
-.Python
 .venv/
-venv/
-env/
-__pypackages__/
 .ruff_cache/
 .pytest_cache/
 .mypy_cache/
-.tox/
-.nox/
-.hypothesis/
-.benchmarks/
-.coverage*
-htmlcov/
-pip-wheel-metadata/
-pip-log.txt
-pip-delete-this-directory.txt
-build/
 *.egg-info/
-*.eggs/
+build/
 
-# Environment & secrets
+# Testing
+test-results/
+playwright-report/
+coverage/
+
+# Environment
 .env
 .env.*
 !.env.example
-.envrc
-.direnv/
-.python-version
-*.pem
-*.key
-*.crt
-*.pfx
-*.p12
 
-# Editor & OS metadata
+# Editor
 .vscode/*
 !.vscode/extensions.json
-.idea
-.fleet/
 .DS_Store
-._*
-Thumbs.db
-*.code-workspace
-*.iml
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-*~
-*.orig
-*.rej
-*.tmp
-tmp/
-temp/
-
-# Generated assets
-examples/sample_market.png
-*.bak
 *.swp
 *.swo
+*~
 
-# Databases & data dumps
-*.sqlite
-*.sqlite3
-*.db
-*.pkl
-*.parquet
-*.feather
-*.h5
-*.npz
-*.npy
-*.rds
-
-# Notebooks
-.ipynb_checkpoints/
-
-# Data outputs (keep source scripts, ignore downloaded/derived data)
+# Data files (except essential static data)
 data/
-datasets/
 public/data/
 **/*.csv
-**/*.tsv
-**/*.xls
-**/*.xlsx
-**/*.jsonl
-**/*.feather
 **/*.parquet
-**/*.arrow
-**/*.hdf5
-!public/data/
-!public/data/ndx_eps_quarterly.csv
-!public/data/metrics.json
-public/data/price_NDX.csv
 
+# Include essential static data
+!public/data/
+!public/data/metrics.json
+!public/data/valuation.json
+!public/data/ndx_eps_quarterly.csv
+
+# Logs
+*.log
