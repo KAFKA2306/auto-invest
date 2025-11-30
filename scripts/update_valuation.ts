@@ -2,7 +2,7 @@
 import "dotenv/config";
 import YahooFinance from "yahoo-finance2";
 import path from "node:path";
-import { writeJson, writeCsv, readCsv } from "./shared/io";
+import { writeJson, writeCsv } from "./shared/io";
 import { computeValuation } from "./valuation/engine";
 import type { ValuationPayload } from "./valuation/types";
 

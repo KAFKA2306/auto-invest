@@ -1,58 +1,14 @@
 version: "3"
 
 tasks:
-  install:
-    desc: Install all dependencies
-    cmds:
-      - npm install
-
-  dev:
-    desc: Run Vite frontend
-    cmds:
-      - PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}
-
-  check:
-    desc: Run all quality checks (lint + typecheck + build)
-    cmds:
-      - task: lint
-      - task: typecheck
-      - task: build
-
-  lint:
-    desc: Lint TypeScript
-    cmds:
-      - npm run lint
-
-  typecheck:
-    desc: TypeScript type check
-    cmds:
-      - npm run typecheck
-
-  build:
-    desc: Build production frontend
-    cmds:
-      - npm run build
-
-  update:leverage:
-    desc: Update QQQ leverage metrics
-    cmds:
-      - npm run update:leverage
-
-  update:valuation:
-    desc: Update NDX valuation data
-    cmds:
-      - npm run update:valuation
-
-  update:eps:
-    desc: Update bottom-up EPS dataset
-    cmds:
-      - npm run update:eps
-
-  update:all:
-    desc: Update all market data
-    deps: [update:leverage, update:valuation, update:eps]
-
-  clean:
-    desc: Remove all caches and build artifacts
-    cmds:
-      - rm -rf dist dist-ssr .vite .turbo .cache
+  install: { cmds: [npm install] }
+  dev: { cmds: [PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}] }
+  check: { cmds: [task: lint, task: typecheck, task: build] }
+  lint: { cmds: [npm run lint] }
+  typecheck: { cmds: [npm run typecheck] }
+  build: { cmds: [npm run build] }
+  update:leverage: { cmds: [npm run update:leverage] }
+  update:valuation: { cmds: [npm run update:valuation] }
+  update:eps: { cmds: [npm run update:eps] }
+  update:all: { deps: [update:leverage, update:valuation, update:eps] }
+  clean: { cmds: [rm -rf dist dist-ssr .vite .turbo .cache] }
