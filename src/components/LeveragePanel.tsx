@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -87,6 +87,19 @@ const RANGE_OPTIONS = [
   { key: "max", label: "全期間" },
 ];
 
+
+const quantile = (values: number[], q: number) => {
+  if (!values.length) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const pos = (sorted.length - 1) * q;
+  const base = Math.floor(pos);
+  const rest = pos - base;
+  return sorted[base + 1] !== undefined
+    ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
+    : sorted[base];
+};
+
+
 const fetchLeverageMetrics = async (): Promise<LeverageMetrics> => {
   const base = import.meta.env.BASE_URL ?? "/";
   const response = await fetch(`${base}data/metrics.json`, { cache: "no-store" });
@@ -147,23 +160,12 @@ export const LeveragePanel = () => {
     return data.series.filter((d) => new Date(d.date) >= start && new Date(d.date) <= end);
   }, [data, range]);
 
-  const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
-  const quantile = (values: number[], q: number) => {
-    if (!values.length) return 0;
-    const sorted = [...values].sort((a, b) => a - b);
-    const pos = (sorted.length - 1) * q;
-    const base = Math.floor(pos);
-    const rest = pos - base;
-    return sorted[base + 1] !== undefined
-      ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
-      : sorted[base];
-  };
 
   const isAutoDomain = (domain: Domain): domain is ["auto", "auto"] =>
     typeof domain[0] === "string" || typeof domain[1] === "string";
 
-  const quantileDomain = (
+  const quantileDomain = useCallback((
     values: number[],
     lowerQ = 0.02,
     upperQ = 0.98,
@@ -185,7 +187,7 @@ export const LeveragePanel = () => {
     if (clampMin !== undefined) low = Math.max(clampMin, low);
     if (clampMax !== undefined) high = Math.min(clampMax, high);
     return [low, high];
-  };
+  }, []);
 
   const plottedSeries = useMemo(
     () =>
@@ -365,11 +367,11 @@ export const LeveragePanel = () => {
 
   const peDomain = useMemo(
     () => quantileDomain(valuationSeries.map((d) => d.forward_pe), 0.02, 0.98, 1, 0),
-    [valuationSeries]
+    [valuationSeries, quantileDomain]
   );
   const epsDomain = useMemo(
     () => quantileDomain(valuationSeries.map((d) => d.forward_eps), 0.02, 0.98, 0.5),
-    [valuationSeries]
+    [valuationSeries, quantileDomain]
   );
   const yieldDomain = useMemo(
     () =>
@@ -381,7 +383,7 @@ export const LeveragePanel = () => {
         0.98,
         0.01
       ),
-    [valuationSeries]
+    [valuationSeries, quantileDomain]
   );
 
   const peTicks = useMemo(
