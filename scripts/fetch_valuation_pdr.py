@@ -48,7 +48,10 @@ def fetch_growth() -> pd.DataFrame:
     gdp = gdp.rename(columns={"GDPC1": "gdp_real"})
     gdp["gdp_growth_yoy"] = gdp["gdp_real"].pct_change(4)
     growth = gdp[["gdp_growth_yoy"]].dropna()
-    growth_daily = growth.resample("D").ffill()
+
+    # Create a daily date range and linearly interpolate quarterly values
+    full_daily_range = pd.date_range(start=growth.index.min(), end=growth.index.max(), freq='D')
+    growth_daily = growth.reindex(full_daily_range).interpolate(method='linear')
     growth_daily.index.name = "date"
     return growth_daily
 
@@ -90,7 +93,7 @@ def build_series() -> pd.DataFrame:
 
     df = ndx.join(rf, how="left")
     df["rf_annual"] = df["rf_annual"].ffill().bfill()
-    df["g_long"] = growth.reindex(df.index, method="ffill")["gdp_growth_yoy"].ffill().bfill()
+    df["g_long"] = df.join(growth, how="left")["gdp_growth_yoy"].interpolate(method='linear').bfill().ffill()
 
     log_ret = np.log(df["price_index"] / df["price_index"].shift(1))
     df["mu"] = log_ret.rolling(ROLLING_WINDOW).mean() * 252.0
@@ -104,7 +107,11 @@ def build_series() -> pd.DataFrame:
 
     # Use the same minimum periods as the rolling window to avoid pandas validation errors
     median_window = model_yield.rolling(CALIB_WINDOW, min_periods=CALIB_WINDOW).median()
-    bias = (1.0 / REF_PE) / median_window.iloc[-1] if not pd.isna(median_window.iloc[-1]) else 1.0
+    median_window_last = median_window.iloc[-1]
+    if pd.isna(median_window_last) or median_window_last == 0:
+        bias = 1.0
+    else:
+        bias = (1.0 / REF_PE) / median_window_last
     model_yield = (model_yield * bias).clip(EY_CLIP[0], EY_CLIP[1])
     rolling_anchor = model_yield.rolling(ANCHOR_WINDOW, min_periods=30).median()
     expanding_anchor = model_yield.expanding(min_periods=30).median()
@@ -119,21 +126,23 @@ def build_series() -> pd.DataFrame:
     eps_ref = eps_actual.copy()
     eps_ref["date"] = pd.to_datetime(eps_ref["date"])
 
-    merged = pd.merge_asof(
-        eps_ref.sort_values("date"),
-        price_reset.sort_values("date"),
+    df_with_eps = pd.merge_asof(
+        df.reset_index()[["date", "price_index"]],
+        eps_ref.sort_values("date").rename(columns={"value": "eps_value"}),
         on="date",
-        direction="nearest",
-        tolerance=pd.Timedelta("7D"),
-    ).dropna()
+        direction="backward"
+    )
+    # Apply linear interpolation for eps_value, then bfill/ffill for edges
+    df_with_eps["eps_value"] = df_with_eps["eps_value"].interpolate(method='linear').bfill().ffill()
+    df_with_eps = df_with_eps.dropna(subset=["eps_value"]) # Drop rows where eps could not be interpolated (e.g. before first EPS data point)
 
     scales = []
-    for _, row in merged.iterrows():
+    for _, row in df_with_eps.iterrows():
         d = row["date"]
         price_idx = row["price_index"]
-        eps_d = row["value"]
+        eps_d = row["eps_value"]
         pe_model_d = float(pe_model.loc[d]) if d in pe_model.index else np.nan
-        if np.isfinite(pe_model_d) and pe_model_d > 0:
+        if np.isfinite(pe_model_d) and pe_model_d > 0 and eps_d != 0: # Add eps_d != 0 check
             pe_actual = price_idx / eps_d
             scales.append({"date": d, "scale": pe_actual / pe_model_d})
 
@@ -141,16 +150,17 @@ def build_series() -> pd.DataFrame:
     if scale_df.empty:
         scale_series = pd.Series(1.0, index=df.index)
     else:
-        scale_series = pd.merge_asof(
-            df.reset_index()[["date"]],
-            scale_df.sort_values("date"),
-            on="date",
-            direction="nearest",
-            tolerance=pd.Timedelta("30D"),
-        )["scale"]
-        scale_series = pd.Series(scale_series.values, index=df.index)
-        scale_series = scale_series.interpolate().bfill().ffill()
-        scale_series = scale_series.rolling(30, min_periods=5).median().bfill().ffill()
+        # Create a daily series from scale_df dates and values
+        scale_base_series = scale_df.set_index('date')['scale']
+        
+        # Reindex to match df's index, fill initial NaNs with linear interpolation
+        # and then bfill/ffill for any remaining NaNs at the edges.
+        scale_series_interpolated = scale_base_series.reindex(df.index).interpolate(method='linear').bfill().ffill()
+        
+        # Apply rolling median for further smoothing.
+        # Use a more robust min_periods (e.g., 10) to avoid excessive NaNs from sparse data.
+        # Then bfill/ffill again for any NaNs introduced by the rolling operation at the edges.
+        scale_series = scale_series_interpolated.rolling(30, min_periods=10).median().bfill().ffill()
 
     df["forward_pe"] = (pe_model * scale_series).clip(PE_CLIP[0], PE_CLIP[1])
     df["forward_eps"] = df["price_index"] / df["forward_pe"]
