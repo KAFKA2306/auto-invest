@@ -149,7 +149,7 @@ export const LeveragePanel = () => {
     retry: 1,
   });
 
-  const [range, setRange] = useState<string>("180d");
+  const [range, setRange] = useState<string>("max");
 
   const series = useMemo(() => {
     if (!data) return [] as LeverageMetrics["series"];
