@@ -1,5 +1,7 @@
 # Logs & diagnostics
 logs
+artifacts/
+reports/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -17,6 +19,8 @@ dist-ssr/
 .turbo/
 .parcel-cache/
 .cache/
+.next/
+.nuxt/
 .npm/
 npm-packages-offline-cache/
 .pnpm-store/
@@ -96,6 +100,9 @@ temp/
 
 # Generated assets
 examples/sample_market.png
+*.bak
+*.swp
+*.swo
 
 # Databases & data dumps
 *.sqlite
@@ -107,6 +114,21 @@ examples/sample_market.png
 *.h5
 *.npz
 *.npy
+*.rds
 
 # Notebooks
 .ipynb_checkpoints/
+
+# Data outputs (keep source scripts, ignore downloaded/derived data)
+data/
+datasets/
+public/data/
+**/*.csv
+**/*.tsv
+**/*.xls
+**/*.xlsx
+**/*.jsonl
+**/*.feather
+**/*.parquet
+**/*.arrow
+**/*.hdf5

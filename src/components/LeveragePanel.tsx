@@ -95,6 +95,17 @@ export const LeveragePanel = () => {
 
   const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
+  const quantile = (values: number[], q: number) => {
+    if (!values.length) return 0;
+    const sorted = [...values].sort((a, b) => a - b);
+    const pos = (sorted.length - 1) * q;
+    const base = Math.floor(pos);
+    const rest = pos - base;
+    return sorted[base + 1] !== undefined
+      ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
+      : sorted[base];
+  };
+
   const plottedSeries = useMemo(
     () =>
       series.map((d) => ({
@@ -106,6 +117,51 @@ export const LeveragePanel = () => {
       })),
     [series]
   );
+
+  const priceStats = useMemo(() => {
+    const prices = plottedSeries.map((d) => d.price_close).filter((v) => v > 0);
+    if (!prices.length) return { min: 1, max: 10 };
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    return { min, max };
+  }, [plottedSeries]);
+
+  const priceTicks = useMemo(() => {
+    const ticks: number[] = [];
+    const { min, max } = priceStats;
+    const minPow = Math.floor(Math.log10(min));
+    const maxPow = Math.ceil(Math.log10(max));
+    for (let p = minPow; p <= maxPow; p += 1) {
+      const base = 10 ** p;
+      [1, 2, 5].forEach((m) => {
+        const v = m * base;
+        if (v >= min * 0.9 && v <= max * 1.1) ticks.push(v);
+      });
+    }
+    let candidates = Array.from(new Set(ticks)).sort((a, b) => a - b);
+
+    if (candidates.length < 4) {
+      const logMin = Math.log10(min);
+      const logMax = Math.log10(max);
+      const evenTicks = Array.from({ length: 4 }, (_, i) =>
+        10 ** (logMin + ((logMax - logMin) / 3) * i)
+      );
+      candidates = Array.from(new Set([...candidates, ...evenTicks, min, max])).sort(
+        (a, b) => a - b
+      );
+    }
+
+    if (candidates.length > 8) {
+      const step = Math.ceil(candidates.length / 8);
+      candidates = candidates.filter((_, idx) => idx % step === 0);
+    }
+
+    while (candidates.length < 4 && candidates.length < 8) {
+      candidates.push(max * (1 + candidates.length * 0.01));
+    }
+
+    return candidates;
+  }, [priceStats]);
 
   const domainFor = (key: keyof SeriesPoint): Domain => {
     const vals = series.map((d) => d[key]).filter((v) => Number.isFinite(v)) as number[];
@@ -133,23 +189,75 @@ export const LeveragePanel = () => {
     return [low, high];
   };
 
-  const priceDomain = domainFor("price_close");
+  const priceDomain: Domain = (() => {
+    const low = Math.max(0.5, priceStats.min * 0.9);
+    const high = Math.max(low * 1.05, priceStats.max * 1.1);
+    return [low, high];
+  })();
   const volDomain = domainFor("volatility_score");
   const leverageDomain: Domain = (() => {
+    if (!plottedSeries.length) return [0, 2];
     const maxVal = Math.max(
       0,
       ...plottedSeries.map((d) => d.L_blend_plot),
       ...plottedSeries.map((d) => d.kelly_plot),
       ...plottedSeries.map((d) => d.fractional_plot)
     );
-    const upper = Math.min(10, Math.max(2, maxVal * 1.1));
-    return [0, upper];
+    const minVal = Math.min(
+      ...plottedSeries.map((d) => d.L_blend_plot),
+      ...plottedSeries.map((d) => d.kelly_plot),
+      ...plottedSeries.map((d) => d.fractional_plot)
+    );
+    let low = Math.max(0, minVal * 0.9);
+    let high = Math.min(10, Math.max(low + 0.5, maxVal * 1.1));
+    if (high - low < 0.5) {
+      const pad = 0.25;
+      low = Math.max(0, low - pad);
+      high = Math.min(10, high + pad);
+    }
+    return [low, high];
   })();
   const drawdownDomain: Domain = (() => {
     if (!plottedSeries.length) return [-0.8, 0];
-    const minVal = Math.min(...plottedSeries.map((d) => d.max_drawdown_plot), 0);
-    return [Math.min(minVal * 1.05, -0.05), 0];
+    const vals = plottedSeries.map((d) => d.max_drawdown_plot).filter((v) => Number.isFinite(v));
+    if (!vals.length) return [-0.8, 0];
+
+    const q02 = quantile(vals, 0.02);
+    const q98 = quantile(vals, 0.98);
+
+    let low = Math.min(q02 * 1.1, -0.02);
+    let high = Math.min(0, q98 * 0.95);
+
+    if (high - low < 0.05) {
+      const mid = (low + high) / 2;
+      low = mid - 0.03;
+      high = mid + 0.03;
+    }
+
+    low = Math.max(-0.8, low);
+    high = Math.min(0, high);
+    if (high <= low) high = Math.min(0, low + 0.05);
+    return [low, high];
   })();
+
+  const makeTicks = (low: number, high: number) => {
+    const span = Math.max(high - low, 1);
+    const raw = span / 6;
+    const pow = 10 ** Math.floor(Math.log10(raw));
+    const rel = raw / pow;
+    const nice = rel >= 5 ? 5 : rel >= 2.5 ? 2.5 : rel >= 2 ? 2 : 1;
+    const step = nice * pow;
+    const start = Math.floor(low / step) * step;
+    const ticks: number[] = [];
+    for (let v = start; v <= high + step * 0.5; v += step) {
+      if (v >= 0 && low > 0 && v < low) continue;
+      ticks.push(Number(v.toFixed(2)));
+    }
+    return ticks.length ? ticks : [low, high];
+  };
+
+  const leverageTicks = useMemo(() => makeTicks(leverageDomain[0] as number, leverageDomain[1] as number), [leverageDomain]);
+  const drawdownTicks = useMemo(() => makeTicks(drawdownDomain[0] as number, drawdownDomain[1] as number), [drawdownDomain]);
 
   if (isError) {
     return (
@@ -232,6 +340,13 @@ export const LeveragePanel = () => {
           <p className="text-sm text-muted-foreground">レンジ: {range === "max" ? "全期間" : range} / データ点 {series.length}</p>
         </div>
 
+        <div className="rounded-lg bg-muted/40 p-4 text-xs text-muted-foreground space-y-1">
+          <div className="font-semibold text-foreground">計算定義</div>
+          <div>推奨レバ (Blend) = min(cap, α·Kelly理論レバ + (1-α)·Volターゲット)。α={data.suggested.alpha.toFixed(2)}, cap={data.suggested.cap}x。</div>
+          <div>Kelly理論レバ = (超過収益率) ÷ 分散、分割Kelly = min(cap, fraction·Kelly)。</div>
+          <div>Volターゲット = 目標ボラ20% ÷ 実現ボラ、Max DD = 期間内累積のピーク比下落。</div>
+        </div>
+
         <div className="grid gap-6">
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -240,9 +355,12 @@ export const LeveragePanel = () => {
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
                 <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                 <YAxis
+                  scale="log"
                   domain={priceDomain}
-                  label={{ value: "価格(USD)", angle: -90, position: "insideLeft" }}
+                  ticks={priceTicks}
+                  label={{ value: "価格(USD, 対数)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(0)}
+                  allowDataOverflow
                 />
                 <Tooltip formatter={(value: number) => value.toFixed(2)} />
                 <Line type="monotone" dataKey="price_close" stroke="#2563eb" dot={false} strokeWidth={2} />
@@ -258,6 +376,7 @@ export const LeveragePanel = () => {
                 <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   domain={volDomain}
+                  tickCount={6}
                   label={{ value: "年率ボラ(σ)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(2)}
                 />
@@ -277,6 +396,7 @@ export const LeveragePanel = () => {
                 <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   domain={drawdownDomain}
+                  ticks={drawdownTicks}
                   label={{ value: "最大DD(%)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => `${(v * 100).toFixed(0)}%`}
                 />
@@ -295,6 +415,7 @@ export const LeveragePanel = () => {
                 <XAxis dataKey="date" tickFormatter={(val) => val.slice(0, 7)} minTickGap={30} label={{ value: "日付", position: "insideBottom", offset: -6 }} />
                 <YAxis
                   domain={leverageDomain}
+                  ticks={leverageTicks}
                   label={{ value: "レバレッジ(x)", angle: -90, position: "insideLeft" }}
                   tickFormatter={(v: number) => v.toFixed(1)}
                 />
