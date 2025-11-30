@@ -133,7 +133,10 @@ const fetchFromYahoo = async (symbol: string) => {
 // LLM fallback using Gemini Flash (best-effort). Expects .env GEMINI_API_KEY.
 const fetchWithLLMFallback = async (symbol: string) => {
   const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) return null;
+  if (!apiKey) {
+    console.info(`Gemini skip: no GEMINI_API_KEY for ${symbol}`);
+    return null;
+  }
 
   const prompt = [
     "You are a financial extraction agent.",
@@ -143,6 +146,7 @@ const fetchWithLLMFallback = async (symbol: string) => {
   ].join("\n");
 
   try {
+    console.info(`Gemini fallback call for ${symbol}`);
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
@@ -181,7 +185,10 @@ const fetchWithLLMFallback = async (symbol: string) => {
 // Web search + simple scrape fallback (Serper). Requires SERPER_API_KEY. Very best-effort.
 const fetchWithSerper = async (symbol: string) => {
   const serperKey = process.env.SERPER_API_KEY;
-  if (!serperKey) return null;
+  if (!serperKey) {
+    console.info(`Serper skip: no SERPER_API_KEY for ${symbol}`);
+    return null;
+  }
   try {
     const searchRes = await fetch("https://google.serper.dev/search", {
       method: "POST",
