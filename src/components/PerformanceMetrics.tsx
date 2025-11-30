@@ -1,21 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { AlertCircle, RefreshCw } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { LastUpdatedBadge } from "@/components/LastUpdatedBadge";
-import { useMemo } from "react";
 import { PerformanceCard } from "./PerformanceCard";
+import { Button } from "@/components/ui/button";
 import type { PerformanceMetrics } from "@/types/market";
 
-const staleThresholdMs = 1000 * 60 * 60 * 24; // 24 hours
-
 const fetchPerformanceMetrics = async (): Promise<PerformanceMetrics> => {
-  const response = await fetch("/data/metrics.json", { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error("Failed to load performance metrics");
-  }
-
+  const base = import.meta.env.BASE_URL ?? "/";
+  const response = await fetch(`${base}data/metrics.json`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Failed to fetch metrics: ${response.status}`);
   const payload = (await response.json()) as PerformanceMetrics;
   const lastModifiedHeader = response.headers.get("last-modified");
 
@@ -30,61 +22,34 @@ const fetchPerformanceMetrics = async (): Promise<PerformanceMetrics> => {
 export const PerformanceMetricsGrid = () => {
   const {
     data: metrics,
-    error,
-    isLoading,
+    isFetching,
     isError,
     refetch,
-    isFetching,
   } = useQuery({
     queryKey: ["performance-metrics"],
     queryFn: fetchPerformanceMetrics,
     refetchInterval: 5 * 60 * 1000,
     staleTime: 60 * 1000,
+    retry: 1,
   });
 
-  const isStale = useMemo(() => {
-    if (!metrics?.last_updated) return false;
-    const parsed = new Date(metrics.last_updated);
-    if (Number.isNaN(parsed.getTime())) return false;
-    return Date.now() - parsed.getTime() > staleThresholdMs;
-  }, [metrics?.last_updated]);
-
-  if (isLoading) {
+  if (isError) {
     return (
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="h-6 w-40">
-            <Skeleton className="h-full w-full" />
-          </div>
-          <Skeleton className="h-9 w-20" />
-        </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <Skeleton key={index} className="h-28 rounded-lg" />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (isError || !metrics) {
-    return (
-      <Alert variant="destructive" className="flex items-center justify-between">
-        <div className="flex items-start gap-3">
-          <AlertCircle className="h-5 w-5" />
+      <section className="rounded-xl border border-border/60 bg-card/70 p-6 shadow-sm">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <AlertTitle>Unable to load performance metrics</AlertTitle>
-            <AlertDescription>
-              {error instanceof Error ? error.message : "Please try again shortly."}
-            </AlertDescription>
+            <h2 className="text-lg font-semibold text-foreground">Performance snapshot</h2>
+            <p className="text-sm text-muted-foreground">Unable to load performance metrics.</p>
           </div>
+          <Button variant="outline" size="sm" onClick={() => refetch()}>
+            Retry
+          </Button>
         </div>
-        <Button variant="outline" onClick={() => refetch()}>
-          <RefreshCw className="mr-2 h-4 w-4" /> Retry
-        </Button>
-      </Alert>
+      </section>
     );
   }
+
+  if (!metrics) return null;
 
   return (
     <section className="space-y-6">
@@ -97,28 +62,8 @@ export const PerformanceMetricsGrid = () => {
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <LastUpdatedBadge lastUpdated={metrics.last_updated} isRefreshing={isFetching} />
-          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isFetching}>
-            <RefreshCw className="mr-2 h-4 w-4" /> Refresh now
-          </Button>
         </div>
       </div>
-
-      {isStale && (
-        <Alert variant="destructive" className="flex items-start gap-3">
-          <AlertCircle className="h-5 w-5" />
-          <div>
-            <AlertTitle>Metrics may be outdated</AlertTitle>
-            <AlertDescription>
-              Data has not refreshed in the last 24 hours. Ensure the metrics pipeline is running
-              or trigger it manually via{' '}
-              <code className="rounded bg-muted px-1 py-0.5 text-xs">
-                npm run financial:pipeline
-              </code>
-              .
-            </AlertDescription>
-          </div>
-        </Alert>
-      )}
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
         <PerformanceCard
