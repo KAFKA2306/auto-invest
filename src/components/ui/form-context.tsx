@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import { FieldPath, FieldValues, useFormContext } from "react-hook-form"
 
@@ -43,7 +44,6 @@ const useFormField = () => {
   }
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export {
   useFormField,
   FormFieldContext,
