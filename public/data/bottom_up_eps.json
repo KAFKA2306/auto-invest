@@ -1,4 +1,15 @@
 {
+  "as_of": "2025-12-01",
+  "prior_period": {
+    "date": "2025-09-30",
+    "label": "2025Q3",
+    "eps": 0.0
+  },
+  "base_period": {
+    "date": "2025-12-01",
+    "label": "Latest",
+    "eps": 9.218386145525098
+  },
   "components": [
     {
       "symbol": "ADBE",
@@ -8,7 +19,7 @@
       "eps_yoy": null,
       "weight": 0.003616287711855451,
       "source": "yfinance",
-      "marketCap": 135799144448,
+      "marketCap": 135799144448.0,
       "history": [
         {
           "date": "2025-08-31",
@@ -30,13 +41,13 @@
     },
     {
       "symbol": "AMD",
-      "name": "Advanced Micro Devices",
+      "name": "Advanced Micro Devices, Inc.",
       "quarter": "recent",
       "eps": 1.91,
       "eps_yoy": null,
       "weight": 0.009430844941903462,
       "source": "yfinance",
-      "marketCap": 354147893248,
+      "marketCap": 354147893248.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -58,13 +69,13 @@
     },
     {
       "symbol": "ABNB",
-      "name": "Airbnb",
+      "name": "Airbnb, Inc.",
       "quarter": "recent",
       "eps": 4.2,
       "eps_yoy": null,
       "weight": 0.0019073627734149678,
       "source": "yfinance",
-      "marketCap": 71625449472,
+      "marketCap": 71625449472.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -86,13 +97,13 @@
     },
     {
       "symbol": "GOOGL",
-      "name": "Alphabet Inc. (Class A)",
+      "name": "Alphabet Inc.",
       "quarter": "recent",
       "eps": 10.12,
       "eps_yoy": null,
       "weight": 0.10327146834843993,
       "source": "yfinance",
-      "marketCap": 3878058983424,
+      "marketCap": 3878058983424.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -114,13 +125,13 @@
     },
     {
       "symbol": "GOOG",
-      "name": "Alphabet Inc. (Class C)",
+      "name": "Alphabet Inc.",
       "quarter": "recent",
       "eps": 10.12,
       "eps_yoy": null,
       "weight": 0.10290867561432376,
       "source": "yfinance",
-      "marketCap": 3864435359744,
+      "marketCap": 3864435359744.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -142,13 +153,13 @@
     },
     {
       "symbol": "AMZN",
-      "name": "Amazon",
+      "name": "Amazon.com, Inc.",
       "quarter": "recent",
       "eps": 7.09,
       "eps_yoy": null,
       "weight": 0.06639237575486777,
       "source": "yfinance",
-      "marketCap": 2493172154368,
+      "marketCap": 2493172154368.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -170,13 +181,13 @@
     },
     {
       "symbol": "AEP",
-      "name": "American Electric Power",
+      "name": "American Electric Power Company",
       "quarter": "recent",
       "eps": 6.83,
       "eps_yoy": null,
       "weight": 0.001764211541517758,
       "source": "yfinance",
-      "marketCap": 66249822208,
+      "marketCap": 66249822208.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -192,19 +203,19 @@
         },
         {
           "date": "2024-12-31",
-          "eps": null
+          "eps": 0.0
         }
       ]
     },
     {
       "symbol": "AMGN",
-      "name": "Amgen",
+      "name": "Amgen Inc.",
       "quarter": "recent",
       "eps": 12.92,
       "eps_yoy": null,
       "weight": 0.004953746476986643,
       "source": "yfinance",
-      "marketCap": 186023510016,
+      "marketCap": 186023510016.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -226,17 +237,17 @@
     },
     {
       "symbol": "ADI",
-      "name": "Analog Devices",
+      "name": "Analog Devices, Inc.",
       "quarter": "recent",
       "eps": 4.56,
       "eps_yoy": null,
       "weight": 0.00345985625105309,
       "source": "yfinance",
-      "marketCap": 129924816896,
+      "marketCap": 129924816896.0,
       "history": [
         {
           "date": "2025-10-31",
-          "eps": null
+          "eps": 0.0
         },
         {
           "date": "2025-07-31",
@@ -260,7 +271,7 @@
       "eps_yoy": null,
       "weight": 0.11020007658493121,
       "source": "yfinance",
-      "marketCap": 4138242670592,
+      "marketCap": 4138242670592.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -282,13 +293,13 @@
     },
     {
       "symbol": "AMAT",
-      "name": "Applied Materials",
+      "name": "Applied Materials, Inc.",
       "quarter": "recent",
       "eps": 8.65,
       "eps_yoy": null,
       "weight": 0.005351315428702149,
       "source": "yfinance",
-      "marketCap": 200953053184,
+      "marketCap": 200953053184.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -310,13 +321,13 @@
     },
     {
       "symbol": "APP",
-      "name": "AppLovin",
+      "name": "Applovin Corporation",
       "quarter": "recent",
       "eps": 8.45,
       "eps_yoy": null,
       "weight": 0.005399808066802666,
       "source": "yfinance",
-      "marketCap": 202774052864,
+      "marketCap": 202774052864.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -338,13 +349,13 @@
     },
     {
       "symbol": "ARM",
-      "name": "Arm Holdings",
+      "name": "Arm Holdings plc",
       "quarter": "recent",
       "eps": 0.79,
       "eps_yoy": null,
       "weight": 0.003830119107111212,
       "source": "yfinance",
-      "marketCap": 143828959232,
+      "marketCap": 143828959232.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -366,13 +377,13 @@
     },
     {
       "symbol": "ASML",
-      "name": "ASML Holding",
+      "name": "ASML Holding N.V. - New York Re",
       "quarter": "recent",
       "eps": 28.09,
       "eps_yoy": null,
       "weight": 0.010956423467435932,
       "source": "yfinance",
-      "marketCap": 411436548096,
+      "marketCap": 411436548096.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -380,7 +391,7 @@
         },
         {
           "date": "2025-06-30",
-          "eps": null
+          "eps": 0.0
         },
         {
           "date": "2025-03-31",
@@ -394,13 +405,13 @@
     },
     {
       "symbol": "AZN",
-      "name": "AstraZeneca",
+      "name": "Astrazeneca PLC",
       "quarter": "recent",
       "eps": 3.01,
       "eps_yoy": null,
       "weight": 0.007655558453223133,
       "source": "yfinance",
-      "marketCap": 287482183680,
+      "marketCap": 287482183680.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -422,13 +433,13 @@
     },
     {
       "symbol": "TEAM",
-      "name": "Atlassian",
+      "name": "Atlassian Corporation",
       "quarter": "recent",
       "eps": -0.7,
       "eps_yoy": null,
       "weight": 0.00104810034236052,
       "source": "yfinance",
-      "marketCap": 39358353408,
+      "marketCap": 39358353408.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -450,13 +461,13 @@
     },
     {
       "symbol": "ADSK",
-      "name": "Autodesk",
+      "name": "Autodesk, Inc.",
       "quarter": "recent",
       "eps": 5.16,
       "eps_yoy": null,
       "weight": 0.0017205813653225965,
       "source": "yfinance",
-      "marketCap": 64611418112,
+      "marketCap": 64611418112.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -478,13 +489,13 @@
     },
     {
       "symbol": "ADP",
-      "name": "Automatic Data Processing",
+      "name": "Automatic Data Processing, Inc.",
       "quarter": "recent",
       "eps": 10.14,
       "eps_yoy": null,
       "weight": 0.0027540242957093224,
       "source": "yfinance",
-      "marketCap": 103419355136,
+      "marketCap": 103419355136.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -506,13 +517,13 @@
     },
     {
       "symbol": "AXON",
-      "name": "Axon Enterprise",
+      "name": "Axon Enterprise, Inc.",
       "quarter": "recent",
       "eps": 3.19,
       "eps_yoy": null,
       "weight": 0.001135028779015228,
       "source": "yfinance",
-      "marketCap": 42622697472,
+      "marketCap": 42622697472.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -534,13 +545,13 @@
     },
     {
       "symbol": "BKR",
-      "name": "Baker Hughes",
+      "name": "Baker Hughes Company",
       "quarter": "recent",
       "eps": 2.9,
       "eps_yoy": null,
       "weight": 0.0013191291194830756,
       "source": "yfinance",
-      "marketCap": 49536049152,
+      "marketCap": 49536049152.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -562,13 +573,13 @@
     },
     {
       "symbol": "BIIB",
-      "name": "Biogen",
+      "name": "Biogen Inc.",
       "quarter": "recent",
       "eps": 10.96,
       "eps_yoy": null,
       "weight": 0.0007113590667841122,
       "source": "yfinance",
-      "marketCap": 26713016320,
+      "marketCap": 26713016320.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -590,13 +601,13 @@
     },
     {
       "symbol": "BKNG",
-      "name": "Booking Holdings",
+      "name": "Booking Holdings Inc. Common St",
       "quarter": "recent",
       "eps": 153.83,
       "eps_yoy": null,
       "weight": 0.004241696364476934,
       "source": "yfinance",
-      "marketCap": 159284543488,
+      "marketCap": 159284543488.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -618,13 +629,13 @@
     },
     {
       "symbol": "AVGO",
-      "name": "Broadcom",
+      "name": "Broadcom Inc.",
       "quarter": "recent",
       "eps": 3.91,
       "eps_yoy": null,
       "weight": 0.050674260130299346,
       "source": "yfinance",
-      "marketCap": 1902924136448,
+      "marketCap": 1902924136448.0,
       "history": [
         {
           "date": "2025-07-31",
@@ -646,13 +657,13 @@
     },
     {
       "symbol": "CDNS",
-      "name": "Cadence Design Systems",
+      "name": "Cadence Design Systems, Inc.",
       "quarter": "recent",
       "eps": 3.87,
       "eps_yoy": null,
       "weight": 0.002262811040182496,
       "source": "yfinance",
-      "marketCap": 84973273088,
+      "marketCap": 84973273088.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -680,7 +691,7 @@
       "eps_yoy": null,
       "weight": 0.0005033430140996076,
       "source": "yfinance",
-      "marketCap": 18901579776,
+      "marketCap": 18901579776.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -702,13 +713,13 @@
     },
     {
       "symbol": "CHTR",
-      "name": "Charter Communications",
+      "name": "Charter Communications, Inc.",
       "quarter": "recent",
       "eps": 36.06,
       "eps_yoy": null,
       "weight": 0.0007279113325729276,
       "source": "yfinance",
-      "marketCap": 27334588416,
+      "marketCap": 27334588416.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -730,13 +741,13 @@
     },
     {
       "symbol": "CTAS",
-      "name": "Cintas",
+      "name": "Cintas Corporation",
       "quarter": "recent",
       "eps": 4.5,
       "eps_yoy": null,
       "weight": 0.001996077097792065,
       "source": "yfinance",
-      "marketCap": 74956857344,
+      "marketCap": 74956857344.0,
       "history": [
         {
           "date": "2025-08-31",
@@ -758,13 +769,13 @@
     },
     {
       "symbol": "CSCO",
-      "name": "Cisco",
+      "name": "Cisco Systems, Inc.",
       "quarter": "recent",
       "eps": 2.59,
       "eps_yoy": null,
       "weight": 0.008095348657191328,
       "source": "yfinance",
-      "marketCap": 303997222912,
+      "marketCap": 303997222912.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -786,24 +797,24 @@
     },
     {
       "symbol": "CCEP",
-      "name": "Coca-Cola Europacific Partners",
+      "name": "Coca-Cola Europacific Partners ",
       "quarter": "recent",
       "eps": 3.88,
       "eps_yoy": null,
       "weight": 0.00109766028097796,
       "source": "yfinance",
-      "marketCap": 41219432448,
+      "marketCap": 41219432448.0,
       "history": []
     },
     {
       "symbol": "CTSH",
-      "name": "Cognizant",
+      "name": "Cognizant Technology Solutions ",
       "quarter": "recent",
       "eps": 4.32,
       "eps_yoy": null,
       "weight": 0.00101068286957291,
       "source": "yfinance",
-      "marketCap": 37953249280,
+      "marketCap": 37953249280.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -825,13 +836,13 @@
     },
     {
       "symbol": "CMCSA",
-      "name": "Comcast",
+      "name": "Comcast Corporation",
       "quarter": "recent",
       "eps": 6.02,
       "eps_yoy": null,
       "weight": 0.002624221573772307,
       "source": "yfinance",
-      "marketCap": 98544992256,
+      "marketCap": 98544992256.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -853,13 +864,13 @@
     },
     {
       "symbol": "CEG",
-      "name": "Constellation Energy",
+      "name": "Constellation Energy Corporatio",
       "quarter": "recent",
       "eps": 8.74,
       "eps_yoy": null,
       "weight": 0.003031205457671636,
       "source": "yfinance",
-      "marketCap": 113828085760,
+      "marketCap": 113828085760.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -881,13 +892,13 @@
     },
     {
       "symbol": "CPRT",
-      "name": "Copart",
+      "name": "Copart, Inc.",
       "quarter": "recent",
       "eps": 1.63,
       "eps_yoy": null,
       "weight": 0.0010048264056633932,
       "source": "yfinance",
-      "marketCap": 37733326848,
+      "marketCap": 37733326848.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -909,13 +920,13 @@
     },
     {
       "symbol": "CSGP",
-      "name": "CoStar Group",
+      "name": "CoStar Group, Inc.",
       "quarter": "recent",
       "eps": 0.06,
       "eps_yoy": null,
       "weight": 0.0007764950484385577,
       "source": "yfinance",
-      "marketCap": 29159008256,
+      "marketCap": 29159008256.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -937,13 +948,13 @@
     },
     {
       "symbol": "COST",
-      "name": "Costco",
+      "name": "Costco Wholesale Corporation",
       "quarter": "recent",
       "eps": 18.18,
       "eps_yoy": null,
       "weight": 0.010789180694151572,
       "source": "yfinance",
-      "marketCap": 405156233216,
+      "marketCap": 405156233216.0,
       "history": [
         {
           "date": "2025-08-31",
@@ -965,13 +976,13 @@
     },
     {
       "symbol": "CRWD",
-      "name": "CrowdStrike",
+      "name": "CrowdStrike Holdings, Inc.",
       "quarter": "recent",
       "eps": -1.22,
       "eps_yoy": null,
       "weight": 0.0034026423988359573,
       "source": "yfinance",
-      "marketCap": 127776317440,
+      "marketCap": 127776317440.0,
       "history": [
         {
           "date": "2025-07-31",
@@ -999,7 +1010,7 @@
       "eps_yoy": null,
       "weight": 0.001755450733115231,
       "source": "yfinance",
-      "marketCap": 65920835584,
+      "marketCap": 65920835584.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1021,13 +1032,13 @@
     },
     {
       "symbol": "DDOG",
-      "name": "Datadog",
+      "name": "Datadog, Inc.",
       "quarter": "recent",
       "eps": 0.3,
       "eps_yoy": null,
       "weight": 0.0014942133065805768,
       "source": "yfinance",
-      "marketCap": 56110825472,
+      "marketCap": 56110825472.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1049,13 +1060,13 @@
     },
     {
       "symbol": "DXCM",
-      "name": "DexCom",
+      "name": "DexCom, Inc.",
       "quarter": "recent",
       "eps": 1.8,
       "eps_yoy": null,
       "weight": 0.0006628152724298969,
       "source": "yfinance",
-      "marketCap": 24890095616,
+      "marketCap": 24890095616.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1077,13 +1088,13 @@
     },
     {
       "symbol": "FANG",
-      "name": "Diamondback Energy",
+      "name": "Diamondback Energy, Inc.",
       "quarter": "recent",
       "eps": 14.24,
       "eps_yoy": null,
       "weight": 0.001176304458638259,
       "source": "yfinance",
-      "marketCap": 44172685312,
+      "marketCap": 44172685312.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1105,13 +1116,13 @@
     },
     {
       "symbol": "DASH",
-      "name": "DoorDash",
+      "name": "DoorDash, Inc.",
       "quarter": "recent",
       "eps": 1.98,
       "eps_yoy": null,
       "weight": 0.0022767624085951207,
       "source": "yfinance",
-      "marketCap": 85497176064,
+      "marketCap": 85497176064.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1133,13 +1144,13 @@
     },
     {
       "symbol": "EA",
-      "name": "Electronic Arts",
+      "name": "Electronic Arts Inc.",
       "quarter": "recent",
       "eps": 3.43,
       "eps_yoy": null,
       "weight": 0.001345569485533631,
       "source": "yfinance",
-      "marketCap": 50528940032,
+      "marketCap": 50528940032.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1161,13 +1172,13 @@
     },
     {
       "symbol": "EXC",
-      "name": "Exelon",
+      "name": "Exelon Corporation",
       "quarter": "recent",
       "eps": 2.79,
       "eps_yoy": null,
       "weight": 0.0012673224505592917,
       "source": "yfinance",
-      "marketCap": 47590600704,
+      "marketCap": 47590600704.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1189,13 +1200,13 @@
     },
     {
       "symbol": "FAST",
-      "name": "Fastenal",
+      "name": "Fastenal Company",
       "quarter": "recent",
       "eps": 1.07,
       "eps_yoy": null,
       "weight": 0.001235101755066344,
       "source": "yfinance",
-      "marketCap": 46380646400,
+      "marketCap": 46380646400.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1217,13 +1228,13 @@
     },
     {
       "symbol": "FTNT",
-      "name": "Fortinet",
+      "name": "Fortinet, Inc.",
       "quarter": "recent",
       "eps": 2.43,
       "eps_yoy": null,
       "weight": 0.001655491631539298,
       "source": "yfinance",
-      "marketCap": 62167162880,
+      "marketCap": 62167162880.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1245,13 +1256,13 @@
     },
     {
       "symbol": "GEHC",
-      "name": "GE HealthCare",
+      "name": "GE HealthCare Technologies Inc.",
       "quarter": "recent",
       "eps": 4.83,
       "eps_yoy": null,
       "weight": 0.0009725265215986228,
       "source": "yfinance",
-      "marketCap": 36520398848,
+      "marketCap": 36520398848.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1273,13 +1284,13 @@
     },
     {
       "symbol": "GILD",
-      "name": "Gilead Sciences",
+      "name": "Gilead Sciences, Inc.",
       "quarter": "recent",
       "eps": 6.46,
       "eps_yoy": null,
       "weight": 0.004158041818983743,
       "source": "yfinance",
-      "marketCap": 156143140864,
+      "marketCap": 156143140864.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1301,13 +1312,13 @@
     },
     {
       "symbol": "GFS",
-      "name": "GlobalFoundries",
+      "name": "GlobalFoundries Inc.",
       "quarter": "recent",
       "eps": -0.08,
       "eps_yoy": null,
       "weight": 0.0005303469170046015,
       "source": "yfinance",
-      "marketCap": 19915632640,
+      "marketCap": 19915632640.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1329,13 +1340,13 @@
     },
     {
       "symbol": "HON",
-      "name": "Honeywell",
+      "name": "Honeywell International Inc.",
       "quarter": "recent",
       "eps": 9.47,
       "eps_yoy": null,
       "weight": 0.0034488370413012642,
       "source": "yfinance",
-      "marketCap": 129511022592,
+      "marketCap": 129511022592.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1357,13 +1368,13 @@
     },
     {
       "symbol": "IDXX",
-      "name": "Idexx Laboratories",
+      "name": "IDEXX Laboratories, Inc.",
       "quarter": "recent",
       "eps": 12.57,
       "eps_yoy": null,
       "weight": 0.0016040104429162292,
       "source": "yfinance",
-      "marketCap": 60233936896,
+      "marketCap": 60233936896.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1385,13 +1396,13 @@
     },
     {
       "symbol": "INTC",
-      "name": "Intel",
+      "name": "Intel Corporation",
       "quarter": "recent",
       "eps": 0.06,
       "eps_yoy": null,
       "weight": 0.00515207610939467,
       "source": "yfinance",
-      "marketCap": 193471201280,
+      "marketCap": 193471201280.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1413,13 +1424,13 @@
     },
     {
       "symbol": "INTU",
-      "name": "Intuit",
+      "name": "Intuit Inc.",
       "quarter": "recent",
       "eps": 14.58,
       "eps_yoy": null,
       "weight": 0.004700881005881309,
       "source": "yfinance",
-      "marketCap": 176527884288,
+      "marketCap": 176527884288.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -1441,13 +1452,13 @@
     },
     {
       "symbol": "ISRG",
-      "name": "Intuitive Surgical",
+      "name": "Intuitive Surgical, Inc.",
       "quarter": "recent",
       "eps": 7.57,
       "eps_yoy": null,
       "weight": 0.005474505795816794,
       "source": "yfinance",
-      "marketCap": 205579108352,
+      "marketCap": 205579108352.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1469,13 +1480,13 @@
     },
     {
       "symbol": "KDP",
-      "name": "Keurig Dr Pepper",
+      "name": "Keurig Dr Pepper Inc.",
       "quarter": "recent",
       "eps": 1.16,
       "eps_yoy": null,
       "weight": 0.00100938389339958,
       "source": "yfinance",
-      "marketCap": 37904470016,
+      "marketCap": 37904470016.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1503,7 +1514,7 @@
       "eps_yoy": null,
       "weight": 0.00412204046909968,
       "source": "yfinance",
-      "marketCap": 154791215104,
+      "marketCap": 154791215104.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1525,13 +1536,13 @@
     },
     {
       "symbol": "KHC",
-      "name": "Kraft Heinz",
+      "name": "The Kraft Heinz Company",
       "quarter": "recent",
       "eps": -3.71,
       "eps_yoy": null,
       "weight": 0.0008040845759194696,
       "source": "yfinance",
-      "marketCap": 30195052544,
+      "marketCap": 30195052544.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1553,13 +1564,13 @@
     },
     {
       "symbol": "LRCX",
-      "name": "Lam Research",
+      "name": "Lam Research Corporation",
       "quarter": "recent",
       "eps": 4.52,
       "eps_yoy": null,
       "weight": 0.005238618529030533,
       "source": "yfinance",
-      "marketCap": 196721049600,
+      "marketCap": 196721049600.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1587,7 +1598,7 @@
       "eps_yoy": null,
       "weight": 0.0051236293056324345,
       "source": "yfinance",
-      "marketCap": 192402964480,
+      "marketCap": 192402964480.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1603,19 +1614,19 @@
         },
         {
           "date": "2024-12-31",
-          "eps": null
+          "eps": 0.0
         }
       ]
     },
     {
       "symbol": "LULU",
-      "name": "Lululemon",
+      "name": "lululemon athletica inc.",
       "quarter": "recent",
       "eps": 14.64,
       "eps_yoy": null,
       "weight": 0.000587825276503649,
       "source": "yfinance",
-      "marketCap": 22074064896,
+      "marketCap": 22074064896.0,
       "history": [
         {
           "date": "2025-07-31",
@@ -1643,7 +1654,7 @@
       "eps_yoy": null,
       "weight": 0.0022032767228455864,
       "source": "yfinance",
-      "marketCap": 82737635328,
+      "marketCap": 82737635328.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1665,13 +1676,13 @@
     },
     {
       "symbol": "MRVL",
-      "name": "Marvell Technology",
+      "name": "Marvell Technology, Inc.",
       "quarter": "recent",
       "eps": -0.12,
       "eps_yoy": null,
       "weight": 0.0020526338811983702,
       "source": "yfinance",
-      "marketCap": 77080682496,
+      "marketCap": 77080682496.0,
       "history": [
         {
           "date": "2025-07-31",
@@ -1693,13 +1704,13 @@
     },
     {
       "symbol": "MELI",
-      "name": "Mercado Libre",
+      "name": "MercadoLibre, Inc.",
       "quarter": "recent",
       "eps": 41.02,
       "eps_yoy": null,
       "weight": 0.0027970167093983576,
       "source": "yfinance",
-      "marketCap": 105033809920,
+      "marketCap": 105033809920.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1721,13 +1732,13 @@
     },
     {
       "symbol": "META",
-      "name": "Meta Platforms",
+      "name": "Meta Platforms, Inc.",
       "quarter": "recent",
       "eps": 22.61,
       "eps_yoy": null,
       "weight": 0.043490950033177656,
       "source": "yfinance",
-      "marketCap": 1633175863296,
+      "marketCap": 1633175863296.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1749,13 +1760,13 @@
     },
     {
       "symbol": "MCHP",
-      "name": "Microchip Technology",
+      "name": "Microchip Technology Incorporat",
       "quarter": "recent",
       "eps": -0.46,
       "eps_yoy": null,
       "weight": 0.0007711194424062872,
       "source": "yfinance",
-      "marketCap": 28957143040,
+      "marketCap": 28957143040.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1777,13 +1788,13 @@
     },
     {
       "symbol": "MU",
-      "name": "Micron Technology",
+      "name": "Micron Technology, Inc.",
       "quarter": "recent",
       "eps": 7.59,
       "eps_yoy": null,
       "weight": 0.00708676243049387,
       "source": "yfinance",
-      "marketCap": 266122706944,
+      "marketCap": 266122706944.0,
       "history": [
         {
           "date": "2025-08-31",
@@ -1805,13 +1816,13 @@
     },
     {
       "symbol": "MSFT",
-      "name": "Microsoft",
+      "name": "Microsoft Corporation",
       "quarter": "recent",
       "eps": 14.07,
       "eps_yoy": null,
       "weight": 0.0973898560682352,
       "source": "yfinance",
-      "marketCap": 3657192177664,
+      "marketCap": 3657192177664.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1833,13 +1844,13 @@
     },
     {
       "symbol": "MSTR",
-      "name": "MicroStrategy",
+      "name": "Strategy Inc",
       "quarter": "recent",
       "eps": 24.36,
       "eps_yoy": null,
       "weight": 0.0013558057537309883,
       "source": "yfinance",
-      "marketCap": 50913333248,
+      "marketCap": 50913333248.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1861,13 +1872,13 @@
     },
     {
       "symbol": "MDLZ",
-      "name": "Mondelez International",
+      "name": "Mondelez International, Inc.",
       "quarter": "recent",
       "eps": 2.67,
       "eps_yoy": null,
       "weight": 0.0019837097189662313,
       "source": "yfinance",
-      "marketCap": 74492436480,
+      "marketCap": 74492436480.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1889,13 +1900,13 @@
     },
     {
       "symbol": "MNST",
-      "name": "Monster Beverage",
+      "name": "Monster Beverage Corporation",
       "quarter": "recent",
       "eps": 1.76,
       "eps_yoy": null,
       "weight": 0.0019510718109564489,
       "source": "yfinance",
-      "marketCap": 73266814976,
+      "marketCap": 73266814976.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1923,7 +1934,7 @@
       "eps_yoy": null,
       "weight": 0.012139172632363653,
       "source": "yfinance",
-      "marketCap": 455851245568,
+      "marketCap": 455851245568.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -1945,13 +1956,13 @@
     },
     {
       "symbol": "NVDA",
-      "name": "Nvidia",
+      "name": "NVIDIA Corporation",
       "quarter": "recent",
       "eps": 4.04,
       "eps_yoy": null,
       "weight": 0.1145604864353356,
       "source": "yfinance",
-      "marketCap": 4301985153024,
+      "marketCap": 4301985153024.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -1973,13 +1984,13 @@
     },
     {
       "symbol": "NXPI",
-      "name": "NXP Semiconductors",
+      "name": "NXP Semiconductors N.V.",
       "quarter": "recent",
       "eps": 8.09,
       "eps_yoy": null,
       "weight": 0.001308774722878991,
       "source": "yfinance",
-      "marketCap": 49147219968,
+      "marketCap": 49147219968.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2001,13 +2012,13 @@
     },
     {
       "symbol": "ORLY",
-      "name": "O'Reilly Automotive",
+      "name": "O'Reilly Automotive, Inc.",
       "quarter": "recent",
       "eps": 2.88,
       "eps_yoy": null,
       "weight": 0.002291257189493725,
       "source": "yfinance",
-      "marketCap": 86041485312,
+      "marketCap": 86041485312.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2029,13 +2040,13 @@
     },
     {
       "symbol": "ODFL",
-      "name": "Old Dominion Freight Line",
+      "name": "Old Dominion Freight Line, Inc.",
       "quarter": "recent",
       "eps": 4.97,
       "eps_yoy": null,
       "weight": 0.0007571789269728585,
       "source": "yfinance",
-      "marketCap": 28433647616,
+      "marketCap": 28433647616.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2057,13 +2068,13 @@
     },
     {
       "symbol": "ON",
-      "name": "Onsemi",
+      "name": "ON Semiconductor Corporation",
       "quarter": "recent",
       "eps": 0.73,
       "eps_yoy": null,
       "weight": 0.0005471561093511698,
       "source": "yfinance",
-      "marketCap": 20546852864,
+      "marketCap": 20546852864.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2085,13 +2096,13 @@
     },
     {
       "symbol": "PCAR",
-      "name": "Paccar",
+      "name": "PACCAR Inc.",
       "quarter": "recent",
       "eps": 5.1,
       "eps_yoy": null,
       "weight": 0.001474406565010113,
       "source": "yfinance",
-      "marketCap": 55367041024,
+      "marketCap": 55367041024.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2113,13 +2124,13 @@
     },
     {
       "symbol": "PLTR",
-      "name": "Palantir Technologies",
+      "name": "Palantir Technologies Inc.",
       "quarter": "recent",
       "eps": 0.44,
       "eps_yoy": null,
       "weight": 0.010691545329950449,
       "source": "yfinance",
-      "marketCap": 401489821696,
+      "marketCap": 401489821696.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2141,13 +2152,13 @@
     },
     {
       "symbol": "PANW",
-      "name": "Palo Alto Networks",
+      "name": "Palo Alto Networks, Inc.",
       "quarter": "recent",
       "eps": 1.58,
       "eps_yoy": null,
       "weight": 0.003528981547894652,
       "source": "yfinance",
-      "marketCap": 132520615936,
+      "marketCap": 132520615936.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -2169,13 +2180,13 @@
     },
     {
       "symbol": "PAYX",
-      "name": "Paychex",
+      "name": "Paychex, Inc.",
       "quarter": "recent",
       "eps": 4.46,
       "eps_yoy": null,
       "weight": 0.0010704220300749479,
       "source": "yfinance",
-      "marketCap": 40196579328,
+      "marketCap": 40196579328.0,
       "history": [
         {
           "date": "2025-08-31",
@@ -2197,13 +2208,13 @@
     },
     {
       "symbol": "PYPL",
-      "name": "PayPal",
+      "name": "PayPal Holdings, Inc.",
       "quarter": "recent",
       "eps": 4.98,
       "eps_yoy": null,
       "weight": 0.0015949227362358057,
       "source": "yfinance",
-      "marketCap": 59892674560,
+      "marketCap": 59892674560.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2225,13 +2236,13 @@
     },
     {
       "symbol": "PDD",
-      "name": "PDD Holdings",
+      "name": "PDD Holdings Inc.",
       "quarter": "recent",
       "eps": 9.73,
       "eps_yoy": null,
       "weight": 0.004388373233022943,
       "source": "yfinance",
-      "marketCap": 164792565760,
+      "marketCap": 164792565760.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2253,13 +2264,13 @@
     },
     {
       "symbol": "PEP",
-      "name": "PepsiCo",
+      "name": "Pepsico, Inc.",
       "quarter": "recent",
       "eps": 5.27,
       "eps_yoy": null,
       "weight": 0.0054227762430366444,
       "source": "yfinance",
-      "marketCap": 203636555776,
+      "marketCap": 203636555776.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2281,17 +2292,17 @@
     },
     {
       "symbol": "QCOM",
-      "name": "Qualcomm",
+      "name": "QUALCOMM Incorporated",
       "quarter": "recent",
       "eps": 5.01,
       "eps_yoy": null,
       "weight": 0.004829801309710822,
       "source": "yfinance",
-      "marketCap": 181369110528,
+      "marketCap": 181369110528.0,
       "history": [
         {
           "date": "2025-09-30",
-          "eps": null
+          "eps": 0.0
         },
         {
           "date": "2025-06-30",
@@ -2309,13 +2320,13 @@
     },
     {
       "symbol": "REGN",
-      "name": "Regeneron Pharmaceuticals",
+      "name": "Regeneron Pharmaceuticals, Inc.",
       "quarter": "recent",
       "eps": 41.74,
       "eps_yoy": null,
       "weight": 0.002202017340958168,
       "source": "yfinance",
-      "marketCap": 82690342912,
+      "marketCap": 82690342912.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2337,13 +2348,13 @@
     },
     {
       "symbol": "ROP",
-      "name": "Roper Technologies",
+      "name": "Roper Technologies, Inc.",
       "quarter": "recent",
       "eps": 14.5,
       "eps_yoy": null,
       "weight": 0.001279022834734028,
       "source": "yfinance",
-      "marketCap": 48029974528,
+      "marketCap": 48029974528.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2365,13 +2376,13 @@
     },
     {
       "symbol": "ROST",
-      "name": "Ross Stores",
+      "name": "Ross Stores, Inc.",
       "quarter": "recent",
       "eps": 6.4,
       "eps_yoy": null,
       "weight": 0.0015360573769030135,
       "source": "yfinance",
-      "marketCap": 57682157568,
+      "marketCap": 57682157568.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -2393,13 +2404,13 @@
     },
     {
       "symbol": "SHOP",
-      "name": "Shopify",
+      "name": "Shopify Inc.",
       "quarter": "recent",
       "eps": 1.36,
       "eps_yoy": null,
       "weight": 0.005499677726741003,
       "source": "yfinance",
-      "marketCap": 206524366848,
+      "marketCap": 206524366848.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2421,13 +2432,13 @@
     },
     {
       "symbol": "SOLS",
-      "name": "Solstice Advanced Materials",
+      "name": "Solstice Advanced Materials Inc",
       "quarter": "recent",
       "eps": 0.99,
       "eps_yoy": null,
       "weight": 0.00020153674229805794,
       "source": "yfinance",
-      "marketCap": 7568124928,
+      "marketCap": 7568124928.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2435,7 +2446,7 @@
         },
         {
           "date": "2024-12-31",
-          "eps": null
+          "eps": 0.0
         },
         {
           "date": "2024-09-30",
@@ -2445,13 +2456,13 @@
     },
     {
       "symbol": "SBUX",
-      "name": "Starbucks",
+      "name": "Starbucks Corporation",
       "quarter": "recent",
       "eps": 1.63,
       "eps_yoy": null,
       "weight": 0.0026377438404748066,
       "source": "yfinance",
-      "marketCap": 99052781568,
+      "marketCap": 99052781568.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2473,13 +2484,13 @@
     },
     {
       "symbol": "SNPS",
-      "name": "Synopsys",
+      "name": "Synopsys, Inc.",
       "quarter": "recent",
       "eps": 7.4,
       "eps_yoy": null,
       "weight": 0.002067656367758791,
       "source": "yfinance",
-      "marketCap": 77644808192,
+      "marketCap": 77644808192.0,
       "history": [
         {
           "date": "2025-07-31",
@@ -2501,13 +2512,13 @@
     },
     {
       "symbol": "TMUS",
-      "name": "T-Mobile US",
+      "name": "T-Mobile US, Inc.",
       "quarter": "recent",
       "eps": 10.39,
       "eps_yoy": null,
       "weight": 0.006263935141265825,
       "source": "yfinance",
-      "marketCap": 235223826432,
+      "marketCap": 235223826432.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2523,19 +2534,19 @@
         },
         {
           "date": "2024-12-31",
-          "eps": null
+          "eps": 0.0
         }
       ]
     },
     {
       "symbol": "TTWO",
-      "name": "Take-Two Interactive",
+      "name": "Take-Two Interactive Software, ",
       "quarter": "recent",
       "eps": -22.76,
       "eps_yoy": null,
       "weight": 0.0012108123513248044,
       "source": "yfinance",
-      "marketCap": 45468528640,
+      "marketCap": 45468528640.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2563,7 +2574,7 @@
       "eps_yoy": null,
       "weight": 0.03809822138106588,
       "source": "yfinance",
-      "marketCap": 1430667657216,
+      "marketCap": 1430667657216.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2585,13 +2596,13 @@
     },
     {
       "symbol": "TXN",
-      "name": "Texas Instruments",
+      "name": "Texas Instruments Incorporated",
       "quarter": "recent",
       "eps": 5.49,
       "eps_yoy": null,
       "weight": 0.004073821827820677,
       "source": "yfinance",
-      "marketCap": 152980504576,
+      "marketCap": 152980504576.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2613,13 +2624,13 @@
     },
     {
       "symbol": "TRI",
-      "name": "Thomson Reuters",
+      "name": "Thomson Reuters Corp",
       "quarter": "recent",
       "eps": 3.87,
       "eps_yoy": null,
       "weight": 0.0016302292773009827,
       "source": "yfinance",
-      "marketCap": 61218508800,
+      "marketCap": 61218508800.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2641,13 +2652,13 @@
     },
     {
       "symbol": "TTD",
-      "name": "Trade Desk (The)",
+      "name": "The Trade Desk, Inc.",
       "quarter": "recent",
       "eps": 0.88,
       "eps_yoy": null,
       "weight": 0.0005150867556535446,
       "source": "yfinance",
-      "marketCap": 19342581760,
+      "marketCap": 19342581760.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2669,13 +2680,13 @@
     },
     {
       "symbol": "VRSK",
-      "name": "Verisk Analytics",
+      "name": "Verisk Analytics, Inc.",
       "quarter": "recent",
       "eps": 6.5,
       "eps_yoy": null,
       "weight": 0.0008373876243024965,
       "source": "yfinance",
-      "marketCap": 31445651456,
+      "marketCap": 31445651456.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2697,13 +2708,13 @@
     },
     {
       "symbol": "VRTX",
-      "name": "Vertex Pharmaceuticals",
+      "name": "Vertex Pharmaceuticals Incorpor",
       "quarter": "recent",
       "eps": 14.22,
       "eps_yoy": null,
       "weight": 0.0029605160229238224,
       "source": "yfinance",
-      "marketCap": 111173550080,
+      "marketCap": 111173550080.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2725,13 +2736,13 @@
     },
     {
       "symbol": "WBD",
-      "name": "Warner Bros. Discovery",
+      "name": "Warner Bros. Discovery, Inc. - ",
       "quarter": "recent",
       "eps": 0.19,
       "eps_yoy": null,
       "weight": 0.001583704028002074,
       "source": "yfinance",
-      "marketCap": 59471388672,
+      "marketCap": 59471388672.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2759,7 +2770,7 @@
       "eps_yoy": null,
       "weight": 0.0015330849695052962,
       "source": "yfinance",
-      "marketCap": 57570537472,
+      "marketCap": 57570537472.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -2781,13 +2792,13 @@
     },
     {
       "symbol": "XEL",
-      "name": "Xcel Energy",
+      "name": "Xcel Energy Inc.",
       "quarter": "recent",
       "eps": 3.28,
       "eps_yoy": null,
       "weight": 0.0012934389724366488,
       "source": "yfinance",
-      "marketCap": 48571330560,
+      "marketCap": 48571330560.0,
       "history": [
         {
           "date": "2025-09-30",
@@ -2809,13 +2820,13 @@
     },
     {
       "symbol": "ZS",
-      "name": "Zscaler",
+      "name": "Zscaler, Inc.",
       "quarter": "recent",
       "eps": -0.25,
       "eps_yoy": null,
       "weight": 0.0010680367743054978,
       "source": "yfinance",
-      "marketCap": 40107008000,
+      "marketCap": 40107008000.0,
       "history": [
         {
           "date": "2025-10-31",
@@ -2835,8 +2846,5 @@
         }
       ]
     }
-  ],
-  "base_period": {
-    "eps": 9.218386145525098
-  }
+  ]
 }

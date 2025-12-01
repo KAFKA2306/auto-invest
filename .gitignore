@@ -48,6 +48,7 @@ public/data/
 !public/data/metrics.json
 !public/data/valuation.json
 !public/data/ndx_eps_quarterly.csv
+!public/data/bottom_up_eps.json
 
 # Logs
 *.log
