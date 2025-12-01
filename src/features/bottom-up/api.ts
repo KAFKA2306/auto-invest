@@ -1,4 +1,31 @@
+import { z } from "zod";
 import type { BottomUpDataset } from "./types";
+
+const EpsComponentSchema = z.object({
+  symbol: z.string(),
+  name: z.string(),
+  quarter: z.string(),
+  eps: z.number(),
+  eps_yoy: z.number().nullable().optional(),
+  weight: z.number().nullable().optional(),
+  source: z.string().optional(),
+  history: z.array(z.object({ date: z.string(), eps: z.number() })).optional(),
+}).passthrough();
+
+const BottomUpDatasetSchema = z.object({
+  as_of: z.string(),
+  prior_period: z.object({
+    date: z.string(),
+    label: z.string(),
+    eps: z.number(),
+  }),
+  base_period: z.object({
+    date: z.string(),
+    label: z.string(),
+    eps: z.number(),
+  }),
+  components: z.array(EpsComponentSchema),
+});
 
 const withCacheBust = (url: string) => `${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`;
 
@@ -27,7 +54,15 @@ export const fetchBottomUpDataset = async (): Promise<BottomUpDataset> => {
         const text = await res.text().catch(() => "");
         throw new Error(`${res.status} ${text.slice(0, 80)}`);
       }
-      return (await res.json()) as BottomUpDataset;
+      const json = await res.json();
+      const result = BottomUpDatasetSchema.safeParse(json);
+      
+      if (!result.success) {
+        const errorMsg = result.error.errors.map(e => `${e.path.join(".")}: ${e.message}`).join(", ");
+        throw new Error(`Schema validation failed: ${errorMsg}`);
+      }
+      
+      return result.data as BottomUpDataset;
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       errors.push(`${url} → ${message}`);
