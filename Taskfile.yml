@@ -1,14 +1,42 @@
 version: "3"
 
 tasks:
-  install: { cmds: [npm install] }
-  dev: { cmds: [PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}] }
-  check: { cmds: [task: lint, task: typecheck, task: build] }
-  lint: { cmds: [npm run lint] }
-  typecheck: { cmds: [npm run typecheck] }
-  build: { cmds: [npm run build] }
-  update:leverage: { cmds: [npm run update:leverage] }
-  update:valuation: { cmds: [npm run update:valuation] }
-  update:eps: { cmds: [npm run update:eps] }
-  update:all: { deps: [update:leverage, update:valuation, update:eps] }
-  clean: { cmds: [rm -rf dist dist-ssr .vite .turbo .cache] }
+  install:
+    cmds:
+      - npm install
+      - uv sync
+  dev:
+    cmds:
+      - PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}
+  check:
+    deps:
+      - lint
+      - typecheck
+      - build
+  lint:
+    cmds:
+      - npm run lint
+      - uv run ruff check scripts
+  typecheck:
+    cmds:
+      - npm run typecheck
+  build:
+    cmds:
+      - npm run build
+  update:leverage:
+    cmds:
+      - uv run scripts/update_leverage.py
+  update:valuation:
+    cmds:
+      - uv run scripts/update_valuation.py
+  update:eps:
+    cmds:
+      - uv run scripts/update_eps.py
+  update:all:
+    deps:
+      - update:leverage
+      - update:valuation
+      - update:eps
+  clean:
+    cmds:
+      - rm -rf dist dist-ssr .vite .turbo .cache

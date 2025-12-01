@@ -10,10 +10,9 @@ dependencies = [
     "pydantic>=2.6.1",
     "numpy>=1.26.3",
     "pandas>=2.2.0",
-    "pandas-datareader>=0.10.0",
     "yfinance>=0.2.40",
     "httpx>=0.27.2",
-    "setuptools>=75.1.0",
+    "pyyaml>=6.0.0",
 ]
 
 [dependency-groups]

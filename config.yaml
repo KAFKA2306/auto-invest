@@ -1,0 +1,33 @@
+model:
+  name: gemini-2.5-flash
+
+data:
+  symbols:
+    index: ^NDX
+    proxy: QQQ
+    benchmark: SPY
+
+leverage:
+  window_trading_days: 756
+  summary_window_days: 126
+  borrow_spread_annual: 0.01
+  fund_fee_annual: 0.0
+  cap: 2.0
+  fraction: 0.5
+  vol_target_annual: 0.2
+  blend_alpha: 0.5
+  vol_ewma_lambda: 0.94
+
+valuation:
+  rolling_window: 20
+  pe_clip: [2.0, 60.0]
+  ey_clip: [0.005, 0.12]
+  erp_base: 0.01
+  erp_momentum_weight: 0.2
+  anchor_weight: 0.15
+  anchor_window: 30
+  ref_pe: 32.5
+  calib_window: 20
+
+constants:
+  trading_days_per_year: 252
