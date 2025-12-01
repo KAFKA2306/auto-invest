@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "preview": "vite preview",
     "test:e2e": "playwright test",
-    "update": "uv run scripts/update_leverage.py && uv run scripts/update_valuation.py && uv run scripts/update_eps.py"
+    "update": "uv run scripts/update_leverage.py && uv run scripts/update_valuation.py && uv run scripts/update_eps.py",
+    "postbuild": "node scripts/create-404.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

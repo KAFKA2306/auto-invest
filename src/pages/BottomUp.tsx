@@ -13,7 +13,14 @@ import type { EditableComponent } from "@/features/bottom-up/types";
 import { fetchValuation } from "@/services/valuation";
 
 const BottomUp = () => {
-  const { data: dataset, isLoading, isError, refetch, isFetching } = useQuery({
+  const {
+    data: dataset,
+    isLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useQuery({
     queryKey: ["bottom-up-dataset"],
     queryFn: fetchBottomUpDataset,
     staleTime: 10 * 60 * 1000,
@@ -65,6 +72,8 @@ const BottomUp = () => {
   }
 
   if (isError || !dataset) {
+    const errorMessage = isError && error instanceof Error ? error.message : "Unknown error";
+
     return (
       <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
         <div className="container mx-auto max-w-4xl space-y-4 py-10">
@@ -73,7 +82,9 @@ const BottomUp = () => {
             <CardContent className="flex items-center justify-between py-6">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">データを読み込めませんでした。</p>
-                <p className="text-xs text-muted-foreground">public/data/bottom_up_eps.json を確認してください。</p>
+                <p className="text-xs text-muted-foreground">
+                  Error: {errorMessage || "Check network tab"}
+                </p>
               </div>
               <Button variant="outline" onClick={() => refetch()} disabled={isFetching}>
                 Retry
