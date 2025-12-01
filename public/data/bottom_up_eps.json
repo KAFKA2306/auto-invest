@@ -6,9 +6,27 @@
       "quarter": "recent",
       "eps": 16.04,
       "eps_yoy": null,
-      "weight": 0.003616287711855451,
+      "weight": 0.0036162877118554528,
       "source": "yfinance",
-      "marketCap": 135799144448
+      "marketCap": 135799144448,
+      "history": [
+        {
+          "date": "2025-08-31",
+          "eps": 4.18
+        },
+        {
+          "date": "2025-05-31",
+          "eps": 3.95
+        },
+        {
+          "date": "2025-02-28",
+          "eps": 4.15
+        },
+        {
+          "date": "2024-11-30",
+          "eps": 3.81
+        }
+      ]
     },
     {
       "symbol": "AMD",
@@ -16,9 +34,27 @@
       "quarter": "recent",
       "eps": 1.91,
       "eps_yoy": null,
-      "weight": 0.009430844941903462,
+      "weight": 0.009430844941903466,
       "source": "yfinance",
-      "marketCap": 354147893248
+      "marketCap": 354147893248,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.76
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.54
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.44
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.3
+        }
+      ]
     },
     {
       "symbol": "ABNB",
@@ -26,9 +62,27 @@
       "quarter": "recent",
       "eps": 4.2,
       "eps_yoy": null,
-      "weight": 0.0019073627734149678,
+      "weight": 0.0019073627734149687,
       "source": "yfinance",
-      "marketCap": 71625449472
+      "marketCap": 71625449472,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.25
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.04
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.25
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.74
+        }
+      ]
     },
     {
       "symbol": "GOOGL",
@@ -36,9 +90,27 @@
       "quarter": "recent",
       "eps": 10.12,
       "eps_yoy": null,
-      "weight": 0.10327146834843993,
+      "weight": 0.10327146834843998,
       "source": "yfinance",
-      "marketCap": 3878058983424
+      "marketCap": 3878058983424,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.89
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.33
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.84
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.17
+        }
+      ]
     },
     {
       "symbol": "GOOG",
@@ -46,9 +118,27 @@
       "quarter": "recent",
       "eps": 10.12,
       "eps_yoy": null,
-      "weight": 0.10290867561432376,
+      "weight": 0.1029086756143238,
       "source": "yfinance",
-      "marketCap": 3864435359744
+      "marketCap": 3864435359744,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.89
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.33
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.84
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.17
+        }
+      ]
     },
     {
       "symbol": "AMZN",
@@ -56,9 +146,27 @@
       "quarter": "recent",
       "eps": 7.09,
       "eps_yoy": null,
-      "weight": 0.06639237575486777,
+      "weight": 0.0663923757548678,
       "source": "yfinance",
-      "marketCap": 2493172154368
+      "marketCap": 2493172154368,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.98
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.71
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.62
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.9
+        }
+      ]
     },
     {
       "symbol": "AEP",
@@ -66,9 +174,27 @@
       "quarter": "recent",
       "eps": 6.83,
       "eps_yoy": null,
-      "weight": 0.001764211541517758,
+      "weight": 0.001764211541517759,
       "source": "yfinance",
-      "marketCap": 66249822208
+      "marketCap": 66249822208,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.82
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.29
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.5
+        },
+        {
+          "date": "2024-12-31",
+          "eps": NaN
+        }
+      ]
     },
     {
       "symbol": "AMGN",
@@ -76,9 +202,27 @@
       "quarter": "recent",
       "eps": 12.92,
       "eps_yoy": null,
-      "weight": 0.004953746476986643,
+      "weight": 0.004953746476986646,
       "source": "yfinance",
-      "marketCap": 186023510016
+      "marketCap": 186023510016,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 5.98
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.66
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 3.22
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.17
+        }
+      ]
     },
     {
       "symbol": "ADI",
@@ -86,9 +230,27 @@
       "quarter": "recent",
       "eps": 4.56,
       "eps_yoy": null,
-      "weight": 0.00345985625105309,
+      "weight": 0.003459856251053092,
       "source": "yfinance",
-      "marketCap": 129924816896
+      "marketCap": 129924816896,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": NaN
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 1.05
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 1.15
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.79
+        }
+      ]
     },
     {
       "symbol": "AAPL",
@@ -96,9 +258,27 @@
       "quarter": "recent",
       "eps": 7.47,
       "eps_yoy": null,
-      "weight": 0.11020007658493121,
+      "weight": 0.11020007658493126,
       "source": "yfinance",
-      "marketCap": 4138242670592
+      "marketCap": 4138242670592,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.85
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.57
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.65
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.41
+        }
+      ]
     },
     {
       "symbol": "AMAT",
@@ -106,9 +286,27 @@
       "quarter": "recent",
       "eps": 8.65,
       "eps_yoy": null,
-      "weight": 0.005351315428702149,
+      "weight": 0.005351315428702152,
       "source": "yfinance",
-      "marketCap": 200953053184
+      "marketCap": 200953053184,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 2.39
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 2.23
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 2.64
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 1.46
+        }
+      ]
     },
     {
       "symbol": "APP",
@@ -116,9 +314,27 @@
       "quarter": "recent",
       "eps": 8.45,
       "eps_yoy": null,
-      "weight": 0.005399808066802666,
+      "weight": 0.005399808066802668,
       "source": "yfinance",
-      "marketCap": 202774052864
+      "marketCap": 202774052864,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.47
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.42
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.7
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.77
+        }
+      ]
     },
     {
       "symbol": "ARM",
@@ -126,9 +342,27 @@
       "quarter": "recent",
       "eps": 0.79,
       "eps_yoy": null,
-      "weight": 0.003830119107111212,
+      "weight": 0.003830119107111214,
       "source": "yfinance",
-      "marketCap": 143828959232
+      "marketCap": 143828959232,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.22
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.12
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.2
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.24
+        }
+      ]
     },
     {
       "symbol": "ASML",
@@ -136,9 +370,27 @@
       "quarter": "recent",
       "eps": 28.09,
       "eps_yoy": null,
-      "weight": 0.010956423467435932,
+      "weight": 0.010956423467435937,
       "source": "yfinance",
-      "marketCap": 411436548096
+      "marketCap": 411436548096,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 5.49
+        },
+        {
+          "date": "2025-06-30",
+          "eps": NaN
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 6.0
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 6.85
+        }
+      ]
     },
     {
       "symbol": "AZN",
@@ -146,9 +398,27 @@
       "quarter": "recent",
       "eps": 3.01,
       "eps_yoy": null,
-      "weight": 0.007655558453223133,
+      "weight": 0.007655558453223137,
       "source": "yfinance",
-      "marketCap": 287482183680
+      "marketCap": 287482183680,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.82
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.79
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.94
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.485
+        }
+      ]
     },
     {
       "symbol": "TEAM",
@@ -156,9 +426,27 @@
       "quarter": "recent",
       "eps": -0.7,
       "eps_yoy": null,
-      "weight": 0.00104810034236052,
+      "weight": 0.0010481003423605205,
       "source": "yfinance",
-      "marketCap": 39358353408
+      "marketCap": 39358353408,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": -0.2
+        },
+        {
+          "date": "2025-06-30",
+          "eps": -0.09
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -0.27
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -0.15
+        }
+      ]
     },
     {
       "symbol": "ADSK",
@@ -166,9 +454,27 @@
       "quarter": "recent",
       "eps": 5.16,
       "eps_yoy": null,
-      "weight": 0.0017205813653225965,
+      "weight": 0.0017205813653225974,
       "source": "yfinance",
-      "marketCap": 64611418112
+      "marketCap": 64611418112,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 1.61
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 1.47
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.71
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 1.42
+        }
+      ]
     },
     {
       "symbol": "ADP",
@@ -176,9 +482,27 @@
       "quarter": "recent",
       "eps": 10.14,
       "eps_yoy": null,
-      "weight": 0.0027540242957093224,
+      "weight": 0.0027540242957093237,
       "source": "yfinance",
-      "marketCap": 103419355136
+      "marketCap": 103419355136,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.5
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.24
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 3.07
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.36
+        }
+      ]
     },
     {
       "symbol": "AXON",
@@ -186,9 +510,27 @@
       "quarter": "recent",
       "eps": 3.19,
       "eps_yoy": null,
-      "weight": 0.001135028779015228,
+      "weight": 0.0011350287790152284,
       "source": "yfinance",
-      "marketCap": 42622697472
+      "marketCap": 42622697472,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": -0.03
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.46
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.14
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.77
+        }
+      ]
     },
     {
       "symbol": "BKR",
@@ -196,9 +538,27 @@
       "quarter": "recent",
       "eps": 2.9,
       "eps_yoy": null,
-      "weight": 0.0013191291194830756,
+      "weight": 0.0013191291194830763,
       "source": "yfinance",
-      "marketCap": 49536049152
+      "marketCap": 49536049152,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.62
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.71
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.41
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.19
+        }
+      ]
     },
     {
       "symbol": "BIIB",
@@ -206,9 +566,27 @@
       "quarter": "recent",
       "eps": 10.96,
       "eps_yoy": null,
-      "weight": 0.0007113590667841122,
+      "weight": 0.0007113590667841125,
       "source": "yfinance",
-      "marketCap": 26713016320
+      "marketCap": 26713016320,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 3.18
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 4.33
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.65
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.83
+        }
+      ]
     },
     {
       "symbol": "BKNG",
@@ -216,9 +594,27 @@
       "quarter": "recent",
       "eps": 153.83,
       "eps_yoy": null,
-      "weight": 0.004241696364476934,
+      "weight": 0.004241696364476936,
       "source": "yfinance",
-      "marketCap": 159284543488
+      "marketCap": 159284543488,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 84.86
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 27.54
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 10.14
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 32.31
+        }
+      ]
     },
     {
       "symbol": "AVGO",
@@ -226,9 +622,27 @@
       "quarter": "recent",
       "eps": 3.91,
       "eps_yoy": null,
-      "weight": 0.050674260130299346,
+      "weight": 0.05067426013029937,
       "source": "yfinance",
-      "marketCap": 1902924136448
+      "marketCap": 1902924136448,
+      "history": [
+        {
+          "date": "2025-07-31",
+          "eps": 0.88
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 1.05
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 1.17
+        },
+        {
+          "date": "2024-10-31",
+          "eps": 0.92
+        }
+      ]
     },
     {
       "symbol": "CDNS",
@@ -236,9 +650,27 @@
       "quarter": "recent",
       "eps": 3.87,
       "eps_yoy": null,
-      "weight": 0.002262811040182496,
+      "weight": 0.002262811040182497,
       "source": "yfinance",
-      "marketCap": 84973273088
+      "marketCap": 84973273088,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.06
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.59
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.01
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.25
+        }
+      ]
     },
     {
       "symbol": "CDW",
@@ -246,9 +678,27 @@
       "quarter": "recent",
       "eps": 7.9,
       "eps_yoy": null,
-      "weight": 0.0005033430140996076,
+      "weight": 0.0005033430140996078,
       "source": "yfinance",
-      "marketCap": 18901579776
+      "marketCap": 18901579776,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.22
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.06
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.7
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.98
+        }
+      ]
     },
     {
       "symbol": "CHTR",
@@ -256,9 +706,27 @@
       "quarter": "recent",
       "eps": 36.06,
       "eps_yoy": null,
-      "weight": 0.0007279113325729276,
+      "weight": 0.0007279113325729279,
       "source": "yfinance",
-      "marketCap": 27334588416
+      "marketCap": 27334588416,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 8.5
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 9.41
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 8.59
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 10.32
+        }
+      ]
     },
     {
       "symbol": "CTAS",
@@ -266,9 +734,27 @@
       "quarter": "recent",
       "eps": 4.5,
       "eps_yoy": null,
-      "weight": 0.001996077097792065,
+      "weight": 0.001996077097792066,
       "source": "yfinance",
-      "marketCap": 74956857344
+      "marketCap": 74956857344,
+      "history": [
+        {
+          "date": "2025-08-31",
+          "eps": 1.21
+        },
+        {
+          "date": "2025-05-31",
+          "eps": 1.11
+        },
+        {
+          "date": "2025-02-28",
+          "eps": 1.14
+        },
+        {
+          "date": "2024-11-30",
+          "eps": 1.11
+        }
+      ]
     },
     {
       "symbol": "CSCO",
@@ -276,9 +762,27 @@
       "quarter": "recent",
       "eps": 2.59,
       "eps_yoy": null,
-      "weight": 0.008095348657191328,
+      "weight": 0.008095348657191331,
       "source": "yfinance",
-      "marketCap": 303997222912
+      "marketCap": 303997222912,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 0.72
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 0.71
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.63
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.61
+        }
+      ]
     },
     {
       "symbol": "CCEP",
@@ -286,9 +790,10 @@
       "quarter": "recent",
       "eps": 3.88,
       "eps_yoy": null,
-      "weight": 0.00109766028097796,
+      "weight": 0.0010976602809779604,
       "source": "yfinance",
-      "marketCap": 41219432448
+      "marketCap": 41219432448,
+      "history": []
     },
     {
       "symbol": "CTSH",
@@ -296,9 +801,27 @@
       "quarter": "recent",
       "eps": 4.32,
       "eps_yoy": null,
-      "weight": 0.00101068286957291,
+      "weight": 0.0010106828695729104,
       "source": "yfinance",
-      "marketCap": 37953249280
+      "marketCap": 37953249280,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.56
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.31
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.34
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.1
+        }
+      ]
     },
     {
       "symbol": "CMCSA",
@@ -306,9 +829,27 @@
       "quarter": "recent",
       "eps": 6.02,
       "eps_yoy": null,
-      "weight": 0.002624221573772307,
+      "weight": 0.0026242215737723082,
       "source": "yfinance",
-      "marketCap": 98544992256
+      "marketCap": 98544992256,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.911749
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 3.007882
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.901371
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.261436
+        }
+      ]
     },
     {
       "symbol": "CEG",
@@ -316,9 +857,27 @@
       "quarter": "recent",
       "eps": 8.74,
       "eps_yoy": null,
-      "weight": 0.003031205457671636,
+      "weight": 0.0030312054576716375,
       "source": "yfinance",
-      "marketCap": 113828085760
+      "marketCap": 113828085760,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.98
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.67
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.38
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.72
+        }
+      ]
     },
     {
       "symbol": "CPRT",
@@ -326,9 +885,27 @@
       "quarter": "recent",
       "eps": 1.63,
       "eps_yoy": null,
-      "weight": 0.0010048264056633932,
+      "weight": 0.0010048264056633936,
       "source": "yfinance",
-      "marketCap": 37733326848
+      "marketCap": 37733326848,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 0.42
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 0.41
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.42
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.4
+        }
+      ]
     },
     {
       "symbol": "CSGP",
@@ -336,9 +913,27 @@
       "quarter": "recent",
       "eps": 0.06,
       "eps_yoy": null,
-      "weight": 0.0007764950484385577,
+      "weight": 0.000776495048438558,
       "source": "yfinance",
-      "marketCap": 29159008256
+      "marketCap": 29159008256,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": -0.07
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.01
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -0.04
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.15
+        }
+      ]
     },
     {
       "symbol": "COST",
@@ -346,9 +941,27 @@
       "quarter": "recent",
       "eps": 18.18,
       "eps_yoy": null,
-      "weight": 0.010789180694151572,
+      "weight": 0.010789180694151577,
       "source": "yfinance",
-      "marketCap": 405156233216
+      "marketCap": 405156233216,
+      "history": [
+        {
+          "date": "2025-08-31",
+          "eps": 5.88
+        },
+        {
+          "date": "2025-05-31",
+          "eps": 4.29
+        },
+        {
+          "date": "2025-02-28",
+          "eps": 4.03
+        },
+        {
+          "date": "2024-11-30",
+          "eps": 4.05
+        }
+      ]
     },
     {
       "symbol": "CRWD",
@@ -356,9 +969,27 @@
       "quarter": "recent",
       "eps": -1.22,
       "eps_yoy": null,
-      "weight": 0.0034026423988359573,
+      "weight": 0.0034026423988359586,
       "source": "yfinance",
-      "marketCap": 127776317440
+      "marketCap": 127776317440,
+      "history": [
+        {
+          "date": "2025-07-31",
+          "eps": -0.31
+        },
+        {
+          "date": "2025-04-30",
+          "eps": -0.44
+        },
+        {
+          "date": "2025-01-31",
+          "eps": -0.37
+        },
+        {
+          "date": "2024-10-31",
+          "eps": -0.07
+        }
+      ]
     },
     {
       "symbol": "CSX",
@@ -366,9 +997,27 @@
       "quarter": "recent",
       "eps": 1.54,
       "eps_yoy": null,
-      "weight": 0.001755450733115231,
+      "weight": 0.001755450733115232,
       "source": "yfinance",
-      "marketCap": 65920835584
+      "marketCap": 65920835584,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.37
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.444676
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.343883
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.385751
+        }
+      ]
     },
     {
       "symbol": "DDOG",
@@ -376,9 +1025,27 @@
       "quarter": "recent",
       "eps": 0.3,
       "eps_yoy": null,
-      "weight": 0.0014942133065805768,
+      "weight": 0.0014942133065805774,
       "source": "yfinance",
-      "marketCap": 56110825472
+      "marketCap": 56110825472,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.1
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.01
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.07
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.13
+        }
+      ]
     },
     {
       "symbol": "DXCM",
@@ -386,9 +1053,27 @@
       "quarter": "recent",
       "eps": 1.8,
       "eps_yoy": null,
-      "weight": 0.0006628152724298969,
+      "weight": 0.0006628152724298972,
       "source": "yfinance",
-      "marketCap": 24890095616
+      "marketCap": 24890095616,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.73
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.46
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.27
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.39
+        }
+      ]
     },
     {
       "symbol": "FANG",
@@ -396,9 +1081,27 @@
       "quarter": "recent",
       "eps": 14.24,
       "eps_yoy": null,
-      "weight": 0.001176304458638259,
+      "weight": 0.0011763044586382595,
       "source": "yfinance",
-      "marketCap": 44172685312
+      "marketCap": 44172685312,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 3.51
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.38
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 4.83
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 3.67
+        }
+      ]
     },
     {
       "symbol": "DASH",
@@ -406,9 +1109,27 @@
       "quarter": "recent",
       "eps": 1.98,
       "eps_yoy": null,
-      "weight": 0.0022767624085951207,
+      "weight": 0.0022767624085951216,
       "source": "yfinance",
-      "marketCap": 85497176064
+      "marketCap": 85497176064,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.57
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.67
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.46
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.34
+        }
+      ]
     },
     {
       "symbol": "EA",
@@ -416,9 +1137,27 @@
       "quarter": "recent",
       "eps": 3.43,
       "eps_yoy": null,
-      "weight": 0.001345569485533631,
+      "weight": 0.0013455694855336315,
       "source": "yfinance",
-      "marketCap": 50528940032
+      "marketCap": 50528940032,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.55
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.8
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.99
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.12
+        }
+      ]
     },
     {
       "symbol": "EXC",
@@ -426,9 +1165,27 @@
       "quarter": "recent",
       "eps": 2.79,
       "eps_yoy": null,
-      "weight": 0.0012673224505592917,
+      "weight": 0.0012673224505592923,
       "source": "yfinance",
-      "marketCap": 47590600704
+      "marketCap": 47590600704,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.87
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.39
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.899423
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.643752
+        }
+      ]
     },
     {
       "symbol": "FAST",
@@ -436,9 +1193,27 @@
       "quarter": "recent",
       "eps": 1.07,
       "eps_yoy": null,
-      "weight": 0.001235101755066344,
+      "weight": 0.0012351017550663447,
       "source": "yfinance",
-      "marketCap": 46380646400
+      "marketCap": 46380646400,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.29
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.29
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.26
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.23
+        }
+      ]
     },
     {
       "symbol": "FTNT",
@@ -446,9 +1221,27 @@
       "quarter": "recent",
       "eps": 2.43,
       "eps_yoy": null,
-      "weight": 0.001655491631539298,
+      "weight": 0.0016554916315392988,
       "source": "yfinance",
-      "marketCap": 62167162880
+      "marketCap": 62167162880,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.63
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.57
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.56
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.69
+        }
+      ]
     },
     {
       "symbol": "GEHC",
@@ -456,9 +1249,27 @@
       "quarter": "recent",
       "eps": 4.83,
       "eps_yoy": null,
-      "weight": 0.0009725265215986228,
+      "weight": 0.0009725265215986233,
       "source": "yfinance",
-      "marketCap": 36520398848
+      "marketCap": 36520398848,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.98
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.06
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.23
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.58
+        }
+      ]
     },
     {
       "symbol": "GILD",
@@ -466,9 +1277,27 @@
       "quarter": "recent",
       "eps": 6.46,
       "eps_yoy": null,
-      "weight": 0.004158041818983743,
+      "weight": 0.004158041818983745,
       "source": "yfinance",
-      "marketCap": 156143140864
+      "marketCap": 156143140864,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.46
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.57
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.06
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.43
+        }
+      ]
     },
     {
       "symbol": "GFS",
@@ -476,9 +1305,27 @@
       "quarter": "recent",
       "eps": -0.08,
       "eps_yoy": null,
-      "weight": 0.0005303469170046015,
+      "weight": 0.0005303469170046017,
       "source": "yfinance",
-      "marketCap": 19915632640
+      "marketCap": 19915632640,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.45
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.41
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.38
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -1.32
+        }
+      ]
     },
     {
       "symbol": "HON",
@@ -486,9 +1333,27 @@
       "quarter": "recent",
       "eps": 9.47,
       "eps_yoy": null,
-      "weight": 0.0034488370413012642,
+      "weight": 0.003448837041301266,
       "source": "yfinance",
-      "marketCap": 129511022592
+      "marketCap": 129511022592,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.87
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.46
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.24
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.98
+        }
+      ]
     },
     {
       "symbol": "IDXX",
@@ -496,9 +1361,27 @@
       "quarter": "recent",
       "eps": 12.57,
       "eps_yoy": null,
-      "weight": 0.0016040104429162292,
+      "weight": 0.0016040104429162298,
       "source": "yfinance",
-      "marketCap": 60233936896
+      "marketCap": 60233936896,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 3.43
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 3.66
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.98
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.64
+        }
+      ]
     },
     {
       "symbol": "INTC",
@@ -506,9 +1389,27 @@
       "quarter": "recent",
       "eps": 0.06,
       "eps_yoy": null,
-      "weight": 0.00515207610939467,
+      "weight": 0.005152076109394672,
       "source": "yfinance",
-      "marketCap": 193471201280
+      "marketCap": 193471201280,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.9
+        },
+        {
+          "date": "2025-06-30",
+          "eps": -0.67
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -0.19
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -0.03
+        }
+      ]
     },
     {
       "symbol": "INTU",
@@ -516,9 +1417,27 @@
       "quarter": "recent",
       "eps": 14.58,
       "eps_yoy": null,
-      "weight": 0.004700881005881309,
+      "weight": 0.004700881005881311,
       "source": "yfinance",
-      "marketCap": 176527884288
+      "marketCap": 176527884288,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 1.6
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 1.36
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 10.09
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 1.68
+        }
+      ]
     },
     {
       "symbol": "ISRG",
@@ -526,9 +1445,27 @@
       "quarter": "recent",
       "eps": 7.57,
       "eps_yoy": null,
-      "weight": 0.005474505795816794,
+      "weight": 0.005474505795816796,
       "source": "yfinance",
-      "marketCap": 205579108352
+      "marketCap": 205579108352,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.98
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.84
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.95
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.92
+        }
+      ]
     },
     {
       "symbol": "KDP",
@@ -536,9 +1473,27 @@
       "quarter": "recent",
       "eps": 1.16,
       "eps_yoy": null,
-      "weight": 0.00100938389339958,
+      "weight": 0.0010093838933995804,
       "source": "yfinance",
-      "marketCap": 37904470016
+      "marketCap": 37904470016,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.49
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.4
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.38
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -0.11
+        }
+      ]
     },
     {
       "symbol": "KLAC",
@@ -546,9 +1501,27 @@
       "quarter": "recent",
       "eps": 31.86,
       "eps_yoy": null,
-      "weight": 0.00412204046909968,
+      "weight": 0.004122040469099681,
       "source": "yfinance",
-      "marketCap": 154791215104
+      "marketCap": 154791215104,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 8.51
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 9.11
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 8.21
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 6.18
+        }
+      ]
     },
     {
       "symbol": "KHC",
@@ -556,9 +1529,27 @@
       "quarter": "recent",
       "eps": -3.71,
       "eps_yoy": null,
-      "weight": 0.0008040845759194696,
+      "weight": 0.0008040845759194699,
       "source": "yfinance",
-      "marketCap": 30195052544
+      "marketCap": 30195052544,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.52
+        },
+        {
+          "date": "2025-06-30",
+          "eps": -6.6
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.6
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.77
+        }
+      ]
     },
     {
       "symbol": "LRCX",
@@ -566,9 +1557,27 @@
       "quarter": "recent",
       "eps": 4.52,
       "eps_yoy": null,
-      "weight": 0.005238618529030533,
+      "weight": 0.005238618529030536,
       "source": "yfinance",
-      "marketCap": 196721049600
+      "marketCap": 196721049600,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.24
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.35
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.04
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.93
+        }
+      ]
     },
     {
       "symbol": "LIN",
@@ -576,9 +1585,27 @@
       "quarter": "recent",
       "eps": 14.94,
       "eps_yoy": null,
-      "weight": 0.0051236293056324345,
+      "weight": 0.005123629305632437,
       "source": "yfinance",
-      "marketCap": 192402964480
+      "marketCap": 192402964480,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 4.11
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 3.75
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 3.53
+        },
+        {
+          "date": "2024-12-31",
+          "eps": NaN
+        }
+      ]
     },
     {
       "symbol": "LULU",
@@ -586,9 +1613,27 @@
       "quarter": "recent",
       "eps": 14.64,
       "eps_yoy": null,
-      "weight": 0.000587825276503649,
+      "weight": 0.0005878252765036492,
       "source": "yfinance",
-      "marketCap": 22074064896
+      "marketCap": 22074064896,
+      "history": [
+        {
+          "date": "2025-07-31",
+          "eps": 3.1
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 2.61
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 6.15
+        },
+        {
+          "date": "2024-10-31",
+          "eps": 2.87
+        }
+      ]
     },
     {
       "symbol": "MAR",
@@ -596,9 +1641,27 @@
       "quarter": "recent",
       "eps": 9.48,
       "eps_yoy": null,
-      "weight": 0.0022032767228455864,
+      "weight": 0.0022032767228455873,
       "source": "yfinance",
-      "marketCap": 82737635328
+      "marketCap": 82737635328,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.68
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.78
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.4
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.63
+        }
+      ]
     },
     {
       "symbol": "MRVL",
@@ -606,9 +1669,27 @@
       "quarter": "recent",
       "eps": -0.12,
       "eps_yoy": null,
-      "weight": 0.0020526338811983702,
+      "weight": 0.002052633881198371,
       "source": "yfinance",
-      "marketCap": 77080682496
+      "marketCap": 77080682496,
+      "history": [
+        {
+          "date": "2025-07-31",
+          "eps": 0.23
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.21
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.23
+        },
+        {
+          "date": "2024-10-31",
+          "eps": -0.78
+        }
+      ]
     },
     {
       "symbol": "MELI",
@@ -616,9 +1697,27 @@
       "quarter": "recent",
       "eps": 41.02,
       "eps_yoy": null,
-      "weight": 0.0027970167093983576,
+      "weight": 0.002797016709398359,
       "source": "yfinance",
-      "marketCap": 105033809920
+      "marketCap": 105033809920,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 8.32
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 10.31
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 9.74
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 12.61
+        }
+      ]
     },
     {
       "symbol": "META",
@@ -626,9 +1725,27 @@
       "quarter": "recent",
       "eps": 22.61,
       "eps_yoy": null,
-      "weight": 0.043490950033177656,
+      "weight": 0.043490950033177676,
       "source": "yfinance",
-      "marketCap": 1633175863296
+      "marketCap": 1633175863296,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.08
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 7.28
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 6.59
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 8.24
+        }
+      ]
     },
     {
       "symbol": "MCHP",
@@ -636,9 +1753,27 @@
       "quarter": "recent",
       "eps": -0.46,
       "eps_yoy": null,
-      "weight": 0.0007711194424062872,
+      "weight": 0.0007711194424062875,
       "source": "yfinance",
-      "marketCap": 28957143040
+      "marketCap": 28957143040,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.03
+        },
+        {
+          "date": "2025-06-30",
+          "eps": -0.09
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -0.29
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -0.1
+        }
+      ]
     },
     {
       "symbol": "MU",
@@ -646,9 +1781,27 @@
       "quarter": "recent",
       "eps": 7.59,
       "eps_yoy": null,
-      "weight": 0.00708676243049387,
+      "weight": 0.007086762430493873,
       "source": "yfinance",
-      "marketCap": 266122706944
+      "marketCap": 266122706944,
+      "history": [
+        {
+          "date": "2025-08-31",
+          "eps": 2.86
+        },
+        {
+          "date": "2025-05-31",
+          "eps": 1.69
+        },
+        {
+          "date": "2025-02-28",
+          "eps": 1.42
+        },
+        {
+          "date": "2024-11-30",
+          "eps": 1.68
+        }
+      ]
     },
     {
       "symbol": "MSFT",
@@ -656,9 +1809,27 @@
       "quarter": "recent",
       "eps": 14.07,
       "eps_yoy": null,
-      "weight": 0.0973898560682352,
+      "weight": 0.09738985606823525,
       "source": "yfinance",
-      "marketCap": 3657192177664
+      "marketCap": 3657192177664,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 3.73
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 3.66
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 3.47
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 3.24
+        }
+      ]
     },
     {
       "symbol": "MSTR",
@@ -666,9 +1837,27 @@
       "quarter": "recent",
       "eps": 24.36,
       "eps_yoy": null,
-      "weight": 0.0013558057537309883,
+      "weight": 0.001355805753730989,
       "source": "yfinance",
-      "marketCap": 50913333248
+      "marketCap": 50913333248,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 9.3
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 36.23
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -16.49
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -3.03
+        }
+      ]
     },
     {
       "symbol": "MDLZ",
@@ -676,9 +1865,27 @@
       "quarter": "recent",
       "eps": 2.67,
       "eps_yoy": null,
-      "weight": 0.0019837097189662313,
+      "weight": 0.001983709718966232,
       "source": "yfinance",
-      "marketCap": 74492436480
+      "marketCap": 74492436480,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.57
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.49
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.31
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.31
+        }
+      ]
     },
     {
       "symbol": "MNST",
@@ -686,9 +1893,27 @@
       "quarter": "recent",
       "eps": 1.76,
       "eps_yoy": null,
-      "weight": 0.0019510718109564489,
+      "weight": 0.0019510718109564497,
       "source": "yfinance",
-      "marketCap": 73266814976
+      "marketCap": 73266814976,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.54
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.5
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.45
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.39
+        }
+      ]
     },
     {
       "symbol": "NFLX",
@@ -696,9 +1921,27 @@
       "quarter": "recent",
       "eps": 2.4,
       "eps_yoy": null,
-      "weight": 0.012139172632363653,
+      "weight": 0.012139172632363658,
       "source": "yfinance",
-      "marketCap": 455851245568
+      "marketCap": 455851245568,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 6.0
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 7.35
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 6.76
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 4.37
+        }
+      ]
     },
     {
       "symbol": "NVDA",
@@ -706,9 +1949,27 @@
       "quarter": "recent",
       "eps": 4.04,
       "eps_yoy": null,
-      "weight": 0.1145604864353356,
+      "weight": 0.11456048643533566,
       "source": "yfinance",
-      "marketCap": 4301985153024
+      "marketCap": 4301985153024,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 1.31
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 1.08
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.77
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.9
+        }
+      ]
     },
     {
       "symbol": "NXPI",
@@ -716,9 +1977,27 @@
       "quarter": "recent",
       "eps": 8.09,
       "eps_yoy": null,
-      "weight": 0.001308774722878991,
+      "weight": 0.0013087747228789917,
       "source": "yfinance",
-      "marketCap": 49147219968
+      "marketCap": 49147219968,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.5
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.76
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.93
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.95
+        }
+      ]
     },
     {
       "symbol": "ORLY",
@@ -726,9 +2005,27 @@
       "quarter": "recent",
       "eps": 2.88,
       "eps_yoy": null,
-      "weight": 0.002291257189493725,
+      "weight": 0.002291257189493726,
       "source": "yfinance",
-      "marketCap": 86041485312
+      "marketCap": 86041485312,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.86
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.78
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.626667
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.637333
+        }
+      ]
     },
     {
       "symbol": "ODFL",
@@ -736,9 +2033,27 @@
       "quarter": "recent",
       "eps": 4.97,
       "eps_yoy": null,
-      "weight": 0.0007571789269728585,
+      "weight": 0.0007571789269728588,
       "source": "yfinance",
-      "marketCap": 28433647616
+      "marketCap": 28433647616,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.29
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.27
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.2
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.23
+        }
+      ]
     },
     {
       "symbol": "ON",
@@ -746,9 +2061,27 @@
       "quarter": "recent",
       "eps": 0.73,
       "eps_yoy": null,
-      "weight": 0.0005471561093511698,
+      "weight": 0.00054715610935117,
       "source": "yfinance",
-      "marketCap": 20546852864
+      "marketCap": 20546852864,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.63
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.41
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -1.15
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.89
+        }
+      ]
     },
     {
       "symbol": "PCAR",
@@ -756,9 +2089,27 @@
       "quarter": "recent",
       "eps": 5.1,
       "eps_yoy": null,
-      "weight": 0.001474406565010113,
+      "weight": 0.0014744065650101137,
       "source": "yfinance",
-      "marketCap": 55367041024
+      "marketCap": 55367041024,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.12
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.38
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.96
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.66
+        }
+      ]
     },
     {
       "symbol": "PLTR",
@@ -766,9 +2117,27 @@
       "quarter": "recent",
       "eps": 0.44,
       "eps_yoy": null,
-      "weight": 0.010691545329950449,
+      "weight": 0.010691545329950454,
       "source": "yfinance",
-      "marketCap": 401489821696
+      "marketCap": 401489821696,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.05
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.035
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.0225
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.0075
+        }
+      ]
     },
     {
       "symbol": "PANW",
@@ -776,9 +2145,27 @@
       "quarter": "recent",
       "eps": 1.58,
       "eps_yoy": null,
-      "weight": 0.003528981547894652,
+      "weight": 0.0035289815478946537,
       "source": "yfinance",
-      "marketCap": 132520615936
+      "marketCap": 132520615936,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 0.49
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 0.38
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.39
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.41
+        }
+      ]
     },
     {
       "symbol": "PAYX",
@@ -786,9 +2173,27 @@
       "quarter": "recent",
       "eps": 4.46,
       "eps_yoy": null,
-      "weight": 0.0010704220300749479,
+      "weight": 0.0010704220300749483,
       "source": "yfinance",
-      "marketCap": 40196579328
+      "marketCap": 40196579328,
+      "history": [
+        {
+          "date": "2025-08-31",
+          "eps": 1.07
+        },
+        {
+          "date": "2025-05-31",
+          "eps": 0.82
+        },
+        {
+          "date": "2025-02-28",
+          "eps": 1.44
+        },
+        {
+          "date": "2024-11-30",
+          "eps": 1.15
+        }
+      ]
     },
     {
       "symbol": "PYPL",
@@ -796,9 +2201,27 @@
       "quarter": "recent",
       "eps": 4.98,
       "eps_yoy": null,
-      "weight": 0.0015949227362358057,
+      "weight": 0.0015949227362358064,
       "source": "yfinance",
-      "marketCap": 59892674560
+      "marketCap": 59892674560,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.31
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.3
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.31
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.12
+        }
+      ]
     },
     {
       "symbol": "PDD",
@@ -806,9 +2229,27 @@
       "quarter": "recent",
       "eps": 9.73,
       "eps_yoy": null,
-      "weight": 0.004388373233022943,
+      "weight": 0.004388373233022945,
       "source": "yfinance",
-      "marketCap": 164792565760
+      "marketCap": 164792565760,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 20.96
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 22.0
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 10.6
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 19.76
+        }
+      ]
     },
     {
       "symbol": "PEP",
@@ -816,9 +2257,27 @@
       "quarter": "recent",
       "eps": 5.27,
       "eps_yoy": null,
-      "weight": 0.0054227762430366444,
+      "weight": 0.005422776243036647,
       "source": "yfinance",
-      "marketCap": 203636555776
+      "marketCap": 203636555776,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.9
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.92
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.34
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.110067
+        }
+      ]
     },
     {
       "symbol": "QCOM",
@@ -826,9 +2285,27 @@
       "quarter": "recent",
       "eps": 5.01,
       "eps_yoy": null,
-      "weight": 0.004829801309710822,
+      "weight": 0.004829801309710824,
       "source": "yfinance",
-      "marketCap": 181369110528
+      "marketCap": 181369110528,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": NaN
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.44
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.55
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 2.86
+        }
+      ]
     },
     {
       "symbol": "REGN",
@@ -836,9 +2313,27 @@
       "quarter": "recent",
       "eps": 41.74,
       "eps_yoy": null,
-      "weight": 0.002202017340958168,
+      "weight": 0.002202017340958169,
       "source": "yfinance",
-      "marketCap": 82690342912
+      "marketCap": 82690342912,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 14.09
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 13.24
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 7.58
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 8.53
+        }
+      ]
     },
     {
       "symbol": "ROP",
@@ -846,9 +2341,27 @@
       "quarter": "recent",
       "eps": 14.5,
       "eps_yoy": null,
-      "weight": 0.001279022834734028,
+      "weight": 0.0012790228347340287,
       "source": "yfinance",
-      "marketCap": 48029974528
+      "marketCap": 48029974528,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 3.7
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 3.52
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 3.08
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 4.31
+        }
+      ]
     },
     {
       "symbol": "ROST",
@@ -856,9 +2369,27 @@
       "quarter": "recent",
       "eps": 6.4,
       "eps_yoy": null,
-      "weight": 0.0015360573769030135,
+      "weight": 0.0015360573769030142,
       "source": "yfinance",
-      "marketCap": 57682157568
+      "marketCap": 57682157568,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 1.59
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 1.57
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 1.48
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 1.8
+        }
+      ]
     },
     {
       "symbol": "SHOP",
@@ -866,9 +2397,27 @@
       "quarter": "recent",
       "eps": 1.36,
       "eps_yoy": null,
-      "weight": 0.005499677726741003,
+      "weight": 0.005499677726741006,
       "source": "yfinance",
-      "marketCap": 206524366848
+      "marketCap": 206524366848,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.2
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.7
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -0.525797
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.998779
+        }
+      ]
     },
     {
       "symbol": "SOLS",
@@ -876,9 +2425,23 @@
       "quarter": "recent",
       "eps": 0.99,
       "eps_yoy": null,
-      "weight": 0.00020153674229805794,
+      "weight": 0.00020153674229805803,
       "source": "yfinance",
-      "marketCap": 7568124928
+      "marketCap": 7568124928,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": -0.220516
+        },
+        {
+          "date": "2024-12-31",
+          "eps": NaN
+        },
+        {
+          "date": "2024-09-30",
+          "eps": 0.957668
+        }
+      ]
     },
     {
       "symbol": "SBUX",
@@ -886,9 +2449,27 @@
       "quarter": "recent",
       "eps": 1.63,
       "eps_yoy": null,
-      "weight": 0.0026377438404748066,
+      "weight": 0.002637743840474808,
       "source": "yfinance",
-      "marketCap": 99052781568
+      "marketCap": 99052781568,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.117073
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.49
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.34
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.687445
+        }
+      ]
     },
     {
       "symbol": "SNPS",
@@ -896,9 +2477,27 @@
       "quarter": "recent",
       "eps": 7.4,
       "eps_yoy": null,
-      "weight": 0.002067656367758791,
+      "weight": 0.002067656367758792,
       "source": "yfinance",
-      "marketCap": 77644808192
+      "marketCap": 77644808192,
+      "history": [
+        {
+          "date": "2025-07-31",
+          "eps": 1.51
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 2.23
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 1.91
+        },
+        {
+          "date": "2024-10-31",
+          "eps": 7.24
+        }
+      ]
     },
     {
       "symbol": "TMUS",
@@ -906,9 +2505,27 @@
       "quarter": "recent",
       "eps": 10.39,
       "eps_yoy": null,
-      "weight": 0.006263935141265825,
+      "weight": 0.006263935141265828,
       "source": "yfinance",
-      "marketCap": 235223826432
+      "marketCap": 235223826432,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 2.42
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 2.84
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.59
+        },
+        {
+          "date": "2024-12-31",
+          "eps": NaN
+        }
+      ]
     },
     {
       "symbol": "TTWO",
@@ -916,9 +2533,27 @@
       "quarter": "recent",
       "eps": -22.76,
       "eps_yoy": null,
-      "weight": 0.0012108123513248044,
+      "weight": 0.0012108123513248049,
       "source": "yfinance",
-      "marketCap": 45468528640
+      "marketCap": 45468528640,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": -0.73
+        },
+        {
+          "date": "2025-06-30",
+          "eps": -0.07
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -21.08
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -0.71
+        }
+      ]
     },
     {
       "symbol": "TSLA",
@@ -926,9 +2561,27 @@
       "quarter": "recent",
       "eps": 1.46,
       "eps_yoy": null,
-      "weight": 0.03809822138106588,
+      "weight": 0.038098221381065896,
       "source": "yfinance",
-      "marketCap": 1430667657216
+      "marketCap": 1430667657216,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.43
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.36
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.13
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.72
+        }
+      ]
     },
     {
       "symbol": "TXN",
@@ -936,9 +2589,27 @@
       "quarter": "recent",
       "eps": 5.49,
       "eps_yoy": null,
-      "weight": 0.004073821827820677,
+      "weight": 0.004073821827820678,
       "source": "yfinance",
-      "marketCap": 152980504576
+      "marketCap": 152980504576,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.50055
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.426211
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.295604
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.321272
+        }
+      ]
     },
     {
       "symbol": "TRI",
@@ -946,9 +2617,27 @@
       "quarter": "recent",
       "eps": 3.87,
       "eps_yoy": null,
-      "weight": 0.0016302292773009827,
+      "weight": 0.0016302292773009834,
       "source": "yfinance",
-      "marketCap": 61218508800
+      "marketCap": 61218508800,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.94
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.69
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.96
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.3
+        }
+      ]
     },
     {
       "symbol": "TTD",
@@ -956,9 +2645,27 @@
       "quarter": "recent",
       "eps": 0.88,
       "eps_yoy": null,
-      "weight": 0.0005150867556535446,
+      "weight": 0.0005150867556535448,
       "source": "yfinance",
-      "marketCap": 19342581760
+      "marketCap": 19342581760,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.24
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.18
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.1
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.37
+        }
+      ]
     },
     {
       "symbol": "VRSK",
@@ -966,9 +2673,27 @@
       "quarter": "recent",
       "eps": 6.5,
       "eps_yoy": null,
-      "weight": 0.0008373876243024965,
+      "weight": 0.0008373876243024968,
       "source": "yfinance",
-      "marketCap": 31445651456
+      "marketCap": 31445651456,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 1.62
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 1.81
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 1.66
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 1.5
+        }
+      ]
     },
     {
       "symbol": "VRTX",
@@ -976,9 +2701,27 @@
       "quarter": "recent",
       "eps": 14.22,
       "eps_yoy": null,
-      "weight": 0.0029605160229238224,
+      "weight": 0.0029605160229238237,
       "source": "yfinance",
-      "marketCap": 111173550080
+      "marketCap": 111173550080,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 4.24
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 4.02
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 2.52
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 3.55
+        }
+      ]
     },
     {
       "symbol": "WBD",
@@ -986,9 +2729,27 @@
       "quarter": "recent",
       "eps": 0.19,
       "eps_yoy": null,
-      "weight": 0.001583704028002074,
+      "weight": 0.0015837040280020746,
       "source": "yfinance",
-      "marketCap": 59471388672
+      "marketCap": 59471388672,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": -0.06
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.64
+        },
+        {
+          "date": "2025-03-31",
+          "eps": -0.18
+        },
+        {
+          "date": "2024-12-31",
+          "eps": -0.2
+        }
+      ]
     },
     {
       "symbol": "WDAY",
@@ -996,9 +2757,27 @@
       "quarter": "recent",
       "eps": 2.37,
       "eps_yoy": null,
-      "weight": 0.0015330849695052962,
+      "weight": 0.0015330849695052969,
       "source": "yfinance",
-      "marketCap": 57570537472
+      "marketCap": 57570537472,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": 0.95
+        },
+        {
+          "date": "2025-07-31",
+          "eps": 0.86
+        },
+        {
+          "date": "2025-04-30",
+          "eps": 0.25
+        },
+        {
+          "date": "2025-01-31",
+          "eps": 0.35
+        }
+      ]
     },
     {
       "symbol": "XEL",
@@ -1006,9 +2785,27 @@
       "quarter": "recent",
       "eps": 3.28,
       "eps_yoy": null,
-      "weight": 0.0012934389724366488,
+      "weight": 0.0012934389724366495,
       "source": "yfinance",
-      "marketCap": 48571330560
+      "marketCap": 48571330560,
+      "history": [
+        {
+          "date": "2025-09-30",
+          "eps": 0.88
+        },
+        {
+          "date": "2025-06-30",
+          "eps": 0.76
+        },
+        {
+          "date": "2025-03-31",
+          "eps": 0.84
+        },
+        {
+          "date": "2024-12-31",
+          "eps": 0.81
+        }
+      ]
     },
     {
       "symbol": "ZS",
@@ -1016,12 +2813,30 @@
       "quarter": "recent",
       "eps": -0.25,
       "eps_yoy": null,
-      "weight": 0.0010680367743054978,
+      "weight": 0.0010680367743054983,
       "source": "yfinance",
-      "marketCap": 40107008000
+      "marketCap": 40107008000,
+      "history": [
+        {
+          "date": "2025-10-31",
+          "eps": -0.07
+        },
+        {
+          "date": "2025-07-31",
+          "eps": -0.11
+        },
+        {
+          "date": "2025-04-30",
+          "eps": -0.03
+        },
+        {
+          "date": "2025-01-31",
+          "eps": -0.05
+        }
+      ]
     }
   ],
   "base_period": {
-    "eps": 9.218386145525098
+    "eps": 9.218386145525102
   }
 }

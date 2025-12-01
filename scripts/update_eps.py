@@ -20,6 +20,20 @@ def main():
         eps = info.get("trailingEps", 0)
         mcap = info.get("marketCap", 0)
 
+        history = []
+        try:
+            fin = ticker.quarterly_financials
+            if "Basic EPS" in fin.index:
+                # Get last 4 quarters
+                series = fin.loc["Basic EPS"].head(4)
+                for date, val in series.items():
+                    history.append({
+                        "date": str(date.date()),
+                        "eps": float(val) if val is not None else 0.0
+                    })
+        except Exception:
+            pass
+
         rows.append(
             {
                 "symbol": comp["symbol"],
@@ -30,6 +44,7 @@ def main():
                 "weight": comp.get("weight", 0),
                 "source": "yfinance",
                 "marketCap": mcap,
+                "history": history
             }
         )
         market_caps[comp["symbol"]] = mcap

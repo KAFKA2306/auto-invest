@@ -105,9 +105,6 @@ const BottomUp = () => {
             <Button variant="secondary" size="sm" asChild>
               <Link to="/">Back to top-down</Link>
             </Button>
-            <Button variant="outline" size="sm" onClick={handleReset}>
-              Prefill reset
-            </Button>
             <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isFetching}>
               Refresh static data
             </Button>

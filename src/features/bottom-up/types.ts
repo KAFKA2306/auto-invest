@@ -6,6 +6,7 @@ export interface EpsComponent {
   eps_yoy?: number | null;
   weight?: number | null;
   source?: string;
+  history?: { date: string; eps: number }[];
 }
 
 export interface BottomUpDataset {
@@ -26,12 +27,13 @@ export interface BottomUpDataset {
 export interface EditableComponent extends EpsComponent {
   input_weight: number;
   input_eps_yoy: number | null;
+  contribution?: number; // input_weight * input_eps_yoy
 }
 
 export interface BottomUpAggregate {
   totalWeight: number;
   activeWeight: number;
   coverage: number; // activeWeight / totalWeight
-  weightedGrowth: number; // decimal (e.g., 0.23)
+  weightedAverageGrowth: number; // sum(weight * yoy) / activeWeight
   projectedEps: number | null;
 }

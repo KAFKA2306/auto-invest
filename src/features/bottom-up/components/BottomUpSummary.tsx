@@ -22,11 +22,13 @@ export const BottomUpSummary = ({ aggregate, dataset, topDownForwardEps }: Botto
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium">Weighted EPS YoY</CardTitle>
+          <CardTitle className="text-sm font-medium">Implied Index Growth</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-bold">{fmtPct(aggregate.weightedGrowth, 1)}</div>
-          <p className="text-xs text-muted-foreground">Sum(weight × YoY). Coverage adjusts for missing YoY.</p>
+          <div className="text-3xl font-bold">{fmtPct(aggregate.weightedAverageGrowth, 1)}</div>
+          <p className="text-xs text-muted-foreground">
+            Extrapolated from coverage. Assumes sample is representative.
+          </p>
         </CardContent>
       </Card>
 
@@ -39,7 +41,7 @@ export const BottomUpSummary = ({ aggregate, dataset, topDownForwardEps }: Botto
             {fmtNumber(aggregate.projectedEps, 1)}
           </div>
           <p className="text-xs text-muted-foreground">
-            Based on {priorLabel}: {fmtNumber(priorEps, 1)} × (1 + YoY)
+            {priorLabel}: {fmtNumber(priorEps, 1)} × (1 + Growth)
           </p>
         </CardContent>
       </Card>
