@@ -1,42 +1,21 @@
 version: "3"
 
 tasks:
-  install:
-    cmds:
-      - npm install
-      - uv sync
   dev:
     cmds:
       - PORT=${PORT:-4173} npm run dev -- --host --port ${PORT:-4173}
-  check:
-    deps:
-      - lint
-      - typecheck
-      - build
   lint:
     cmds:
       - npm run lint
       - uv run ruff check scripts
-  typecheck:
-    cmds:
-      - npm run typecheck
   build:
     cmds:
       - npm run build
-  update:leverage:
+  update:
     cmds:
       - uv run scripts/update_leverage.py
-  update:valuation:
-    cmds:
       - uv run scripts/update_valuation.py
-  update:eps:
-    cmds:
       - uv run scripts/update_eps.py
-  update:all:
-    deps:
-      - update:leverage
-      - update:valuation
-      - update:eps
   clean:
     cmds:
       - rm -rf dist dist-ssr .vite .turbo .cache

@@ -1,4 +1,4 @@
-name: Update Leverage Metrics
+name: Daily Data Update
 
 on:
   schedule:
@@ -17,12 +17,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Update leverage metrics
-        run: npm run update:leverage
+      - name: Update all data
+        run: npm run update
 
       - name: Commit and push if changed
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add public/data/metrics.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update leverage metrics" && git push)
+          git add public/data/metrics.json public/data/valuation.json public/data/bottom_up_eps.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: daily data update" && git push)

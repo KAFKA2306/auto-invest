@@ -10,9 +10,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "preview": "vite preview",
     "test:e2e": "playwright test",
-    "update:eps": "tsx scripts/update_nasdaq_eps.ts",
-    "update:valuation": "tsx scripts/update_valuation.ts",
-    "update:leverage": "tsx scripts/update_leverage.ts"
+    "update": "uv run scripts/update_leverage.py && uv run scripts/update_valuation.py && uv run scripts/update_eps.py"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

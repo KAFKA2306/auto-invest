@@ -6,7 +6,7 @@
       "quarter": "recent",
       "eps": 16.04,
       "eps_yoy": null,
-      "weight": 0.0036162877118554528,
+      "weight": 0.003616287711855451,
       "source": "yfinance",
       "marketCap": 135799144448,
       "history": [
@@ -34,7 +34,7 @@
       "quarter": "recent",
       "eps": 1.91,
       "eps_yoy": null,
-      "weight": 0.009430844941903466,
+      "weight": 0.009430844941903462,
       "source": "yfinance",
       "marketCap": 354147893248,
       "history": [
@@ -62,7 +62,7 @@
       "quarter": "recent",
       "eps": 4.2,
       "eps_yoy": null,
-      "weight": 0.0019073627734149687,
+      "weight": 0.0019073627734149678,
       "source": "yfinance",
       "marketCap": 71625449472,
       "history": [
@@ -90,7 +90,7 @@
       "quarter": "recent",
       "eps": 10.12,
       "eps_yoy": null,
-      "weight": 0.10327146834843998,
+      "weight": 0.10327146834843993,
       "source": "yfinance",
       "marketCap": 3878058983424,
       "history": [
@@ -118,7 +118,7 @@
       "quarter": "recent",
       "eps": 10.12,
       "eps_yoy": null,
-      "weight": 0.1029086756143238,
+      "weight": 0.10290867561432376,
       "source": "yfinance",
       "marketCap": 3864435359744,
       "history": [
@@ -146,7 +146,7 @@
       "quarter": "recent",
       "eps": 7.09,
       "eps_yoy": null,
-      "weight": 0.0663923757548678,
+      "weight": 0.06639237575486777,
       "source": "yfinance",
       "marketCap": 2493172154368,
       "history": [
@@ -174,7 +174,7 @@
       "quarter": "recent",
       "eps": 6.83,
       "eps_yoy": null,
-      "weight": 0.001764211541517759,
+      "weight": 0.001764211541517758,
       "source": "yfinance",
       "marketCap": 66249822208,
       "history": [
@@ -202,7 +202,7 @@
       "quarter": "recent",
       "eps": 12.92,
       "eps_yoy": null,
-      "weight": 0.004953746476986646,
+      "weight": 0.004953746476986643,
       "source": "yfinance",
       "marketCap": 186023510016,
       "history": [
@@ -230,7 +230,7 @@
       "quarter": "recent",
       "eps": 4.56,
       "eps_yoy": null,
-      "weight": 0.003459856251053092,
+      "weight": 0.00345985625105309,
       "source": "yfinance",
       "marketCap": 129924816896,
       "history": [
@@ -258,7 +258,7 @@
       "quarter": "recent",
       "eps": 7.47,
       "eps_yoy": null,
-      "weight": 0.11020007658493126,
+      "weight": 0.11020007658493121,
       "source": "yfinance",
       "marketCap": 4138242670592,
       "history": [
@@ -286,7 +286,7 @@
       "quarter": "recent",
       "eps": 8.65,
       "eps_yoy": null,
-      "weight": 0.005351315428702152,
+      "weight": 0.005351315428702149,
       "source": "yfinance",
       "marketCap": 200953053184,
       "history": [
@@ -314,7 +314,7 @@
       "quarter": "recent",
       "eps": 8.45,
       "eps_yoy": null,
-      "weight": 0.005399808066802668,
+      "weight": 0.005399808066802666,
       "source": "yfinance",
       "marketCap": 202774052864,
       "history": [
@@ -342,7 +342,7 @@
       "quarter": "recent",
       "eps": 0.79,
       "eps_yoy": null,
-      "weight": 0.003830119107111214,
+      "weight": 0.003830119107111212,
       "source": "yfinance",
       "marketCap": 143828959232,
       "history": [
@@ -370,7 +370,7 @@
       "quarter": "recent",
       "eps": 28.09,
       "eps_yoy": null,
-      "weight": 0.010956423467435937,
+      "weight": 0.010956423467435932,
       "source": "yfinance",
       "marketCap": 411436548096,
       "history": [
@@ -398,7 +398,7 @@
       "quarter": "recent",
       "eps": 3.01,
       "eps_yoy": null,
-      "weight": 0.007655558453223137,
+      "weight": 0.007655558453223133,
       "source": "yfinance",
       "marketCap": 287482183680,
       "history": [
@@ -426,7 +426,7 @@
       "quarter": "recent",
       "eps": -0.7,
       "eps_yoy": null,
-      "weight": 0.0010481003423605205,
+      "weight": 0.00104810034236052,
       "source": "yfinance",
       "marketCap": 39358353408,
       "history": [
@@ -454,7 +454,7 @@
       "quarter": "recent",
       "eps": 5.16,
       "eps_yoy": null,
-      "weight": 0.0017205813653225974,
+      "weight": 0.0017205813653225965,
       "source": "yfinance",
       "marketCap": 64611418112,
       "history": [
@@ -482,7 +482,7 @@
       "quarter": "recent",
       "eps": 10.14,
       "eps_yoy": null,
-      "weight": 0.0027540242957093237,
+      "weight": 0.0027540242957093224,
       "source": "yfinance",
       "marketCap": 103419355136,
       "history": [
@@ -510,7 +510,7 @@
       "quarter": "recent",
       "eps": 3.19,
       "eps_yoy": null,
-      "weight": 0.0011350287790152284,
+      "weight": 0.001135028779015228,
       "source": "yfinance",
       "marketCap": 42622697472,
       "history": [
@@ -538,7 +538,7 @@
       "quarter": "recent",
       "eps": 2.9,
       "eps_yoy": null,
-      "weight": 0.0013191291194830763,
+      "weight": 0.0013191291194830756,
       "source": "yfinance",
       "marketCap": 49536049152,
       "history": [
@@ -566,7 +566,7 @@
       "quarter": "recent",
       "eps": 10.96,
       "eps_yoy": null,
-      "weight": 0.0007113590667841125,
+      "weight": 0.0007113590667841122,
       "source": "yfinance",
       "marketCap": 26713016320,
       "history": [
@@ -594,7 +594,7 @@
       "quarter": "recent",
       "eps": 153.83,
       "eps_yoy": null,
-      "weight": 0.004241696364476936,
+      "weight": 0.004241696364476934,
       "source": "yfinance",
       "marketCap": 159284543488,
       "history": [
@@ -622,7 +622,7 @@
       "quarter": "recent",
       "eps": 3.91,
       "eps_yoy": null,
-      "weight": 0.05067426013029937,
+      "weight": 0.050674260130299346,
       "source": "yfinance",
       "marketCap": 1902924136448,
       "history": [
@@ -650,7 +650,7 @@
       "quarter": "recent",
       "eps": 3.87,
       "eps_yoy": null,
-      "weight": 0.002262811040182497,
+      "weight": 0.002262811040182496,
       "source": "yfinance",
       "marketCap": 84973273088,
       "history": [
@@ -678,7 +678,7 @@
       "quarter": "recent",
       "eps": 7.9,
       "eps_yoy": null,
-      "weight": 0.0005033430140996078,
+      "weight": 0.0005033430140996076,
       "source": "yfinance",
       "marketCap": 18901579776,
       "history": [
@@ -706,7 +706,7 @@
       "quarter": "recent",
       "eps": 36.06,
       "eps_yoy": null,
-      "weight": 0.0007279113325729279,
+      "weight": 0.0007279113325729276,
       "source": "yfinance",
       "marketCap": 27334588416,
       "history": [
@@ -734,7 +734,7 @@
       "quarter": "recent",
       "eps": 4.5,
       "eps_yoy": null,
-      "weight": 0.001996077097792066,
+      "weight": 0.001996077097792065,
       "source": "yfinance",
       "marketCap": 74956857344,
       "history": [
@@ -762,7 +762,7 @@
       "quarter": "recent",
       "eps": 2.59,
       "eps_yoy": null,
-      "weight": 0.008095348657191331,
+      "weight": 0.008095348657191328,
       "source": "yfinance",
       "marketCap": 303997222912,
       "history": [
@@ -790,7 +790,7 @@
       "quarter": "recent",
       "eps": 3.88,
       "eps_yoy": null,
-      "weight": 0.0010976602809779604,
+      "weight": 0.00109766028097796,
       "source": "yfinance",
       "marketCap": 41219432448,
       "history": []
@@ -801,7 +801,7 @@
       "quarter": "recent",
       "eps": 4.32,
       "eps_yoy": null,
-      "weight": 0.0010106828695729104,
+      "weight": 0.00101068286957291,
       "source": "yfinance",
       "marketCap": 37953249280,
       "history": [
@@ -829,7 +829,7 @@
       "quarter": "recent",
       "eps": 6.02,
       "eps_yoy": null,
-      "weight": 0.0026242215737723082,
+      "weight": 0.002624221573772307,
       "source": "yfinance",
       "marketCap": 98544992256,
       "history": [
@@ -857,7 +857,7 @@
       "quarter": "recent",
       "eps": 8.74,
       "eps_yoy": null,
-      "weight": 0.0030312054576716375,
+      "weight": 0.003031205457671636,
       "source": "yfinance",
       "marketCap": 113828085760,
       "history": [
@@ -885,7 +885,7 @@
       "quarter": "recent",
       "eps": 1.63,
       "eps_yoy": null,
-      "weight": 0.0010048264056633936,
+      "weight": 0.0010048264056633932,
       "source": "yfinance",
       "marketCap": 37733326848,
       "history": [
@@ -913,7 +913,7 @@
       "quarter": "recent",
       "eps": 0.06,
       "eps_yoy": null,
-      "weight": 0.000776495048438558,
+      "weight": 0.0007764950484385577,
       "source": "yfinance",
       "marketCap": 29159008256,
       "history": [
@@ -941,7 +941,7 @@
       "quarter": "recent",
       "eps": 18.18,
       "eps_yoy": null,
-      "weight": 0.010789180694151577,
+      "weight": 0.010789180694151572,
       "source": "yfinance",
       "marketCap": 405156233216,
       "history": [
@@ -969,7 +969,7 @@
       "quarter": "recent",
       "eps": -1.22,
       "eps_yoy": null,
-      "weight": 0.0034026423988359586,
+      "weight": 0.0034026423988359573,
       "source": "yfinance",
       "marketCap": 127776317440,
       "history": [
@@ -997,7 +997,7 @@
       "quarter": "recent",
       "eps": 1.54,
       "eps_yoy": null,
-      "weight": 0.001755450733115232,
+      "weight": 0.001755450733115231,
       "source": "yfinance",
       "marketCap": 65920835584,
       "history": [
@@ -1025,7 +1025,7 @@
       "quarter": "recent",
       "eps": 0.3,
       "eps_yoy": null,
-      "weight": 0.0014942133065805774,
+      "weight": 0.0014942133065805768,
       "source": "yfinance",
       "marketCap": 56110825472,
       "history": [
@@ -1053,7 +1053,7 @@
       "quarter": "recent",
       "eps": 1.8,
       "eps_yoy": null,
-      "weight": 0.0006628152724298972,
+      "weight": 0.0006628152724298969,
       "source": "yfinance",
       "marketCap": 24890095616,
       "history": [
@@ -1081,7 +1081,7 @@
       "quarter": "recent",
       "eps": 14.24,
       "eps_yoy": null,
-      "weight": 0.0011763044586382595,
+      "weight": 0.001176304458638259,
       "source": "yfinance",
       "marketCap": 44172685312,
       "history": [
@@ -1109,7 +1109,7 @@
       "quarter": "recent",
       "eps": 1.98,
       "eps_yoy": null,
-      "weight": 0.0022767624085951216,
+      "weight": 0.0022767624085951207,
       "source": "yfinance",
       "marketCap": 85497176064,
       "history": [
@@ -1137,7 +1137,7 @@
       "quarter": "recent",
       "eps": 3.43,
       "eps_yoy": null,
-      "weight": 0.0013455694855336315,
+      "weight": 0.001345569485533631,
       "source": "yfinance",
       "marketCap": 50528940032,
       "history": [
@@ -1165,7 +1165,7 @@
       "quarter": "recent",
       "eps": 2.79,
       "eps_yoy": null,
-      "weight": 0.0012673224505592923,
+      "weight": 0.0012673224505592917,
       "source": "yfinance",
       "marketCap": 47590600704,
       "history": [
@@ -1193,7 +1193,7 @@
       "quarter": "recent",
       "eps": 1.07,
       "eps_yoy": null,
-      "weight": 0.0012351017550663447,
+      "weight": 0.001235101755066344,
       "source": "yfinance",
       "marketCap": 46380646400,
       "history": [
@@ -1221,7 +1221,7 @@
       "quarter": "recent",
       "eps": 2.43,
       "eps_yoy": null,
-      "weight": 0.0016554916315392988,
+      "weight": 0.001655491631539298,
       "source": "yfinance",
       "marketCap": 62167162880,
       "history": [
@@ -1249,7 +1249,7 @@
       "quarter": "recent",
       "eps": 4.83,
       "eps_yoy": null,
-      "weight": 0.0009725265215986233,
+      "weight": 0.0009725265215986228,
       "source": "yfinance",
       "marketCap": 36520398848,
       "history": [
@@ -1277,7 +1277,7 @@
       "quarter": "recent",
       "eps": 6.46,
       "eps_yoy": null,
-      "weight": 0.004158041818983745,
+      "weight": 0.004158041818983743,
       "source": "yfinance",
       "marketCap": 156143140864,
       "history": [
@@ -1305,7 +1305,7 @@
       "quarter": "recent",
       "eps": -0.08,
       "eps_yoy": null,
-      "weight": 0.0005303469170046017,
+      "weight": 0.0005303469170046015,
       "source": "yfinance",
       "marketCap": 19915632640,
       "history": [
@@ -1333,7 +1333,7 @@
       "quarter": "recent",
       "eps": 9.47,
       "eps_yoy": null,
-      "weight": 0.003448837041301266,
+      "weight": 0.0034488370413012642,
       "source": "yfinance",
       "marketCap": 129511022592,
       "history": [
@@ -1361,7 +1361,7 @@
       "quarter": "recent",
       "eps": 12.57,
       "eps_yoy": null,
-      "weight": 0.0016040104429162298,
+      "weight": 0.0016040104429162292,
       "source": "yfinance",
       "marketCap": 60233936896,
       "history": [
@@ -1389,7 +1389,7 @@
       "quarter": "recent",
       "eps": 0.06,
       "eps_yoy": null,
-      "weight": 0.005152076109394672,
+      "weight": 0.00515207610939467,
       "source": "yfinance",
       "marketCap": 193471201280,
       "history": [
@@ -1417,7 +1417,7 @@
       "quarter": "recent",
       "eps": 14.58,
       "eps_yoy": null,
-      "weight": 0.004700881005881311,
+      "weight": 0.004700881005881309,
       "source": "yfinance",
       "marketCap": 176527884288,
       "history": [
@@ -1445,7 +1445,7 @@
       "quarter": "recent",
       "eps": 7.57,
       "eps_yoy": null,
-      "weight": 0.005474505795816796,
+      "weight": 0.005474505795816794,
       "source": "yfinance",
       "marketCap": 205579108352,
       "history": [
@@ -1473,7 +1473,7 @@
       "quarter": "recent",
       "eps": 1.16,
       "eps_yoy": null,
-      "weight": 0.0010093838933995804,
+      "weight": 0.00100938389339958,
       "source": "yfinance",
       "marketCap": 37904470016,
       "history": [
@@ -1501,7 +1501,7 @@
       "quarter": "recent",
       "eps": 31.86,
       "eps_yoy": null,
-      "weight": 0.004122040469099681,
+      "weight": 0.00412204046909968,
       "source": "yfinance",
       "marketCap": 154791215104,
       "history": [
@@ -1529,7 +1529,7 @@
       "quarter": "recent",
       "eps": -3.71,
       "eps_yoy": null,
-      "weight": 0.0008040845759194699,
+      "weight": 0.0008040845759194696,
       "source": "yfinance",
       "marketCap": 30195052544,
       "history": [
@@ -1557,7 +1557,7 @@
       "quarter": "recent",
       "eps": 4.52,
       "eps_yoy": null,
-      "weight": 0.005238618529030536,
+      "weight": 0.005238618529030533,
       "source": "yfinance",
       "marketCap": 196721049600,
       "history": [
@@ -1585,7 +1585,7 @@
       "quarter": "recent",
       "eps": 14.94,
       "eps_yoy": null,
-      "weight": 0.005123629305632437,
+      "weight": 0.0051236293056324345,
       "source": "yfinance",
       "marketCap": 192402964480,
       "history": [
@@ -1613,7 +1613,7 @@
       "quarter": "recent",
       "eps": 14.64,
       "eps_yoy": null,
-      "weight": 0.0005878252765036492,
+      "weight": 0.000587825276503649,
       "source": "yfinance",
       "marketCap": 22074064896,
       "history": [
@@ -1641,7 +1641,7 @@
       "quarter": "recent",
       "eps": 9.48,
       "eps_yoy": null,
-      "weight": 0.0022032767228455873,
+      "weight": 0.0022032767228455864,
       "source": "yfinance",
       "marketCap": 82737635328,
       "history": [
@@ -1669,7 +1669,7 @@
       "quarter": "recent",
       "eps": -0.12,
       "eps_yoy": null,
-      "weight": 0.002052633881198371,
+      "weight": 0.0020526338811983702,
       "source": "yfinance",
       "marketCap": 77080682496,
       "history": [
@@ -1697,7 +1697,7 @@
       "quarter": "recent",
       "eps": 41.02,
       "eps_yoy": null,
-      "weight": 0.002797016709398359,
+      "weight": 0.0027970167093983576,
       "source": "yfinance",
       "marketCap": 105033809920,
       "history": [
@@ -1725,7 +1725,7 @@
       "quarter": "recent",
       "eps": 22.61,
       "eps_yoy": null,
-      "weight": 0.043490950033177676,
+      "weight": 0.043490950033177656,
       "source": "yfinance",
       "marketCap": 1633175863296,
       "history": [
@@ -1753,7 +1753,7 @@
       "quarter": "recent",
       "eps": -0.46,
       "eps_yoy": null,
-      "weight": 0.0007711194424062875,
+      "weight": 0.0007711194424062872,
       "source": "yfinance",
       "marketCap": 28957143040,
       "history": [
@@ -1781,7 +1781,7 @@
       "quarter": "recent",
       "eps": 7.59,
       "eps_yoy": null,
-      "weight": 0.007086762430493873,
+      "weight": 0.00708676243049387,
       "source": "yfinance",
       "marketCap": 266122706944,
       "history": [
@@ -1809,7 +1809,7 @@
       "quarter": "recent",
       "eps": 14.07,
       "eps_yoy": null,
-      "weight": 0.09738985606823525,
+      "weight": 0.0973898560682352,
       "source": "yfinance",
       "marketCap": 3657192177664,
       "history": [
@@ -1837,7 +1837,7 @@
       "quarter": "recent",
       "eps": 24.36,
       "eps_yoy": null,
-      "weight": 0.001355805753730989,
+      "weight": 0.0013558057537309883,
       "source": "yfinance",
       "marketCap": 50913333248,
       "history": [
@@ -1865,7 +1865,7 @@
       "quarter": "recent",
       "eps": 2.67,
       "eps_yoy": null,
-      "weight": 0.001983709718966232,
+      "weight": 0.0019837097189662313,
       "source": "yfinance",
       "marketCap": 74492436480,
       "history": [
@@ -1893,7 +1893,7 @@
       "quarter": "recent",
       "eps": 1.76,
       "eps_yoy": null,
-      "weight": 0.0019510718109564497,
+      "weight": 0.0019510718109564489,
       "source": "yfinance",
       "marketCap": 73266814976,
       "history": [
@@ -1921,7 +1921,7 @@
       "quarter": "recent",
       "eps": 2.4,
       "eps_yoy": null,
-      "weight": 0.012139172632363658,
+      "weight": 0.012139172632363653,
       "source": "yfinance",
       "marketCap": 455851245568,
       "history": [
@@ -1949,7 +1949,7 @@
       "quarter": "recent",
       "eps": 4.04,
       "eps_yoy": null,
-      "weight": 0.11456048643533566,
+      "weight": 0.1145604864353356,
       "source": "yfinance",
       "marketCap": 4301985153024,
       "history": [
@@ -1977,7 +1977,7 @@
       "quarter": "recent",
       "eps": 8.09,
       "eps_yoy": null,
-      "weight": 0.0013087747228789917,
+      "weight": 0.001308774722878991,
       "source": "yfinance",
       "marketCap": 49147219968,
       "history": [
@@ -2005,7 +2005,7 @@
       "quarter": "recent",
       "eps": 2.88,
       "eps_yoy": null,
-      "weight": 0.002291257189493726,
+      "weight": 0.002291257189493725,
       "source": "yfinance",
       "marketCap": 86041485312,
       "history": [
@@ -2033,7 +2033,7 @@
       "quarter": "recent",
       "eps": 4.97,
       "eps_yoy": null,
-      "weight": 0.0007571789269728588,
+      "weight": 0.0007571789269728585,
       "source": "yfinance",
       "marketCap": 28433647616,
       "history": [
@@ -2061,7 +2061,7 @@
       "quarter": "recent",
       "eps": 0.73,
       "eps_yoy": null,
-      "weight": 0.00054715610935117,
+      "weight": 0.0005471561093511698,
       "source": "yfinance",
       "marketCap": 20546852864,
       "history": [
@@ -2089,7 +2089,7 @@
       "quarter": "recent",
       "eps": 5.1,
       "eps_yoy": null,
-      "weight": 0.0014744065650101137,
+      "weight": 0.001474406565010113,
       "source": "yfinance",
       "marketCap": 55367041024,
       "history": [
@@ -2117,7 +2117,7 @@
       "quarter": "recent",
       "eps": 0.44,
       "eps_yoy": null,
-      "weight": 0.010691545329950454,
+      "weight": 0.010691545329950449,
       "source": "yfinance",
       "marketCap": 401489821696,
       "history": [
@@ -2145,7 +2145,7 @@
       "quarter": "recent",
       "eps": 1.58,
       "eps_yoy": null,
-      "weight": 0.0035289815478946537,
+      "weight": 0.003528981547894652,
       "source": "yfinance",
       "marketCap": 132520615936,
       "history": [
@@ -2173,7 +2173,7 @@
       "quarter": "recent",
       "eps": 4.46,
       "eps_yoy": null,
-      "weight": 0.0010704220300749483,
+      "weight": 0.0010704220300749479,
       "source": "yfinance",
       "marketCap": 40196579328,
       "history": [
@@ -2201,7 +2201,7 @@
       "quarter": "recent",
       "eps": 4.98,
       "eps_yoy": null,
-      "weight": 0.0015949227362358064,
+      "weight": 0.0015949227362358057,
       "source": "yfinance",
       "marketCap": 59892674560,
       "history": [
@@ -2229,7 +2229,7 @@
       "quarter": "recent",
       "eps": 9.73,
       "eps_yoy": null,
-      "weight": 0.004388373233022945,
+      "weight": 0.004388373233022943,
       "source": "yfinance",
       "marketCap": 164792565760,
       "history": [
@@ -2257,7 +2257,7 @@
       "quarter": "recent",
       "eps": 5.27,
       "eps_yoy": null,
-      "weight": 0.005422776243036647,
+      "weight": 0.0054227762430366444,
       "source": "yfinance",
       "marketCap": 203636555776,
       "history": [
@@ -2285,7 +2285,7 @@
       "quarter": "recent",
       "eps": 5.01,
       "eps_yoy": null,
-      "weight": 0.004829801309710824,
+      "weight": 0.004829801309710822,
       "source": "yfinance",
       "marketCap": 181369110528,
       "history": [
@@ -2313,7 +2313,7 @@
       "quarter": "recent",
       "eps": 41.74,
       "eps_yoy": null,
-      "weight": 0.002202017340958169,
+      "weight": 0.002202017340958168,
       "source": "yfinance",
       "marketCap": 82690342912,
       "history": [
@@ -2341,7 +2341,7 @@
       "quarter": "recent",
       "eps": 14.5,
       "eps_yoy": null,
-      "weight": 0.0012790228347340287,
+      "weight": 0.001279022834734028,
       "source": "yfinance",
       "marketCap": 48029974528,
       "history": [
@@ -2369,7 +2369,7 @@
       "quarter": "recent",
       "eps": 6.4,
       "eps_yoy": null,
-      "weight": 0.0015360573769030142,
+      "weight": 0.0015360573769030135,
       "source": "yfinance",
       "marketCap": 57682157568,
       "history": [
@@ -2397,7 +2397,7 @@
       "quarter": "recent",
       "eps": 1.36,
       "eps_yoy": null,
-      "weight": 0.005499677726741006,
+      "weight": 0.005499677726741003,
       "source": "yfinance",
       "marketCap": 206524366848,
       "history": [
@@ -2425,7 +2425,7 @@
       "quarter": "recent",
       "eps": 0.99,
       "eps_yoy": null,
-      "weight": 0.00020153674229805803,
+      "weight": 0.00020153674229805794,
       "source": "yfinance",
       "marketCap": 7568124928,
       "history": [
@@ -2449,7 +2449,7 @@
       "quarter": "recent",
       "eps": 1.63,
       "eps_yoy": null,
-      "weight": 0.002637743840474808,
+      "weight": 0.0026377438404748066,
       "source": "yfinance",
       "marketCap": 99052781568,
       "history": [
@@ -2477,7 +2477,7 @@
       "quarter": "recent",
       "eps": 7.4,
       "eps_yoy": null,
-      "weight": 0.002067656367758792,
+      "weight": 0.002067656367758791,
       "source": "yfinance",
       "marketCap": 77644808192,
       "history": [
@@ -2505,7 +2505,7 @@
       "quarter": "recent",
       "eps": 10.39,
       "eps_yoy": null,
-      "weight": 0.006263935141265828,
+      "weight": 0.006263935141265825,
       "source": "yfinance",
       "marketCap": 235223826432,
       "history": [
@@ -2533,7 +2533,7 @@
       "quarter": "recent",
       "eps": -22.76,
       "eps_yoy": null,
-      "weight": 0.0012108123513248049,
+      "weight": 0.0012108123513248044,
       "source": "yfinance",
       "marketCap": 45468528640,
       "history": [
@@ -2561,7 +2561,7 @@
       "quarter": "recent",
       "eps": 1.46,
       "eps_yoy": null,
-      "weight": 0.038098221381065896,
+      "weight": 0.03809822138106588,
       "source": "yfinance",
       "marketCap": 1430667657216,
       "history": [
@@ -2589,7 +2589,7 @@
       "quarter": "recent",
       "eps": 5.49,
       "eps_yoy": null,
-      "weight": 0.004073821827820678,
+      "weight": 0.004073821827820677,
       "source": "yfinance",
       "marketCap": 152980504576,
       "history": [
@@ -2617,7 +2617,7 @@
       "quarter": "recent",
       "eps": 3.87,
       "eps_yoy": null,
-      "weight": 0.0016302292773009834,
+      "weight": 0.0016302292773009827,
       "source": "yfinance",
       "marketCap": 61218508800,
       "history": [
@@ -2645,7 +2645,7 @@
       "quarter": "recent",
       "eps": 0.88,
       "eps_yoy": null,
-      "weight": 0.0005150867556535448,
+      "weight": 0.0005150867556535446,
       "source": "yfinance",
       "marketCap": 19342581760,
       "history": [
@@ -2673,7 +2673,7 @@
       "quarter": "recent",
       "eps": 6.5,
       "eps_yoy": null,
-      "weight": 0.0008373876243024968,
+      "weight": 0.0008373876243024965,
       "source": "yfinance",
       "marketCap": 31445651456,
       "history": [
@@ -2701,7 +2701,7 @@
       "quarter": "recent",
       "eps": 14.22,
       "eps_yoy": null,
-      "weight": 0.0029605160229238237,
+      "weight": 0.0029605160229238224,
       "source": "yfinance",
       "marketCap": 111173550080,
       "history": [
@@ -2729,7 +2729,7 @@
       "quarter": "recent",
       "eps": 0.19,
       "eps_yoy": null,
-      "weight": 0.0015837040280020746,
+      "weight": 0.001583704028002074,
       "source": "yfinance",
       "marketCap": 59471388672,
       "history": [
@@ -2757,7 +2757,7 @@
       "quarter": "recent",
       "eps": 2.37,
       "eps_yoy": null,
-      "weight": 0.0015330849695052969,
+      "weight": 0.0015330849695052962,
       "source": "yfinance",
       "marketCap": 57570537472,
       "history": [
@@ -2785,7 +2785,7 @@
       "quarter": "recent",
       "eps": 3.28,
       "eps_yoy": null,
-      "weight": 0.0012934389724366495,
+      "weight": 0.0012934389724366488,
       "source": "yfinance",
       "marketCap": 48571330560,
       "history": [
@@ -2813,7 +2813,7 @@
       "quarter": "recent",
       "eps": -0.25,
       "eps_yoy": null,
-      "weight": 0.0010680367743054983,
+      "weight": 0.0010680367743054978,
       "source": "yfinance",
       "marketCap": 40107008000,
       "history": [
@@ -2837,6 +2837,6 @@
     }
   ],
   "base_period": {
-    "eps": 9.218386145525102
+    "eps": 9.218386145525098
   }
 }
