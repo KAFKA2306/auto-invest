@@ -6,6 +6,8 @@ data:
     index: ^NDX
     proxy: QQQ
     benchmark: SPY
+  paths:
+    eps: public/data/ndx_eps.csv
 
 leverage:
   window_trading_days: 756
