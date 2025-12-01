@@ -1,5 +1,7 @@
 import type { BottomUpDataset } from "./types";
 
+const withCacheBust = (url: string) => `${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`;
+
 const buildCandidateUrls = (): string[] => {
   const base = import.meta.env.BASE_URL ?? "/";
   const normalizedBase = base.endsWith("/") ? base : `${base}/`;
@@ -12,7 +14,7 @@ const buildCandidateUrls = (): string[] => {
   const routeRelative = "./data/bottom_up_eps.json";
 
   // Deduplicate while preserving order
-  return Array.from(new Set([fromBase, rootRelative, routeRelative]));
+  return Array.from(new Set([fromBase, rootRelative, routeRelative])).map(withCacheBust);
 };
 
 export const fetchBottomUpDataset = async (): Promise<BottomUpDataset> => {
