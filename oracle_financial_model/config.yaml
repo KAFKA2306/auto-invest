@@ -1,0 +1,43 @@
+base_quarter:
+  period: "FY2026 Q2"
+  revenue_B: 16.1
+  operating_income_B: 4.73
+  # net_income_B: 6.14 # Excluded due to one-time gain distortion
+  capex_last_4q_B: 35.5
+  # Derived starting intensity approx $35.5B / ($16.1B * 4) = ~55%
+  current_capex_intensity: 0.55
+  rpo_B: 523.0
+  cloud_revenue_growth_yoy_pct: 34.0
+  software_revenue_growth_yoy_pct: -2.0
+
+  # Critical Reality Factors
+  # Seasonality multipliers for Software/License (Q1, Q2, Q3, Q4)
+  # Oracle Q4 (May) is historically huge for licenses. Q2 is baseline (1.0).
+  software_seasonality_factors: [0.85, 1.0, 1.05, 1.40]
+
+  # Cannibalization: For every $1 of *sequential* Cloud growth, how much License revenue is lost?
+  # This links the two segments.
+  cloud_cannibalization_ratio: 0.4
+
+projections:
+  quarters_to_project: 8
+  scenarios:
+    base:
+      cloud_growth_decay_rate: 0.95 # Growth slows slightly each quarter
+      software_growth_rate: -0.02 # Continues slight decline
+      operating_margin_improvement: 0.005 # 50bps improvement per quarter
+      # Thesis: AI Infra investment peak passed => CAPEX intensity flattening
+      capex_intensity_target: 0.25 # Long term target CAPEX/Revenue
+      rpo_growth_yoy: 0.15 # Strong backlog growth continues
+    bull:
+      cloud_growth_decay_rate: 1.0 # Growth sustains
+      software_growth_rate: 0.0 # Stabilizes
+      operating_margin_improvement: 0.01 # 100bps improvement
+      capex_intensity_target: 0.30 # Aggressive investment continues
+      rpo_growth_yoy: 0.25 # Massive AI contracts
+    bear:
+      cloud_growth_decay_rate: 0.90 # Growth decelerates faster
+      software_growth_rate: -0.05 # Accelerating decline
+      operating_margin_improvement: 0.0 # Flat margins
+      capex_intensity_target: 0.20 # Pullback
+      rpo_growth_yoy: 0.05 # Slowdown

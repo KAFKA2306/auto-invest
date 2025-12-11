@@ -1,0 +1,12 @@
+[project]
+name = "analysis-2025"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.14.2",
+    "matplotlib>=3.10.8",
+    "pandas>=2.3.3",
+    "requests>=2.32.5",
+]
