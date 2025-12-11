@@ -153,71 +153,54 @@ def get_historical_data(symbol, days=365):
             print(f"No data found on page {page}, stopping.")
             break
 
-        # HYBRID PAGINATION LOGIC
+        # Check for duplicate data (Infinite Loop Protection)
+        first_row_date_str = None
+        if len(rows) > 1:
+            try:
+                r0 = rows[1]
+                cs = r0.find_all("td")
+                eff = []
+                ths0 = r0.find_all("th")
+                if ths0:
+                    eff.extend(ths0)
+                eff.extend(cs)
+                if len(eff) > date_idx:
+                    first_row_date_str = eff[date_idx].text.strip()
+            except:
+                pass
+
+        if page > 1 and first_row_date_str == last_page_first_date:
+            print(f"Page {page} returned same data as Page {page - 1}. Stopping.")
+            break
+
+        # Additional check for Fund Date Cursor failure
+        # If we updated 'to' cursor but got the exact same first date, we are stuck.
         is_fund_type = "BK" in symbol
+        if (
+            is_fund_type
+            and str_to != end_date.strftime("%Y%m%d")
+            and first_row_date_str == last_page_first_date
+        ):
+            print("Fund Date Cursor returned duplicate data. Stopping.")
+            break
+
+        last_page_first_date = first_row_date_str
+
+        # HYBRID STRATEGY: Update params for next loop
 
         if is_fund_type:
-            # Logic for Funds: Ignore 'page', move 'to' date backwards
-            if not batch_dates:
-                print("No dates found in batch but data_found_on_page is True? Odd.")
+            if batch_dates:
+                min_date = min(batch_dates)
+                # Try to move cursor back
+                next_to = min_date - datetime.timedelta(days=1)
+                str_to = next_to.strftime("%Y%m%d")
+                print(f"Fund Strategy: Next 'to' {str_to}")
+                page = 1  # Reset page for next date window
+            else:
                 break
-
-            min_date_in_batch = min(batch_dates)
-
-            # Convert current str_to to date object
-            curr_to_dt = datetime.datetime.strptime(str_to, "%Y%m%d").date()
-
-            # If the minimum date we just got is >= current 'to' date (which means we didn't move back),
-            # OR if we just want to ensure we fetch older data:
-            # We set the NEXT 'to' date to be (min_date_in_batch - 1 day).
-
-            next_to_dt = min_date_in_batch - datetime.timedelta(days=1)
-
-            if next_to_dt < start_date:
-                print(
-                    f"Next request date {next_to_dt} is before start date {start_date}. Stopping."
-                )
-                break
-
-            str_to = next_to_dt.strftime("%Y%m%d")
-            print(f"Fund Strategy: Moving 'to' cursor to {str_to}")
-
-            # 'page' param effectively unused, but keep it 1 to avoid confusion
-            page = 1
-
-            # Check for infinite loop (effective deadlock)
-            # If new str_to is same as old (unlikely given -1 day logic)
-
         else:
-            # Logic for Identical Page Detection (Indices)
-            # Compare first date to detect if we are just getting page 1 over and over?
-            # Actually, standard indices usually respect 'page'.
-            # We keep the duplicate check for safety.
-
-            first_row_date_str = None
-            # Re-find first row to get identifier
-            if len(rows) > 1:
-                try:
-                    # Reuse logic roughly
-                    r0 = rows[1]
-                    cs = r0.find_all("td")
-                    eff = []
-                    ths0 = r0.find_all("th")
-                    if ths0:
-                        eff.extend(ths0)
-                    eff.extend(cs)
-                    if len(eff) > date_idx:
-                        first_row_date_str = eff[date_idx].text.strip()
-                except:
-                    pass
-
-            if page > 1 and first_row_date_str == last_page_first_date:
-                print(f"Page {page} returned same data as Page {page - 1}. Stopping.")
-                break
-
-            last_page_first_date = first_row_date_str
             page += 1
-            print(f"Index Strategy: Requesting page {page}")
+            print(f"Index Strategy: Page {page}")
 
         time.sleep(1)
 
