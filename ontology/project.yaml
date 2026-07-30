@@ -1,0 +1,78 @@
+project:
+  id: kafka:auto-invest
+  name: Auto Invest Dashboard
+  repository: https://github.com/KAFKA2306/auto-invest
+  pages: https://kafka2306.github.io/auto-invest/
+  version: 0.1.0
+  updated: 2026-07-30
+  core_ontology: https://raw.githubusercontent.com/KAFKA2306/know/main/ontology/causal-evidence-core.yaml
+  schema: https://raw.githubusercontent.com/KAFKA2306/know/main/ontology/project.schema.json
+
+purpose:
+  problem: Calculate and visualize leverage and downside-risk indicators without presenting model outputs as guaranteed or personalized investment instructions.
+  intended_decisions: [calculate, display, flag_risk, require_update, reject_output]
+  success_conditions:
+    - Every metric exposes input series, observation window, frequency, formula, and as-of date.
+    - Observed prices, calculated risk metrics, model-based leverage outputs, and user decisions remain distinct.
+    - Missing, stale, or insufficient data prevents a confident leverage output.
+  falsification_conditions:
+    - A leverage value lacks formula inputs or observation window.
+    - Backward-looking risk metrics are represented as certain future loss limits.
+    - A stale or malformed price series silently produces a recommendation.
+
+scope:
+  included: [price observations, returns, volatility, downside deviation, drawdown, expected shortfall, correlation, Kelly estimates, leverage outputs]
+  excluded: [broker execution, guaranteed returns, individualized fiduciary advice, unsupported forecasts]
+  temporal: Market observation, return period, calculation window, as-of date, and publication time are explicit.
+  abstraction_level: Transparent risk and leverage calculation dashboard.
+
+competency_questions:
+  - Which price series, period, frequency, and source feed each metric?
+  - Which values are observed, calculated, estimated, or scenario-based?
+  - What formula and assumptions generate the blended leverage output?
+  - How do missing data, outliers, and window changes affect the result?
+  - Is the deployed dashboard based on the latest validated dataset?
+
+domain_mapping:
+  System: PortfolioRiskCalculationSystem
+  State: [market data state, risk state, leverage model state, publication state]
+  Action: [acquire prices, calculate returns, estimate risk, calculate leverage, flag risk, publish]
+  Process: [data ingestion, cleaning, metric calculation, model evaluation, visualization, deployment]
+  Observation: [price, return, benchmark series, data-quality flag, deployed metric]
+  Model: [Kelly estimator, volatility target, blended leverage model, expected-shortfall calculation]
+  Requirement: [source traceability, formula transparency, as-of freshness, assumption visibility, uncertainty boundary]
+  Claim: [risk metric, correlation, drawdown, leverage estimate, risk flag]
+  Evidence: [source record, time series, formula, parameter set, calculation artifact, build hash]
+  Decision: [calculate, display, flag_risk, require_update, reject_output]
+
+claims_and_evidence:
+  assertion_types: [MarketObservation, CalculatedValue, ModelEstimate, Scenario, Assumption, DecisionAssertion]
+  required_evidence:
+    MarketObservation: [source, symbol, timestamp, frequency]
+    CalculatedValue: [formula, window, upstream series ID, code version]
+    ModelEstimate: [model version, parameters, assumptions, as-of date]
+    DecisionAssertion: [rule ID, supporting metrics, result]
+  unknown_policy: Missing source, insufficient history, stale data, invalid parameters, or calculation failure produces UNKNOWN and suppresses confident leverage output.
+
+decision_rules:
+  - id: display-metric
+    when: Source series, window, formula, and validation are present.
+    result: display
+  - id: leverage-output
+    when: Required risk metrics, model parameters, bounds, and data-quality checks pass.
+    result: calculate
+  - id: stale-or-invalid
+    when: Data freshness, minimum history, or numerical validation fails.
+    result: reject_output
+
+provenance:
+  sources: [configured market-data sources, benchmark series, versioned local datasets]
+  generated_artifacts: [normalized series, metric tables, leverage outputs, charts, static dashboard]
+  agents: [data updater, Python calculation scripts, FastAPI, React build, GitHub Actions]
+  lineage: Every displayed metric links to source series, observation window, formula, parameters, code version, and as-of date.
+
+validation:
+  structural: Validate timestamps, symbols, numeric values, windows, formulas, and artifact identifiers.
+  semantic: Separate market observations, historical calculations, model estimates, scenarios, and user decisions.
+  evidence: Verify source series, formulas, parameter bounds, missing-data handling, and calculation reproducibility.
+  publication: CI build and deployed Pages output must match the validated calculation artifacts and disclose limitations.
