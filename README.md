@@ -1,5 +1,8 @@
 # Auto Invest Dashboard — 投資リスク計算ダッシュボード
 
+[![CI](https://github.com/KAFKA2306/auto-invest/actions/workflows/ci.yml/badge.svg)](https://github.com/KAFKA2306/auto-invest/actions/workflows/ci.yml)
+[![Deploy to GitHub Pages](https://github.com/KAFKA2306/auto-invest/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/KAFKA2306/auto-invest/actions/workflows/deploy-pages.yml)
+
 **公開サイト:** https://kafka2306.github.io/auto-invest/
 
 FastAPI、React、TypeScriptで構成した投資リスク分析ダッシュボードです。市場価格の履歴からリスク指標を計算し、Kelly基準とボラティリティターゲットを組み合わせた参考レバレッジを可視化します。
