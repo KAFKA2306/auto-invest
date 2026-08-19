@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
+    "check": "npm run lint && npm run typecheck && npm run build",
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "update": "uv run scripts/update_leverage.py && uv run scripts/update_valuation.py && uv run scripts/update_eps.py",
