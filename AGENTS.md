@@ -16,8 +16,22 @@ Own portfolio-risk and sizing research for this repository. Produce reproducible
 2. Continue one canonical workline before adding another model, dataset, branch or Issue.
 3. Prefer reproducible risk/sizing results, leakage/definition corrections, scenario correctness, user-visible decision support, then simplification.
 4. Require frozen/versioned inputs and explicit assumptions before comparing or promoting model results.
-5. Run focused deterministic/model tests and verify reviewed/merged/public state when applicable.
+5. Run focused deterministic/model tests and verify the exact reviewed revision before merge.
 6. Stop at the fixed point; do not create another strategy, optimizer or signal without a specific unresolved decision and evidence test.
+
+## Merge and release are separate
+
+### PR merge conditions
+
+A PR may merge when the repository-local portfolio/model contract is correct on the exact head revision: frozen inputs and assumptions are bound, deterministic/model tests pass, result artifacts are reproducible where affected, and no unresolved review or correctness blocker remains.
+
+Fresh market data after merge, public deployment, user adoption, realized returns, brokerage integration, or live portfolio operation is **not** a merge condition unless the PR specifically changes the release mechanism and pre-merge validation belongs to that bounded change.
+
+### Product/model release conditions
+
+Release is a separate post-merge decision. Treat a portfolio-risk model/view as released only after the merged `main` revision is read back and the release surfaces in scope are actually verified, including intended input vintage, published model/artifacts/API/UI, deployment identity, and rollback/rebuild path where applicable.
+
+A merged PR does not prove realized performance or production use. A release/data blocker may block release without invalidating a correctly merged repository change. Report merge and release independently.
 
 ## Boundaries
 
@@ -28,4 +42,4 @@ Own portfolio-risk and sizing research for this repository. Produce reproducible
 
 ## Completion report
 
-Report reproducible decision/risk capability Before -> After, canonical inputs/model result, Issue/PR/commit/check/public evidence when applicable, duplicate/manual work removed, and remaining blocker.
+Report reproducible decision/risk capability Before -> After, canonical inputs/model result, Issue/PR/commit/check evidence, then report `merged` and `released` separately with direct evidence for each. Include duplicate/manual work removed and remaining blocker.
