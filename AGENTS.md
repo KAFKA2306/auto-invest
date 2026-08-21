@@ -19,6 +19,14 @@ Own portfolio-risk and sizing research for this repository. Produce reproducible
 5. Run focused deterministic/model tests and verify the exact reviewed revision before merge.
 6. Stop at the fixed point; do not create another strategy, optimizer or signal without a specific unresolved decision and evidence test.
 
+## Branch lifecycle
+
+- Aside from the default branch and unavoidable platform-managed/protected branches, a persistent branch is permitted only while it is the head branch of a currently open PR.
+- Creating a work branch creates an obligation to open or reuse its canonical PR immediately; do not use branches as backlog, continuation state, backup, archive, or evidence storage.
+- After a PR is merged or closed, delete its head branch after verifying PR/main state. A branch with no open PR is an orphan and must be deleted.
+- Before and after work, compare repository branches with open PR heads. Do not report cleanup/fixed point while an orphan task branch remains.
+- If the available tool cannot delete a branch, record that as a tooling blocker and do not claim cleanup complete. Never create another orphan branch as a workaround.
+
 ## Merge and release are separate
 
 ### PR merge conditions
@@ -42,4 +50,4 @@ A merged PR does not prove realized performance or production use. A release/dat
 
 ## Completion report
 
-Report reproducible decision/risk capability Before -> After, canonical inputs/model result, Issue/PR/commit/check evidence, then report `merged` and `released` separately with direct evidence for each. Include duplicate/manual work removed and remaining blocker.
+Report reproducible decision/risk capability Before -> After, canonical inputs/model result, Issue/PR/commit/check evidence, then report `merged` and `released` separately with direct evidence for each. Include branch cleanup state, duplicate/manual work removed and remaining blocker.
