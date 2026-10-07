@@ -79,6 +79,22 @@ http://localhost:8080
 task update:all
 ```
 
+## ローカル監査データ基盤
+
+Issue #12 の実行履歴は、追加契約なしのローカルOSS経路で検証できます。
+
+```text
+audit event -> Kafka 4.3.1 -> Spark 4.1.3 -> Iceberg 1.12.0
+```
+
+```bash
+task audit:check
+```
+
+固定fixtureをKafkaへpublishし、Sparkがschema・重複・live fillの根拠を検証してIcebergへ保存し、snapshotをread-backします。これは監査・研究用であり、実口座へ注文を送る機能ではありません。
+
+詳細: [pipeline/README.md](pipeline/README.md)
+
 ## 検証
 
 ```bash
