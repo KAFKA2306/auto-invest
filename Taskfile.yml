@@ -27,3 +27,12 @@ tasks:
   clean:
     cmds:
       - rm -rf dist dist-ssr .vite .turbo .cache
+  audit:check:
+    cmds:
+      - |
+        set -e
+        trap 'docker compose -f compose.audit.yaml down -v' EXIT
+        python -m unittest discover -s tests -p 'test_audit_policy.py'
+        docker compose -f compose.audit.yaml up -d --wait kafka
+        docker compose -f compose.audit.yaml run --rm producer
+        docker compose -f compose.audit.yaml run --rm spark
