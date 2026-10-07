@@ -25,3 +25,27 @@ jobs:
 
       - name: Check
         run: npm run check
+
+  audit-pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check audit safety policy
+        run: python -m unittest discover -s tests -p 'test_audit_policy.py'
+      - name: Start Apache Kafka
+        run: docker compose -f compose.audit.yaml up -d --wait kafka
+      - name: Publish frozen audit events
+        run: docker compose -f compose.audit.yaml run --rm producer
+      - name: Process Kafka events with Spark into Iceberg
+        run: docker compose -f compose.audit.yaml run --rm spark
+      - name: Show service logs on failure
+        if: failure()
+        run: docker compose -f compose.audit.yaml logs
+      - name: Stop audit stack
+        if: always()
+        run: docker compose -f compose.audit.yaml down -v
