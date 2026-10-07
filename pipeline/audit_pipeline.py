@@ -72,7 +72,14 @@ def main() -> None:
         F.col("event_id").isNull()
         | F.col("run_id").isNull()
         | F.col("event_seq").isNull()
+        | (F.col("event_seq") < 1)
         | F.col("event_time").isNull()
+        | F.col("stage").isNull()
+        | F.col("strategy_version").isNull()
+        | F.col("symbol").isNull()
+        | F.col("execution_environment").isNull()
+        | F.col("source_kind").isNull()
+        | F.col("observed_data_ref").isNull()
         | ~F.col("stage").isin(sorted(ALLOWED_STAGES))
         | ~F.col("execution_environment").isin(sorted(ALLOWED_ENVIRONMENTS))
         | (
@@ -97,6 +104,13 @@ def main() -> None:
     if duplicates.limit(1).count():
         duplicates.show(truncate=False)
         raise RuntimeError("duplicate event_id detected")
+
+    sequence_duplicates = (
+        events.groupBy("run_id", "event_seq").count().filter(F.col("count") > 1)
+    )
+    if sequence_duplicates.limit(1).count():
+        sequence_duplicates.show(truncate=False)
+        raise RuntimeError("duplicate event_seq detected within run")
 
     spark.sql("CREATE NAMESPACE IF NOT EXISTS audit.research")
     spark.sql(
