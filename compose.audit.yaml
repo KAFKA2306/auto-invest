@@ -1,0 +1,76 @@
+services:
+  kafka:
+    image: apache/kafka:4.3.1
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+  producer:
+    image: apache/kafka:4.3.1
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./pipeline/fixtures:/fixtures:ro
+    entrypoint: ["/bin/bash", "-lc"]
+    command:
+      - >
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092
+        --create --if-not-exists --topic audit-events --partitions 1 --replication-factor 1 &&
+        cat /fixtures/audit_events.jsonl |
+        /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server kafka:9092 --topic audit-events
+
+  spark:
+    image: apache/spark:4.1.3-python3
+    user: "0:0"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./pipeline:/workspace/pipeline:ro
+      - audit-warehouse:/warehouse
+      - spark-ivy:/root/.ivy2
+    entrypoint: ["/opt/spark/bin/spark-submit"]
+    command:
+      - --master
+      - local[2]
+      - --packages
+      - org.apache.spark:spark-sql-kafka-0-10_2.13:4.1.3,org.apache.iceberg:iceberg-spark-runtime-4.1_2.13:1.12.0
+      - --conf
+      - spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions
+      - --conf
+      - spark.sql.catalog.audit=org.apache.iceberg.spark.SparkCatalog
+      - --conf
+      - spark.sql.catalog.audit.type=hadoop
+      - --conf
+      - spark.sql.catalog.audit.warehouse=file:///warehouse
+      - /workspace/pipeline/audit_pipeline.py
+      - --bootstrap-servers
+      - kafka:9092
+      - --topic
+      - audit-events
+      - --expected-rows
+      - "5"
+
+volumes:
+  audit-warehouse:
+  spark-ivy:
