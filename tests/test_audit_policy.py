@@ -1,3 +1,8 @@
+"""Runtime-only audit-policy edge cases not covered by the Lean evidence proof.
+
+The live-fill/backtest evidence matrix is now verified against the actual
+Python function by the Lean workflow's bridge script.
+"""
 from __future__ import annotations
 
 import unittest
@@ -25,23 +30,13 @@ BASE = {
 
 
 class AuditPolicyTest(unittest.TestCase):
-    def test_backtest_simulated_fill_is_explicitly_allowed(self) -> None:
-        self.assertEqual(validate_event(BASE), [])
+    def test_missing_required_provenance_is_rejected(self) -> None:
+        event = {**BASE, "observed_data_ref": ""}
+        self.assertIn("observed_data_ref is required", validate_event(event))
 
-    def test_live_fill_without_broker_evidence_is_rejected(self) -> None:
-        event = {**BASE, "execution_environment": "live"}
-        errors = validate_event(event)
-        self.assertIn("live fill must come from broker_observation", errors)
-        self.assertIn("live fill requires broker_event_id", errors)
-
-    def test_live_broker_fill_with_external_id_is_allowed(self) -> None:
-        event = {
-            **BASE,
-            "execution_environment": "live",
-            "source_kind": "broker_observation",
-            "broker_event_id": "broker-event-123",
-        }
-        self.assertEqual(validate_event(event), [])
+    def test_negative_execution_costs_are_rejected(self) -> None:
+        event = {**BASE, "slippage_bps": -0.1}
+        self.assertIn("slippage_bps must be non-negative", validate_event(event))
 
 
 if __name__ == "__main__":
