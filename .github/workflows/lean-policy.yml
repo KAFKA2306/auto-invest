@@ -1,0 +1,39 @@
+name: Lean 4 audit policy
+
+on:
+  pull_request:
+    paths:
+      - 'proofs/**'
+      - 'pipeline/policy.py'
+      - 'scripts/check_lean_policy_bridge.py'
+      - '.github/workflows/lean-policy.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'proofs/**'
+      - 'pipeline/policy.py'
+      - 'scripts/check_lean_policy_bridge.py'
+      - '.github/workflows/lean-policy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof-and-python-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Check proofs with Lean 4
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: proofs
+          build: 'true'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+      - name: Check Lean and Python production-policy parity
+        run: python scripts/check_lean_policy_bridge.py
