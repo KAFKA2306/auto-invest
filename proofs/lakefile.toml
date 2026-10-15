@@ -1,0 +1,6 @@
+name = "audit_policy_proofs"
+version = "0.1.0"
+defaultTargets = ["Policy"]
+
+[[lean_lib]]
+name = "Policy"
